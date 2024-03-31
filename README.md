@@ -1,7 +1,7 @@
 # Virtù #
 
 ## Descrição
->Nossa idéia é entregar uma aplicação web otimizada e funcional para a empresa Ecee-Tec, dessa forma tornar o preenchimento de dados dos clientes e organização da empresa mais rápido e eficiente. Essa página de aplicação web permitirá que o próprio cliente da Ecee-Tec preencha suas informações, que serão armazenadas em um banco de dados seguro e de fácil acesso.
+>Nossa idéia é entregar uma aplicação web otimizada e funcional para a empresa Eceel-Tec, dessa forma tornar o preenchimento de dados dos clientes e organização da empresa mais rápido e eficiente. Essa página de aplicação web permitirá que o próprio cliente da Eceel-Tec preencha suas informações, que serão armazenadas em um banco de dados seguro e de fácil acesso.
 
 *Projeto em construção*
 
