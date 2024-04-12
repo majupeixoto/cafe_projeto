@@ -121,7 +121,7 @@ STATIC_URL = 'static/'
 
 # Diretórios de arquivos static
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Default primary key field type
