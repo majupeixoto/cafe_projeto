@@ -74,3 +74,9 @@ ul li.item-menu a .icon > i{
     margin-left: 9px; /* ajustado */
 }
 
+/*ORGANIZANDO O CORPO*/
+
+.corpo{
+    margin-left: 120px;
+    padding-top: 40px;
+}
