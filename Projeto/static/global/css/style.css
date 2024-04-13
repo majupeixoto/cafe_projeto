@@ -1,0 +1,76 @@
+/*PERSONALIZAÇÃO GERAL*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif; /*fonte da letra do site*/
+}
+
+body{
+    height: 900vh; /*isso é só pra aumentar a largura da página*/
+    background-color: #fff5ea;
+}
+
+/*PERSONALIZAÇÕES ESPECÍFICAS*/
+
+/* MENU */
+nav.menu-lateral{
+    z-index: 1000;
+    width: 80px;
+    height: 100%;
+    background-color: #202020;
+    padding: 40px 0px 40px 1%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transition: .2s;
+}
+
+nav.menu-lateral:hover{
+    width: 300px;
+}
+
+.btn-expandir{
+    width: 100%;
+    padding-left: 10px;
+}
+
+.btn-expandir > i{
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+ul{
+    list-style-type: none;
+    padding-left: 0; /* removendo o padding padrão */
+}
+
+ul li.item-menu{
+    transition: .2s;
+}
+
+ul li.item-menu:hover{
+    background: rgba(5, 210, 217, 0.947);
+}
+
+ul li.item-menu a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 4%;
+    display: flex;
+    margin-bottom: 20px; 
+    line-height: 40px;
+}
+
+ul li.item-menu a .txt-link{
+    margin-left: 40px; /* Ajuste o espaço entre o ícone e o texto */
+}
+
+ul li.item-menu a .icon > i{
+    font-size: 30px;
+    margin-left: 9px; /* ajustado */
+}
+

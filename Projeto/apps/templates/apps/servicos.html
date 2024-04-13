@@ -1,0 +1,32 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    <h1>Olá, ... !</h1>
+
+    <div class="grid text-center" style="margin-left: 100px;">
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                {% if cliente.imagem %}
+                <img src="{{ cliente.imagem.url }}" class="card-img-top" alt="{{ cliente.cliente_nome }}">
+                {% else %}
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                    role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c"></rect>
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ cliente.cliente_nome|first }}</text>
+                </svg>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title"> Cliente: ...{{ cliente.cliente_nome }}</h5>
+                    <p class="card-text">Aparelho: ...{{ cliente.aparelho }}</p>
+                    <p class="card-text">Garantia: ...</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="..." class="btn btn-sm btn-outline-secondary">Ver mais</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

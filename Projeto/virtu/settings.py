@@ -56,7 +56,9 @@ ROOT_URLCONF = 'virtu.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'base'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,7 +123,7 @@ STATIC_URL = 'static/'
 
 # Diretórios de arquivos static
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    BASE_DIR / 'static'
 ]
 
 # Default primary key field type
