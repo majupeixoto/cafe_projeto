@@ -9,13 +9,16 @@ from django.db import models
 
 
 #informações do cliente
-class Cliente(models.Model):
-    cliente_nome = models.CharField(max_length=100)
-    aparelho = models.CharField(max_length=100)
-    garantia = models.BooleanField() # ainda vai ter que criar a opção 'sim' e 'não'
-    contato = models.CharField(max_length=20) # considerando formato "DDD + número"
+class OrdemServico(models.Model):
+    nome_completo = models.CharField(max_length=255)
+    cpf = models.CharField(max_length=14)  # No formato xxx.xxx.xxx-xx
     data_nascimento = models.DateField()
+    contato = models.CharField(max_length=15)  # No formato (xx) xxxx-xxxx
+    aparelho = models.CharField(max_length=225)
+    garantia = models.BooleanField()
     descricao_problema = models.TextField()
+    email = models.EmailField(unique=True)
+    senha = models.CharField(max_length=255)  # Você deve armazenar a senha criptografada
 
     def __str__(self):
-        return self.cliente_nome
+        return self.nome_completo
