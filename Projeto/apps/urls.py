@@ -5,4 +5,5 @@ from . import views
 
 urlpatterns = [
     path('', views.servicos, name = 'servicos'),
+    path('login/', views.login, name = 'login'),
 ]

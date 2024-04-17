@@ -43,3 +43,15 @@ def criar_os(request):
         return redirect("...", os_id=nova_os.id) # direcionar para a página home do cliente
     else:
         return render(request, '...') # retornar dnv para a mesma página de "cadastrar nova os"
+
+
+def login(request):
+    if request.method == 'POST':
+        tipo_usuario = request.POST.get('tipo_usuario')
+
+        if tipo_usuario == 'cliente':
+            return redirect("apps/cadastrar_os.html")  # Substitua 'pagina_cliente' pela URL da página do cliente
+        elif tipo_usuario == 'funcionario':
+            return redirect("apps/login_profissional.html")  # Substitua 'pagina_funcionario' pela URL da página do funcionário
+
+    return render(request, 'apps/login.html')  # Nome do template que contém o formulário
