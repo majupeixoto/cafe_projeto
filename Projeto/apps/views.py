@@ -95,3 +95,14 @@ def login_cad_cliente(request):
         if OrdemServico.objects.filter(email=email).exists():
             messages.error(request, 'Email já cadastrado.')
             return render(request, 'apps/login_cad_cliente.html')
+
+        user = OrdemServico.objects.create_user(username=email, email=email, password=senha)
+        user.first_name = nome_completo
+        user.save()
+
+        login(request, user)
+
+        return redirect('...')  # redirecionar para a página inicial do cliente
+
+    return render(request, 'apps/login_cad_cliente.html')
+
