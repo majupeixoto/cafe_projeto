@@ -50,13 +50,13 @@ def login(request):
         if tipo_usuario == 'cliente':
             return redirect("login_cliente")  # Substitua 'pagina_cliente' pela URL da página do cliente
         elif tipo_usuario == 'funcionario':
-            return redirect("login_profissional")  # Substitua 'pagina_funcionario' pela URL da página do funcionário
+            return redirect("login_funcionario")  # Substitua 'pagina_funcionario' pela URL da página do funcionário
 
     return render(request, 'apps/login.html')  # Nome do template que contém o formulário
 
 def login_funcionario(request ):
     ...
-    return redirect(request, 'login_funcionario')
+    return render(request, 'apps/login_funcionario.html')
 
 def login_cliente(request):
     if request.method == 'POST':
