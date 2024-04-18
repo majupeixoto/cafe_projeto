@@ -84,9 +84,9 @@ def login_cliente(request):
 
         if user is not None:
             # Se as credenciais são válidas, fazer login
-            login(request, user)
-            return redirect('...')  # redirecionar para a página inicial do cliente
+            login(request, user)  # redirecionar para a página inicial do cliente
         else:
+            return redirect('login_cad_cliente')
             # Se as credenciais são inválidas, exibir uma mensagem de erro
             messages.error(request, 'Credenciais inválidas. Tente novamente.')
 
