@@ -9,4 +9,5 @@ urlpatterns = [
     path('servicos/', views.servicos, name = 'servicos'),
     path('login_funcionario/', views.login_funcionario, name = 'login_funcionario'),
     path('login_cad_cliente/', views.login_cad_cliente, name = 'login_cad_cliente'),
+    path('login_cad_func/', views.login_cad_func, name = 'login_cad_func'),
 ]
