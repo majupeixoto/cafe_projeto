@@ -79,18 +79,22 @@ def login_cliente(request):
         email = request.POST['email']
         senha = request.POST['senha']
 
+        # Verificar se o botão de cadastro foi clicado
+        if 'cadastro' in request.POST:
+            return redirect('login_cad_cliente')  # redirecionar para a página de cadastro de cliente
+
         # Autenticar o usuário
         user = authenticate(request, email=email, senha=senha)
 
         if user is not None:
             # Se as credenciais são válidas, fazer login
-            login(request, user)  # redirecionar para a página inicial do cliente
+            login(request, user)
+            return redirect('...')  # redirecionar para a página inicial do cliente
         else:
-            return redirect('login_cad_cliente')
             # Se as credenciais são inválidas, exibir uma mensagem de erro
             messages.error(request, 'Credenciais inválidas. Tente novamente.')
 
-    # Se o método da requisição for GET, renderizar o template de login
+    # Se o método da requisição for GET ou se o POST falhar, renderizar o template de login
     return render(request, 'apps/login_cliente.html')
 
 
