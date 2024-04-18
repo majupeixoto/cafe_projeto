@@ -1,5 +1,19 @@
 {% extends 'global/base_logins.html' %}
 
 {% block body %}
-    <h1>cadastrar os</h1>
+    <h2>Login Cliente</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="senha">Senha:</label><br>
+        <input type="password" id="senha" name="senha" required><br><br>
+
+        <input type="submit" value="Login">
+    </form>
+
+    <p>Não possui uma conta? <a href="...">Fazer Cadastro</a></p>
 {% endblock %}

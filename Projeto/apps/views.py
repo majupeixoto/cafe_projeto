@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from . models import *
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 
 def servicos(request):
     clientes = OrdemServico.objects.all()
@@ -47,7 +48,7 @@ def login(request):
         tipo_usuario = request.POST.get('tipo_usuario')
 
         if tipo_usuario == 'cliente':
-            return redirect("cadastrar_os")  # Substitua 'pagina_cliente' pela URL da página do cliente
+            return redirect("login_cliente")  # Substitua 'pagina_cliente' pela URL da página do cliente
         elif tipo_usuario == 'funcionario':
             return redirect("login_profissional")  # Substitua 'pagina_funcionario' pela URL da página do funcionário
 
@@ -56,3 +57,22 @@ def login(request):
 def login_funcionario(request ):
     ...
     return redirect(request, 'login_funcionario')
+
+def login_cliente(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        senha = request.POST['senha']
+
+        # Autenticar o usuário
+        user = authenticate(request, email=email, senha=senha)
+
+        if user is not None:
+            # Se as credenciais são válidas, fazer login
+            login(request, user)
+            return redirect('...')  # redirecionar para a página inicial do cliente
+        else:
+            # Se as credenciais são inválidas, exibir uma mensagem de erro
+            messages.error(request, 'Credenciais inválidas. Tente novamente.')
+
+    # Se o método da requisição for GET, renderizar o template de login
+    return render(request, 'apps/login_cliente.html')
