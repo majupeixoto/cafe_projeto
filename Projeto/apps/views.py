@@ -6,10 +6,7 @@ def servicos(request):
     clientes = OrdemServico.objects.all()
     return render(request, "apps/servicos.html", {'clientes': clientes})
 
-def detalhes_cliente(request, id):
-    return ...
-
-def criar_os(request):
+def cadastrar_os(request):
     if request.method == 'POST':
         nome_completo = request.POST['nome_completo']
         cpf = request.POST['cpf']
@@ -42,7 +39,7 @@ def criar_os(request):
 
         return redirect("...", os_id=nova_os.id) # direcionar para a página home do cliente
     else:
-        return render(request, '...') # retornar dnv para a mesma página de "cadastrar nova os"
+        return render(request, 'apps/cadastrar_os.html') # retornar dnv para a mesma página de "cadastrar nova os"
 
 
 def login(request):
@@ -50,8 +47,12 @@ def login(request):
         tipo_usuario = request.POST.get('tipo_usuario')
 
         if tipo_usuario == 'cliente':
-            return redirect("apps/cadastrar_os.html")  # Substitua 'pagina_cliente' pela URL da página do cliente
+            return redirect("cadastrar_os")  # Substitua 'pagina_cliente' pela URL da página do cliente
         elif tipo_usuario == 'funcionario':
-            return redirect("apps/login_profissional.html")  # Substitua 'pagina_funcionario' pela URL da página do funcionário
+            return redirect("login_profissional")  # Substitua 'pagina_funcionario' pela URL da página do funcionário
 
     return render(request, 'apps/login.html')  # Nome do template que contém o formulário
+
+def login_funcionario(request ):
+    ...
+    return redirect(request, 'login_funcionario')
