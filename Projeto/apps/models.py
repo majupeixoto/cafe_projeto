@@ -24,8 +24,8 @@ class OrdemServico(models.Model):
         return self.nome_completo
     
 class CadFunc(models.Model):
-    email = models.EmailField(unique=True)
-    senha = models.CharField(max_length=255)
+    email_func = models.EmailField(unique=True)
+    senha_func = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.email
+        return self.email_func
