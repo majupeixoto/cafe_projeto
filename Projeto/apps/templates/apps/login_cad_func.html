@@ -15,7 +15,10 @@
         <label for="confirmar_senha">Confirmar Senha:</label><br>
         <input type="password" id="confirmar_senha" name="confirmar_senha" required><br><br>
 
-        <button type="submit">Cadastrar</button>
+        <button type="submit" id="Cadastrar_func" name="tipo_usuario" value="Cadastrar_func">
+            <a href = {% url 'servicos' %} class = "botao">Cadastrar</a>
+        </button>
+
     </form>
 
     {% if messages %}
