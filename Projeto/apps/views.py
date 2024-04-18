@@ -92,3 +92,22 @@ def login_cliente(request):
 
     # Se o método da requisição for GET, renderizar o template de login
     return render(request, 'apps/login_cliente.html')
+
+
+def login_cad_cliente(request):
+    if request.method == 'POST':
+        nome_completo = request.POST['nome_completo']
+        cpf = request.POST['cpf']
+        data_nascimento = request.POST['data_nascimento']
+        contato = request.POST['contato']
+        email = request.POST['email']
+        senha = request.POST['senha']
+        confirmar_senha = request.POST['confirmar_senha']
+
+        if senha != confirmar_senha:
+            messages.error(request, 'As senhas não coincidem.')
+            return render(request, 'apps/login_cad_cliente.html')
+
+        if OrdemServico.objects.filter(email=email).exists():
+            messages.error(request, 'Email já cadastrado.')
+            return render(request, 'apps/login_cad_cliente.html')
