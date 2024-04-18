@@ -55,7 +55,23 @@ def login(request):
     return render(request, 'apps/login.html')  # Nome do template que contém o formulário
 
 def login_funcionario(request ):
-    ...
+    if request.method == 'POST':
+        email = request.POST['email']
+        senha = request.POST['senha']
+
+        # Autenticar o usuário
+        user = authenticate(request, email=email, senha=senha)
+
+        if user is not None:
+            # Se as credenciais são válidas, fazer login
+            login(request, user)
+            return redirect('...')  # redirecionar para a página inicial do cliente
+        else:
+            # Se as credenciais são inválidas, exibir uma mensagem de erro
+            messages.error(request, 'Credenciais inválidas. Tente novamente.')
+
+    # Se o método da requisição for GET, renderizar o template de login
+    
     return render(request, 'apps/login_funcionario.html')
 
 def login_cliente(request):
