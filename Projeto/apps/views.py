@@ -122,3 +122,27 @@ def login_cad_cliente(request):
 
     return render(request, 'apps/login_cad_cliente.html')
 
+
+def login_cad_func(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        senha = request.POST['senha']
+        confirmar_senha = request.POST['confirmar_senha']
+
+        if senha != confirmar_senha:
+            messages.error(request, 'As senhas não coincidem.')
+            return render(request, 'apps/login_cad_func.html')
+
+        if CadFunc.objects.filter(email=email).exists():
+            messages.error(request, 'Email já cadastrado.')
+            return render(request, 'apps/login_cad_func.html')
+
+        user = CadFunc.objects.create_user(username=email, email=email, password=senha)
+        user.email = email
+        user.save()
+
+        login(request, user)
+
+        return redirect('...')  # redirecionar para a página inicial do cliente
+
+    return render(request, 'apps/login_cad_func.html')
