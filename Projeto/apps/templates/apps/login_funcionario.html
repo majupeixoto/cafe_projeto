@@ -3,17 +3,35 @@
 {% block body %}
     <h2>Login Funcionário</h2>
 
-    <form method="post">
+    <form class ='login' method="post">
         {% csrf_token %}
+        
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+        <input type="hidden" name="next" value="{{ next }}">
+        <h2>{{ title }}</h2>
 
-        <label for="senha">Senha:</label><br>
-        <input type="password" id="senha" name="senha" required><br><br>
+        <div class="box-user">
+            <input type="text" name="email" required>
+            <label>Nome de usuário</label>
+        </div>
 
-        <input type="submit" value="Login">
+        <div class="box-user">
+            <input type="password" name="senha" required>
+            <label>Senha</label>
+        </div>
+
+        <div>
+            <p>Não possui uma conta? <a href="{% url 'login_cad_func' %}">Fazer Cadastro</a>.</p>
+        </div>
+
+        <button type="submit" class="btn btn-light">Entrar</button>
     </form>
 
-    <p>Não possui uma conta? <a href={% url 'login_cad_func' %}>Fazer Cadastro</a></p>
 {% endblock %}

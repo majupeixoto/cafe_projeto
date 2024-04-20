@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.hashers import make_password
 
 # Create your models here.
 
@@ -7,25 +8,51 @@ from django.db import models
 # e em seguida:
 # python manage.py migrate
 
-
-#informações do cliente
-class OrdemServico(models.Model):
-    nome_completo = models.CharField(max_length=255)
-    cpf = models.CharField(max_length=14)  # No formato xxx.xxx.xxx-xx
-    data_nascimento = models.DateField()
-    contato = models.CharField(max_length=15)  # No formato (xx) xxxx-xxxx
-    aparelho = models.CharField(max_length=225)
-    garantia = models.BooleanField()
-    descricao_problema = models.TextField()
+class Cliente(models.Model):
     email = models.EmailField(unique=True)
-    senha = models.CharField(max_length=255)  # Você deve armazenar a senha criptografada
+    nome_completo = models.CharField(max_length=255)
+    cpf = models.CharField(max_length=14)
+    data_nascimento = models.DateField()
+    contato = models.CharField(max_length=15)
+    senha = models.CharField(max_length=255)  # Armazenar a senha criptografada
+
+    def save(self, *args, **kwargs):
+        # Criptografar a senha antes de salvar
+        self.senha = make_password(self.senha)
+        super(Cliente, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.nome_completo
-    
-class CadFunc(models.Model):
-    email_func = models.EmailField(unique=True)
-    senha_func = models.CharField(max_length=255)
+
+class Funcionario(models.Model):
+    email = models.EmailField(unique=True)
+    nome_completo = models.CharField(max_length=255)  # Adicionado o campo nome_completo
+    senha = models.CharField(max_length=255)  # Armazenar a senha criptografada
+
+    def save(self, *args, **kwargs):
+        # Criptografar a senha antes de salvar
+        self.senha = make_password(self.senha)
+        super(Funcionario, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.email_func
+        return self.nome_completo
+
+
+class OrdemServico(models.Model):
+    cliente = models.ForeignKey('Cliente', on_delete=models.CASCADE)
+    aparelho = models.CharField(max_length=225)
+    garantia = models.BooleanField()
+    descricao_problema = models.TextField()
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ('aberta', 'Aberta'),
+            ('em_andamento', 'Em Andamento'),
+            ('fechada', 'Fechada'),
+        ],
+        default='aberta'
+    )
+    responsavel = models.ForeignKey('Funcionario', null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f"OS {self.id} - {self.cliente.nome_completo}"
