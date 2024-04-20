@@ -1,19 +1,20 @@
 {% extends 'global/base_logins.html' %}
 
 {% block body %}
-    <h2>Login Cliente</h2>
+    <h2 style="text-align: center; font-weight: bold;">LOGIN CLIENTE</h2>
 
-    <form method="post">
+    <form method="post" style="text-align: center;">
         {% csrf_token %}
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+        <label for="login" style="display: block; font-weight: bold;">LOGIN</label>
+        <input type="text" id="login" name="login" placeholder="E-mail" required style="margin-bottom: 20px;"><br>
 
-        <label for="senha">Senha:</label><br>
-        <input type="password" id="senha" name="senha" required><br><br>
+        <label for="senha" style="display: block; font-weight: bold;">SENHA</label>
+        <input type="password" id="senha" name="senha" placeholder="Senha" required style=""><br><br>
 
-        <input type="submit" value="Login">
+        <input type='submit' value='Entrar' style='background-color:black; color:white; border:none; padding:5px 20px;'>
+
     </form>
 
-    <p>Não possui uma conta? <a href={% url 'login_cad_cliente' %}>Fazer Cadastro</a></p>
+    <p style='text-align:center;'>Não possui uma conta? <a href="{% url 'login_cad_cliente' %}">Fazer Cadastro</a></p>
 {% endblock %}
