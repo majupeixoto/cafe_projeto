@@ -1,46 +1,119 @@
-{% extends 'global/base_logins.html' %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cliente</title>
+    {% load static %}
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            height: 100%;
+        }
+        form {
+            width: 50%;
+            border: 1px solid #000000;
+            padding: 30px;
+            box-shadow: 0 0 10px #ccc;
+            border-radius: 8px;
+        }
+        input[type=text], input[type=email], input[type=date], input[type=password] {
+            width: 80%;
+            padding: 10px;
+            margin: 6px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #285DFF;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #285DFF;
+        }
+        input[type="date"] {
+            text-align: center;
+        }
+        /* Adicione este estilo no seu CSS existente */
+        .radio-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-{% block body %}
-<h2>Prezado cliente, preencha as seguintes informações para realizar seu cadastro.</h2>
+        .radio-group label {
+            margin-right: 10px; /* Ajuste o espaçamento conforme necessário */
+        }
 
-    <form method="post">
-        {% csrf_token %}
-        
-        <label for="nome_completo">Nome Completo:</label><br>
-        <input type="text" id="nome_completo" name="nome_completo" required><br><br>
+        .radio-group input {
+            margin-right: 5px; /* Ajuste o espaçamento conforme necessário */
+        }
+        .radio-option {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #ccc; /* Cor da borda */
+            padding: 5px 10px; /* Espaçamento interno */
+            margin-right: 10px; /* Espaçamento entre as opções */
+        }
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+        .radio-option input {
+            margin-right: 5px;
+        }
 
-        <label for="cpf">CPF:</label><br>
-        <input type="text" id="cpf" name="cpf" required><br><br>
+        .radio-option label {
+            margin: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'global/css/login_cad_cliente.css' %}">
+</head>
+<body>
+    {% block body %}
+    <div class="container">
+        <h2>Prezado cliente, preencha as seguintes informações para realizar seu cadastro.</h2>
 
-        <label for="data_nascimento">Data de Nascimento:</label><br>
-        <input type="date" id="data_nascimento" name="data_nascimento" required><br><br>
+        <form method="post">
+            {% csrf_token %}
+            
+            <label for="nome_completo">Nome Completo:</label><br>
+            <input type="text" id="nome_completo" name="nome_completo" required><br><br>
 
-        <label for="contato">Número para contato:</label><br>
-        <input type="text" id="contato" name="contato" required><br><br>
+            <label for="cpf">CPF:</label><br>
+            <input type="text" id="cpf" name="cpf" required><br><br>
 
-        <label for="aparelho">Aparelho a ser avaliado:</label><br>
-        <input type="text" id="aparelho" name="aparelho" required><br><br>
+            <label for="data_nascimento">Data de Nascimento:</label><br>
+            <input type="date" id="data_nascimento" name="data_nascimento" required><br><br>
 
-        <label for="garantia">Possui garantia?</label><br>
-        <input type="radio" id="sim" name="garantia" value="sim">
-        <label for="sim">Sim</label><br>
-        <input type="radio" id="nao" name="garantia" value="nao">
-        <label for="nao">Não</label><br><br>
+            <label for="contato">Número para contato:</label><br>
+            <input type="text" id="contato" name="contato" required><br><br>
 
-        <label for="situacao_atual">Situação do aparelho:</label><br>
-        <input type="text" id="situacao_atual" name="situacao_atual" required><br><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
 
-        <button type="submit">Cadastrar</button>
-    </form>
+            <label for="senha">Senha:</label><br>
+            <input type="password" id="senha" name="senha" required><br><br>
 
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-{% endblock %}
+            <label for="confirmar_senha">Confirmar Senha:</label><br>
+            <input type="password" id="confirmar_senha" name="confirmar_senha" required><br><br>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+</html>
