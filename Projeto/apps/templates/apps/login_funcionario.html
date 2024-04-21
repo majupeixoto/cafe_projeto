@@ -1,38 +1,40 @@
-{% extends 'global/base_logins.html' %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Funcionário</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'global/css/style.css' %}">
+</head>
+<body>
+    {% block body %}
+    <div class="container" style="text-align: center;">
+        <h2 style="font-weight: bold;">LOGIN FUNCIONÁRIO</h2>
 
-{% block body %}
+        <form method="post" style="text-align: center;">
+            {% csrf_token %}
+            
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
-    <h2>Login Funcionário</h2>
+            <label for="email" style="display: block; font-weight: bold;">LOGIN</label>
+            <input type="text" id="email" name="email" placeholder="E-mail" required style="margin-bottom: 20px;"><br>
 
-    <form class ='login' method="post">
-        {% csrf_token %}
-        
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+            <label for="senha" style="display: block; font-weight: bold;">SENHA</label>
+            <input type="password" id="senha" name="senha" placeholder="Senha" required style="margin-bottom: 20px;"><br><br>
 
-        <input type="hidden" name="next" value="{{ next }}">
-        <h2>{{ title }}</h2>
+            <input type='submit' value='Entrar' class='btn btn-light' style='background-color:#007bff; color:white; border:none; padding:5px 20px;'>
 
-        <div class="box-user">
-            <input type="text" name="email" required>
-            <label>Nome de usuário</label>
-        </div>
+        </form>
 
-        <div class="box-user">
-            <input type="password" name="senha" required>
-            <label>Senha</label>
-        </div>
-
-        <div>
-            <p>Não possui uma conta? <a href="{% url 'login_cad_func' %}">Fazer Cadastro</a>.</p>
-        </div>
-
-        <button type="submit" class="btn btn-light">Entrar</button>
-    </form>
-
-{% endblock %}
+        <p style='text-align:center;'>Não possui uma conta? <a href="{% url 'login_cad_func' %}">Fazer Cadastro</a></p>
+    </div>
+    {% endblock %}
+</body>
+</html>
