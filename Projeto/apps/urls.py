@@ -10,4 +10,5 @@ urlpatterns = [
     path('login_funcionario/', views.login_funcionario, name = 'login_funcionario'),
     path('login_cad_cliente/', views.login_cad_cliente, name = 'login_cad_cliente'),
     path('login_cad_func/', views.login_cad_func, name = 'login_cad_func'),
+    path('home_funcionario/', views.home_funcionario, name = 'home_funcionario'),
 ]
