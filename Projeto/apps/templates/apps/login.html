@@ -1,15 +1,94 @@
-{% extends 'global/base_logins.html' %}
+{% load static %}
+
+{% block styles %}
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f7f7f7; /* Cor de fundo suave */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .login-container {
+        text-align: center;
+        align-items: center;
+        margin: 0 auto; /* Centralizar horizontalmente */
+        max-width: 400px; /* Definir a largura máxima do container */
+    }
+    .logo-placeholder {
+        text-align: center;
+        align-items: center;
+        width: 200px; /* ou a largura que desejar */
+        height: 200px; /* ou a altura que desejar */
+        background-color: #fff; /* fundo branco */
+        border: 2px dashed #ccc; /* borda tracejada */
+        margin-bottom: 20px; /* espaço abaixo do placeholder */
+        display: inline-block;
+        overflow: hidden; /* Para garantir que a imagem não ultrapasse as bordas */
+    }
+    .logo-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ajusta a imagem para cobrir todo o espaço do quadrado */
+    }
+    h1 {
+        margin: 20px 0 0; /* Removendo a margem inferior e ajustando a superior */
+        font-size: 2em; /* Tamanho da fonte do Bem-Vindo! */
+        text-align: center;
+        align-items: center;
+    }
+    h2 {
+        margin: 10px 0 20px; /* Removendo a margem inferior e ajustando a superior */
+        font-size: 1.5em; /* Tamanho da fonte do Bem-Vindo! */
+        text-align: center;
+        align-items: center;
+    }
+    .btn {
+        width: 100%; /* Largura dos botões */
+        padding: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background-color: #007bff; /* Cor do botão primário */
+        border: none;
+        border-radius: 5px;
+        text-decoration: center;
+        text-align: center;
+        align-items: center;
+        margin-bottom: 10px; /* Espaço entre os botões */
+    }
+    .btn:hover, .btn:focus {
+        background-color: #0056b3; /* Cor do botão ao passar o mouse ou focar */
+        cursor: pointer;
+        outline: none;
+    }
+    .btn a {
+        color: white;
+        text-decoration: none;
+        display: block;
+    }
+</style>
+{% endblock %}
 
 {% block body %}
-    <form method="post">
-        {% csrf_token %}
-        <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-primary" type="submit" id="cliente" name="tipo_usuario" value="cliente">
-                <a href = {% url 'login_cliente'%} class = "botao">Sou cliente</a>
-            </button>
-            <button class="btn btn-primary" type="submit" id="funcionario" name="tipo_usuario" value="funcionario">
-                <a href = {% url 'login_funcionario'%} class = "botao">Sou funcionário</a>
-            </button>
+    <div class="login-container">
+        <div class="logo-placeholder">
+            <img src="{% static 'global/css/imagens/logo.virtu.PNG' %}" alt="Logo Virtù">
         </div>
-    </form>
+        <h1>VIRTÙ</h1>
+        <h2>Bem Vindo!</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-primary" type="submit" id="cliente" name="tipo_usuario" value="cliente">
+                    <a href="{% url 'login_cliente' %}" class="botao">SOU CLIENTE</a>
+                </button>
+                <button class="btn btn-primary" type="submit" id="funcionario" name="tipo_usuario" value="funcionario">
+                    <a href="{% url 'login_funcionario' %}" class="botao">SOU FUNCIONÁRIO</a>
+                </button>
+            </div>
+        </form>
+    </div>
 {% endblock %}
