@@ -6,81 +6,8 @@
     <title>Cadastro de Cliente</title>
     {% load static %}
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            height: 100%;
-        }
-        form {
-            width: 50%;
-            border: 1px solid #000000;
-            padding: 30px;
-            box-shadow: 0 0 10px #ccc;
-            border-radius: 8px;
-        }
-        input[type=text], input[type=email], input[type=date], input[type=password] {
-            width: 80%;
-            padding: 10px;
-            margin: 6px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #285DFF;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #285DFF;
-        }
-        input[type="date"] {
-            text-align: center;
-        }
-        /* Adicione este estilo no seu CSS existente */
-        .radio-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .radio-group label {
-            margin-right: 10px; /* Ajuste o espaçamento conforme necessário */
-        }
-
-        .radio-group input {
-            margin-right: 5px; /* Ajuste o espaçamento conforme necessário */
-        }
-        .radio-option {
-            display: inline-flex;
-            align-items: center;
-            border: 1px solid #ccc; /* Cor da borda */
-            padding: 5px 10px; /* Espaçamento interno */
-            margin-right: 10px; /* Espaçamento entre as opções */
-        }
-
-        .radio-option input {
-            margin-right: 5px;
-        }
-
-        .radio-option label {
-            margin: 0;
-        }
     </style>
-    <link rel="stylesheet" href="{% static 'global/css/login_cad_cliente.css' %}">
+    <link rel="stylesheet" href="{% static 'global/css/style.css' %}">
 </head>
 <body>
     {% block body %}
