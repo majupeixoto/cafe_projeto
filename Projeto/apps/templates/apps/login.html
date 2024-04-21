@@ -1,10 +1,16 @@
 {% load static %}
 
-{% block styles %}
-<link rel="stylesheet" href="{% static 'global/css/style.css' %}">
-{% endblock %}
-
-{% block body %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIRTÙ - Login</title>
+    <link rel="stylesheet" href="{% static 'global/css/style.css' %}">
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    {% block body %}
     <div class="login-container">
         <div class="logo-placeholder">
             <img src="{% static 'global/css/imagens/logo.virtu.PNG' %}" alt="Logo Virtù">
@@ -23,4 +29,6 @@
             </div>
         </form>
     </div>
-{% endblock %}
+    {% endblock %}
+</body>
+</html>
