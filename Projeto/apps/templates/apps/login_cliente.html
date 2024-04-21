@@ -14,14 +14,22 @@
 
         <form method="post" style="text-align: center;">
             {% csrf_token %}
+            
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
-            <label for="login" style="display: block; font-weight: bold;">LOGIN</label>
-            <input type="text" id="login" name="login" placeholder="E-mail" required style="margin-bottom: 20px;"><br>
+            <label for="email" style="display: block; font-weight: bold;">LOGIN</label>
+            <input type="text" id="email" name="email" placeholder="E-mail" required style="margin-bottom: 20px;"><br>
 
             <label for="senha" style="display: block; font-weight: bold;">SENHA</label>
             <input type="password" id="senha" name="senha" placeholder="Senha" required style="margin-bottom: 20px;"><br><br>
 
-            <input type='submit' value='Entrar' style='background-color:#007bff; color:white; border:none; padding:5px 20px;'>
+            <input type='submit' value='Entrar' class='btn btn-light' style='background-color:#007bff; color:white; border:none; padding:5px 20px;'>
 
         </form>
         <br><br>
