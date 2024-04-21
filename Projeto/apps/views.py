@@ -128,6 +128,9 @@ def login_cad_cliente(request):
         data_nascimento = request.POST['data_nascimento']
         contato = request.POST['contato']
         email = request.POST['email']
+        aparelho = request.POST['aparelho']
+        descricao_problema = request.POST['descricao_problema']
+        garantia = request.POST['garantia']
         senha = request.POST['senha']
         confirmar_senha = request.POST['confirmar_senha']
 
@@ -148,6 +151,9 @@ def login_cad_cliente(request):
             data_nascimento=data_nascimento,
             contato=contato,
             email=email,
+            aparelho = aparelho,
+            garantia = garantia,
+            descricao_problema = descricao_problema,
             senha=senha  # Você deve armazenar a senha criptografada
         )
         novo_cliente.save()
