@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Cliente</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'global/css/style.css' %}">
-</head>
-<body>
-    {% block body %}
+{% extends 'global/base_logins.html' %}
+
+{% block body %}
     <div class="container" style="text-align: center;">
         <h2 style="font-weight: bold;">LOGIN CLIENTE</h2>
 
@@ -35,6 +27,4 @@
         <br><br>
         <p style='text-align:center;'>Não possui uma conta? <a href="{% url 'login_cad_cliente' %}">Fazer Cadastro</a></p>
     </div>
-    {% endblock %}
-</body>
-</html>
+{% endblock %}

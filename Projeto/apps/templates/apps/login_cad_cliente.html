@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Cliente</title>
-    {% load static %}
-    <style>
-    </style>
-    <link rel="stylesheet" href="{% static 'global/css/style.css' %}">
-</head>
-<body>
-    {% block body %}
+{% extends 'global/base_logins.html' %}
+
+{% block body %}
     <div class="container">
         <h2>Prezado cliente,<br>preencha as seguintes informações para realizar seu cadastro:</h2>
 
@@ -41,6 +31,4 @@
             <button type="submit">Cadastrar</button>
         </form>
     </div>
-    {% endblock %}
-</body>
-</html>
+{% endblock %}
