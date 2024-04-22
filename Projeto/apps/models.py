@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 class Cliente(models.Model):
     email = models.EmailField(unique=True)
     nome_completo = models.CharField(max_length=255)
+    username = models.CharField(max_length=100) # username para login
     cpf = models.CharField(max_length=14)
     data_nascimento = models.DateField()
     contato = models.CharField(max_length=15)
@@ -22,6 +23,7 @@ class Cliente(models.Model):
 class Funcionario(models.Model):
     email = models.EmailField(unique=True)
     nome_completo = models.CharField(max_length=255)  # Adicionado o campo nome_completo
+    username = models.CharField(max_length=100) # username para login
     senha = models.CharField(max_length=255)  # Armazenar a senha sem criptografia
 
     def __str__(self):
