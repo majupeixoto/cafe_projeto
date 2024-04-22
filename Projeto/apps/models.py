@@ -18,7 +18,7 @@ class Cliente(models.Model):
     senha = models.CharField(max_length=255)  # Armazenar a senha sem criptografia
 
     def __str__(self):
-        return self.nome_completo
+        return self.username
 
 class Funcionario(models.Model):
     email = models.EmailField(unique=True)
@@ -27,7 +27,7 @@ class Funcionario(models.Model):
     senha = models.CharField(max_length=255)  # Armazenar a senha sem criptografia
 
     def __str__(self):
-        return self.nome_completo
+        return self.username
 
 class OrdemServico(models.Model):
     cliente = models.ForeignKey('Cliente', on_delete=models.CASCADE)
@@ -46,4 +46,4 @@ class OrdemServico(models.Model):
     responsavel = models.ForeignKey('Funcionario', null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return f"OS {self.id} - {self.cliente.nome_completo}"
+        return f"OS {self.id} - {self.cliente.username}"

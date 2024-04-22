@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.urls import reverse
-from django.contrib.auth.hashers import check_password
 
 @login_required
 def servicos(request):
@@ -79,7 +78,7 @@ def logout(request):
         del request.session["usuario"]
     return redirect(login)
 
-def login_funcionario(request):
+"""def login_funcionario(request):
     if request.method == 'POST':
         username = request.POST['username']
         senha = request.POST.get('senha')
@@ -95,7 +94,24 @@ def login_funcionario(request):
             return render(request, 'apps/login_funcionario.html', {"erro": "Usuário não encontrado"})
     
     # Retorne uma resposta para o método GET
-    return render(request, 'apps/login_funcionario.html')
+    return render(request, 'apps/login_funcionario.html')"""
+
+def login_funcionario(request):
+    title = "Login"
+    next_url = request.GET.get('next')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        senha = request.POST.get('senha')
+        
+        user = authenticate(request, username=username, senha=senha)
+        if user is not None:
+            login(request, user)
+            print("is")
+            return redirect(next_url or 'servicos')
+        else:
+            print("else")
+            return render(request, 'apps/login_funcionario.html', {"erro": "Usuário não encontrado"})
+    return render(request, 'apps/login_funcionario.html', {'next': next_url})
 
 
 def login_cliente(request):
