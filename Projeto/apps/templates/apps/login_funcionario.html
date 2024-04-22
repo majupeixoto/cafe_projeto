@@ -4,8 +4,9 @@
     <div class="container" style="text-align: center;">
         <h2 style="font-weight: bold;">LOGIN FUNCIONÁRIO</h2>
 
-        <form method="post" style="text-align: center;">
+        <form class="login" method="post" style="text-align: center;">
             {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
             
             {% if messages %}
                 <ul class="messages">
@@ -16,7 +17,7 @@
             {% endif %}
 
             <label for="email" style="display: block; font-weight: bold;">LOGIN</label>
-            <input type="text" id="email" name="email" placeholder="E-mail" required style="margin-bottom: 20px;"><br>
+            <input type="email" id="email" name="email" placeholder="E-mail" required style="margin-bottom: 20px;"><br>
 
             <label for="senha" style="display: block; font-weight: bold;">SENHA</label>
             <input type="password" id="senha" name="senha" placeholder="Senha" required style="margin-bottom: 20px;"><br><br>

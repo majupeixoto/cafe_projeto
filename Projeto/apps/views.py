@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.contrib.auth.hashers import check_password
 
 @login_required
 def servicos(request):
@@ -78,22 +79,23 @@ def logout(request):
         del request.session["usuario"]
     return redirect(login)
 
-
 def login_funcionario(request):
-    title = "Login"
-    next_url = request.GET.get('next', '')
     if request.method == 'POST':
         email = request.POST.get('email')
         senha = request.POST.get('senha')
-        
-        user = authenticate(request, email=email, password=senha)
-        if user is not None:
-            login(request, user)
-            return redirect(next_url or 'servicos')
-        else:
-            return render(request, 'apps/login_funcionario.html', {"erro": "Usuário não encontrado"})
-    return render(request, 'apps/login_funcionario.html', {'next': next_url})
 
+        funcionario = authenticate_funcionario(email, senha)  # Corrigindo a passagem de argumentos
+        
+        if funcionario is not None:
+            login(request)
+            print('Funcionário autenticado com sucesso')
+            return redirect('servicos')
+        else:
+            print('Falha na autenticação do funcionário')
+            return render(request, 'apps/login_funcionario.html', {"erro": "Usuário não encontrado"})
+    
+    # Retorne uma resposta para o método GET
+    return render(request, 'apps/login_funcionario.html')
 
 
 def login_cliente(request):
@@ -182,15 +184,18 @@ def login_cad_func(request):
         if Funcionario.objects.filter(email=email).exists():
             messages.error(request, 'Email já cadastrado.')
             return render(request, 'apps/login_cad_func.html')
-
+        elif Funcionario.objects.filter(nome_completo=nome_completo).exists():
+            return render(request, 'apps/login_cad_func.html', {"erro": "Nome já cadastrado cadastrado"})
+        
         # Criar um novo funcionário
-        funcionario = Funcionario(email=email, nome_completo=nome_completo, senha=senha)
-        funcionario.save()
-
-        # Fazer login do funcionário
-        login(request, funcionario)
-
-        return redirect('servicos')
+        funcionario = Funcionario.objects.create(email=email, nome_completo=nome_completo, senha=senha)
+        
+        # Autenticar e fazer login do funcionário
+        user = authenticate(request, email=email, password=senha)
+        if user is not None:
+            login(request, user)
+            request.session["usuario"] = email
+            return redirect('servicos')
 
     return render(request, 'apps/login_cad_func.html')
 

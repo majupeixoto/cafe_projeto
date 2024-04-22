@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -14,12 +14,7 @@ class Cliente(models.Model):
     cpf = models.CharField(max_length=14)
     data_nascimento = models.DateField()
     contato = models.CharField(max_length=15)
-    senha = models.CharField(max_length=255)  # Armazenar a senha criptografada
-
-    def save(self, *args, **kwargs):
-        # Criptografar a senha antes de salvar
-        self.senha = make_password(self.senha)
-        super(Cliente, self).save(*args, **kwargs)
+    senha = models.CharField(max_length=255)  # Armazenar a senha sem criptografia
 
     def __str__(self):
         return self.nome_completo
@@ -27,16 +22,10 @@ class Cliente(models.Model):
 class Funcionario(models.Model):
     email = models.EmailField(unique=True)
     nome_completo = models.CharField(max_length=255)  # Adicionado o campo nome_completo
-    senha = models.CharField(max_length=255)  # Armazenar a senha criptografada
-
-    def save(self, *args, **kwargs):
-        # Criptografar a senha antes de salvar
-        self.senha = make_password(self.senha)
-        super(Funcionario, self).save(*args, **kwargs)
+    senha = models.CharField(max_length=255)  # Armazenar a senha sem criptografia
 
     def __str__(self):
         return self.nome_completo
-
 
 class OrdemServico(models.Model):
     cliente = models.ForeignKey('Cliente', on_delete=models.CASCADE)

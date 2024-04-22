@@ -5,6 +5,14 @@
 
     <form method="post">
         {% csrf_token %}
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
             
         <label for="nome_completo">Nome Completo:</label><br>
         <input type="text" id="nome_completo" name="nome_completo" required><br><br>
