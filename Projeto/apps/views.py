@@ -98,7 +98,6 @@ def logout(request):
 
 def login_funcionario(request):
     title = "Login"
-    next_url = request.GET.get('next')
     if request.method == 'POST':
         username = request.POST.get('username')
         senha = request.POST.get('senha')
@@ -107,11 +106,11 @@ def login_funcionario(request):
         if user is not None:
             login(request, user)
             print("is")
-            return redirect(next_url or 'servicos')
+            return redirect('servicos')
         else:
             print("else")
             return render(request, 'apps/login_funcionario.html', {"erro": "Usuário não encontrado"})
-    return render(request, 'apps/login_funcionario.html', {'next': next_url})
+    return render(request, 'apps/login_funcionario.html')
 
 
 def login_cliente(request):
@@ -179,7 +178,7 @@ def login_cad_cliente(request):
         novo_cliente.save()
 
         # Autenticar e fazer login do cliente
-        user = authenticate(request, email=email, password=senha)
+        user = authenticate(request, email=email, senha=senha)
         if user is not None:
             login(request, user)
             return redirect('pagina_inicial_cliente')  # redirecionar para a página inicial do cliente
@@ -210,7 +209,7 @@ def login_cad_func(request):
         user = Funcionario.objects.create(email=email, username=username, nome_completo=nome_completo, senha=senha)
         
         # Autenticar e fazer login do funcionário
-        user = authenticate(request, username=username, password=senha)
+        user = authenticate(request, username=username, senha=senha)
         if user is not None:
             login(request, user)
             request.session["usuario"] = username
