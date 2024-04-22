@@ -193,6 +193,3 @@ def login_cad_func(request):
         return redirect('servicos')
 
     return render(request, 'apps/login_cad_func.html')
-
-def home_funcionario(request):
-    return render(request, 'apps/home_funcionario.html')
