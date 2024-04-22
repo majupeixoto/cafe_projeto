@@ -81,13 +81,13 @@ def logout(request):
 
 def login_funcionario(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
+        username = request.POST['username']
         senha = request.POST.get('senha')
 
-        funcionario = authenticate_funcionario(email, senha)  # Corrigindo a passagem de argumentos
+        user = authenticate(request, username=username, password=senha)  # Corrigindo a passagem de argumentos
         
-        if funcionario is not None:
-            login(request)
+        if user is not None:
+            login(request, user)
             print('Funcionário autenticado com sucesso')
             return redirect('servicos')
         else:
@@ -100,7 +100,7 @@ def login_funcionario(request):
 
 def login_cliente(request):
     if request.method == 'POST':
-        email = request.POST['email']
+        username = request.POST['username']
         senha = request.POST['senha']
 
         # Verificar se o botão de cadastro foi clicado
@@ -108,7 +108,7 @@ def login_cliente(request):
             return redirect('login_cad_cliente')  # redirecionar para a página de cadastro de cliente
 
         # Autenticar o usuário
-        user = authenticate(request, email=email, senha=senha)
+        user = authenticate(request, username=username, senha=senha)
 
         if user is not None:
             # Se as credenciais são válidas, fazer login
@@ -135,6 +135,7 @@ def login_cad_cliente(request):
         garantia = request.POST['garantia']
         senha = request.POST['senha']
         confirmar_senha = request.POST['confirmar_senha']
+        username = request.POST['username']
 
         # Verificar se as senhas coincidem
         if senha != confirmar_senha:
@@ -149,6 +150,7 @@ def login_cad_cliente(request):
         # Criar um novo cliente
         novo_cliente = Cliente(
             nome_completo=nome_completo,
+            username = username,
             cpf=cpf,
             data_nascimento=data_nascimento,
             contato=contato,
@@ -176,25 +178,26 @@ def login_cad_func(request):
         senha = request.POST['senha']
         confirmar_senha = request.POST['confirmar_senha']
         nome_completo = request.POST['nome_completo']
+        username = request.POST['username']
 
         if senha != confirmar_senha:
             messages.error(request, 'As senhas não coincidem.')
             return render(request, 'apps/login_cad_func.html')
 
-        if Funcionario.objects.filter(email=email).exists():
-            messages.error(request, 'Email já cadastrado.')
+        if Funcionario.objects.filter(username=username).exists():
+            messages.error(request, 'username já cadastrado.')
             return render(request, 'apps/login_cad_func.html')
         elif Funcionario.objects.filter(nome_completo=nome_completo).exists():
             return render(request, 'apps/login_cad_func.html', {"erro": "Nome já cadastrado cadastrado"})
         
         # Criar um novo funcionário
-        funcionario = Funcionario.objects.create(email=email, nome_completo=nome_completo, senha=senha)
+        user = Funcionario.objects.create(email=email, username=username, nome_completo=nome_completo, senha=senha)
         
         # Autenticar e fazer login do funcionário
-        user = authenticate(request, email=email, password=senha)
+        user = authenticate(request, username=username, password=senha)
         if user is not None:
             login(request, user)
-            request.session["usuario"] = email
+            request.session["usuario"] = username
             return redirect('servicos')
 
     return render(request, 'apps/login_cad_func.html')
