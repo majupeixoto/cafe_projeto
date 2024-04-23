@@ -47,3 +47,10 @@ class OrdemServico(models.Model):
 
     def __str__(self):
         return f"OS {self.id} - {self.cliente.username}"
+
+class EscolherOs(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    os = models.ForeignKey(OrdemServico, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.usuario.username} - {self.os.id}'

@@ -97,7 +97,6 @@ def logout(request):
     return render(request, 'apps/login_funcionario.html')"""
 
 def login_funcionario(request):
-    title = "Login"
     if request.method == 'POST':
         username = request.POST.get('username')
         senha = request.POST.get('senha')
@@ -110,6 +109,7 @@ def login_funcionario(request):
         else:
             print("else")
             return render(request, 'apps/login_funcionario.html', {"erro": "Usuário não encontrado"})
+
     return render(request, 'apps/login_funcionario.html')
 
 
@@ -189,11 +189,11 @@ def login_cad_cliente(request):
 def login_cad_func(request):
     if request.method == 'POST':
         # Obter os dados do formulário
-        email = request.POST['email']
-        senha = request.POST['senha']
-        confirmar_senha = request.POST['confirmar_senha']
-        nome_completo = request.POST['nome_completo']
-        username = request.POST['username']
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
+        confirmar_senha = request.POST.get('confirmar_senha')
+        nome_completo = request.POST.get('nome_completo')
+        username = request.POST.get('username')
 
         if senha != confirmar_senha:
             messages.error(request, 'As senhas não coincidem.')
@@ -206,10 +206,11 @@ def login_cad_func(request):
             return render(request, 'apps/login_cad_func.html', {"erro": "Nome já cadastrado cadastrado"})
         
         # Criar um novo funcionário
-        user = Funcionario.objects.create(email=email, username=username, nome_completo=nome_completo, senha=senha)
+        user = Funcionario.objects.create_user(email=email, username=username, nome_completo=nome_completo, password=senha)
+        user.save()
         
         # Autenticar e fazer login do funcionário
-        user = authenticate(request, username=username, senha=senha)
+        user = authenticate(request, username=username, password=senha)
         if user is not None:
             login(request, user)
             request.session["usuario"] = username
@@ -219,3 +220,6 @@ def login_cad_func(request):
 
 def home_cliente(request):
     return render(request, 'apps/home_cliente.html')
+
+def profile(request):
+    return redirect('servicos')

@@ -3,7 +3,7 @@
 {% block body %}
     <h2>Prezado funcionário,<br>preencha as seguintes informações para realizar seu cadastro:</h2>
 
-    <form method="post">
+    <form action="{% url 'login_cad_func' %}" method="POST">
         {% csrf_token %}
 
         {% if messages %}
