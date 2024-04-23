@@ -12,10 +12,10 @@
             {% csrf_token %}
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button class="btn btn-primary" type="submit" id="cliente" name="tipo_usuario" value="cliente">
-                    <a href="{% url 'login_cliente' %}" class="botao">SOU CLIENTE</a>
+                    <a href="{% url 'cliente_login' %}" class="botao">SOU CLIENTE</a>
                 </button>
                 <button class="btn btn-primary" type="submit" id="funcionario" name="tipo_usuario" value="funcionario" style="background-color: #33bba7;">
-                    <a href="{% url 'login_funcionario' %}" class="botao">SOU FUNCIONÁRIO</a>
+                    <a href="{% url 'funcionario_login' %}" class="botao">SOU FUNCIONÁRIO</a>
                 </button>                
             </div>
         </form>

@@ -2,14 +2,11 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
 
-
 urlpatterns = [
-    path('', views.login, name = 'login'),
-    path('accounts/profile/', views.profile, name='profile'),
-    path('login_cliente/', views.login_cliente, name = 'login_cliente'),
-    path('servicos/', views.servicos, name = 'servicos'),
-    path('login_funcionario/', views.login_funcionario, name = 'login_funcionario'),
-    path('login_cad_cliente/', views.login_cad_cliente, name = 'login_cad_cliente'),
-    path('login_cad_func/', views.login_cad_func, name = 'login_cad_func'),
-    path('home_cliente/', views.home_cliente, name = 'home_cliente'),
+    path('', views.login, name='login'),  # Página inicial do projeto
+    path('cliente_login/', views.cliente_login, name='cliente_login'),  # Login do cliente
+    path('clinete_cadastro/', views.cliente_cadastro, name='cliente_cadastro'),  # Cadastro do cliente
+    path('servicos/', views.servicos, name='servicos'),  # Página de serviços (funcionário)
+    path('funcionario_login/', views.funcionario_login, name='funcionario_login'),  # Login do funcionário
+    path('funcionario_cadastro/', views.funcionario_cadastro, name='funcionario_cadastro'),  # Cadastro do funcionário
 ]

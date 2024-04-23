@@ -15,8 +15,8 @@
                 </ul>
             {% endif %}
 
-            <label for="email" style="display: block; font-weight: bold;">LOGIN</label>
-            <input type="text" id="email" name="email" placeholder="E-mail" required style="margin-bottom: 20px;"><br>
+            <label for="username" style="display: block; font-weight: bold;">USERNAME</label>
+            <input type="text" id="username" name="username" placeholder="Username" required style="margin-bottom: 20px;"><br>
 
             <label for="senha" style="display: block; font-weight: bold;">SENHA</label>
             <input type="password" id="senha" name="senha" placeholder="Senha" required style="margin-bottom: 20px;"><br><br>
@@ -25,6 +25,6 @@
 
         </form>
         <br><br>
-        <p style='text-align:center;'>Não possui uma conta? <a href="{% url 'login_cad_cliente' %}">Fazer Cadastro</a></p>
+        <p style='text-align:center;'>Não possui uma conta? <a href="{% url 'cliente_cadastro' %}">Fazer Cadastro</a></p>
     </div>
 {% endblock %}

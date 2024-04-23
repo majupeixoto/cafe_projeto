@@ -7,50 +7,25 @@ from django.contrib.auth.models import User
 # python manage.py makemigrations
 # e em seguida:
 # python manage.py migrate
+# python manage.py runserver
 
 class Cliente(models.Model):
+    nome = models.CharField(max_length=255)
+    username = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=True)
-    nome_completo = models.CharField(max_length=255)
-    username = models.CharField(max_length=100) # username para login
-    cpf = models.CharField(max_length=14)
-    data_nascimento = models.DateField()
-    contato = models.CharField(max_length=15)
-    senha = models.CharField(max_length=255)  # Armazenar a senha sem criptografia
+    senha = models.CharField(max_length=255)
+    cpf = models.CharField(max_length=11, unique=True)
+    contato = models.CharField(max_length=11)
 
     def __str__(self):
-        return self.username
+        return self.nome
 
 class Funcionario(models.Model):
-    email = models.EmailField(unique=True)
-    nome_completo = models.CharField(max_length=255)  # Adicionado o campo nome_completo
-    username = models.CharField(max_length=100) # username para login
-    senha = models.CharField(max_length=255)  # Armazenar a senha sem criptografia
+    nome = models.CharField(max_length=255)
+    email_empresa = models.EmailField(unique=True)
+    senha = models.CharField(max_length=255)
+    username = models.CharField(max_length=255, null=True, blank=True, unique=True)
 
     def __str__(self):
-        return self.username
+        return self.nome
 
-class OrdemServico(models.Model):
-    cliente = models.ForeignKey('Cliente', on_delete=models.CASCADE)
-    aparelho = models.CharField(max_length=225)
-    garantia = models.BooleanField()
-    descricao_problema = models.TextField()
-    status = models.CharField(
-        max_length=20,
-        choices=[
-            ('aberta', 'Aberta'),
-            ('em_andamento', 'Em Andamento'),
-            ('fechada', 'Fechada'),
-        ],
-        default='aberta'
-    )
-    responsavel = models.ForeignKey('Funcionario', null=True, blank=True, on_delete=models.SET_NULL)
-
-    def __str__(self):
-        return f"OS {self.id} - {self.cliente.username}"
-
-class EscolherOs(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    os = models.ForeignKey(OrdemServico, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'{self.usuario.username} - {self.os.id}'
