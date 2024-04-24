@@ -9,7 +9,8 @@ from django.contrib.auth.models import User
 # python manage.py migrate
 # python manage.py runserver
 
-class Cliente(models.Model):
+class Usuario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     nome = models.CharField(max_length=255)
     username = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=True)
@@ -17,15 +18,7 @@ class Cliente(models.Model):
     cpf = models.CharField(max_length=11, unique=True)
     contato = models.CharField(max_length=11)
 
-    def __str__(self):
-        return self.nome
-
-class Funcionario(models.Model):
-    nome = models.CharField(max_length=255)
-    email_empresa = models.EmailField(unique=True)
-    senha = models.CharField(max_length=255)
-    username = models.CharField(max_length=255, null=True, blank=True, unique=True)
+    funcionario = models.IntegerField()
 
     def __str__(self):
-        return self.nome
-
+        return (self.nome)

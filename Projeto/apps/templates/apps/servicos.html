@@ -1,25 +1,24 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-    <h1>Olá, {{ request.user.first_name }}!</h1>
+    <h1>Olá, {{ ... }}!</h1>
 
     <div class="grid text-center" style="margin-left: 100px;">
         <div class="col">
             <div class="card" style="width: 18rem;">
                 {% if cliente.imagem %}
-                <img src="{{ cliente.imagem.url }}" class="card-img-top" alt="{{ cliente.nome_completo }}">
+                <img src="{{ ... }}" class="card-img-top" alt="{{ ... }}">
                 {% else %}
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
                     role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <title>Placeholder</title>
                     <rect width="100%" height="100%" fill="#55595c"></rect>
-                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ cliente.nome_completo|first }}</text>
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ ... }}</text>
                 </svg>
                 {% endif %}
                 <div class="card-body">
-                    <h5 class="card-title"> Cliente: ...{{ cliente.nome_completo }}</h5>
-                    <p class="card-text">Aparelho: ...{{ cliente.aparelho }}</p>
+                    <h5 class="card-title"> Cliente: ...{{ ... }}</h5>
+                    <p class="card-text">Aparelho: ...{{ ... }}</p>
                     <p class="card-text">Garantia: ...</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
@@ -27,15 +26,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="btn-group">
-                {% if user.is_authenticated %}
-                    {% if espaco %}
-                        <a href="{% url 'favoritar' espaco.id %}" class="btn btn-lg btn-outline-secondary">Favoritar</a>
-                    {% endif %}
-                {% else %}
-                    <a href="{% url 'login' %}" class="btn btn-lg btn-outline-secondary">Favoritar</a>
-                {% endif %}
             </div>   
         </div>
     </div>

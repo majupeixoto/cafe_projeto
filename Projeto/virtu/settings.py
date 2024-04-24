@@ -53,8 +53,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'virtu.urls'
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/apps/login'
+LOGIN_URL = 'funcionario_login'
+LOGIN_REDIRECT_URL = 'servicos'  # Ou a URL para onde você deseja redirecionar após o login
+LOGOUT_REDIRECT_URL = '/'
 
 TEMPLATES = [
     {

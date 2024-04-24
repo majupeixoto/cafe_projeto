@@ -18,14 +18,25 @@
 
             <!-- Campo de Username -->
             <div>
-                <label for="id_username">Username:</label>
-                <input type="text" id="id_username" name="username" required>
+                <label for="username">Username:</label>
+                <input 
+        type="text" 
+        placeholder="Usuário" 
+        id="username"
+        name="username"
+        value="{{username}}"
+        required>
             </div>
 
             <!-- Campo de Senha -->
             <div>
-                <label for="id_senha">Senha:</label>
-                <input type="password" id="id_senha" name="senha" required>
+                <label for="senha">Senha:</label>
+                <input type="password"
+                placeholder="Senha"
+                id="password"
+                name="senha"
+                value="{{senha}}"
+                required>
             </div>
 
             <p style='text-align:center; margin-bottom: 20px;'>Não possui uma conta? <a href="{% url 'funcionario_cadastro' %}">Fazer Cadastro</a></p>
