@@ -1,10 +1,10 @@
 {% extends 'global/base_logins.html' %}
 
 {% block body %}
-    <div class="container" style="text-align: center;">
-        <h2 style="font-weight: bold;">LOGIN FUNCIONÁRIO</h2>
+    <div class="container">
+        <h2>LOGIN FUNCIONÁRIO</h2>
 
-        <form class="login" method="post" style="text-align: center;">
+        <form class="login" method="post">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
             
@@ -19,13 +19,7 @@
             <!-- Campo de Username -->
             <div>
                 <label for="username">Username:</label>
-                <input 
-        type="text" 
-        placeholder="Usuário" 
-        id="username"
-        name="username"
-        value="{{username}}"
-        required>
+                <input type="text" placeholder="Usuário" id="username" name="username" value="{{username}}" required>
             </div>
 
             <!-- Campo de Senha -->
@@ -34,9 +28,9 @@
                 <input type="password" placeholder="Senha" id="password" name="senha" value="{{senha}}" required>
             </div>
 
-            <p style='text-align:center; margin-bottom: 20px;'>Não possui uma conta? <a href="{% url 'funcionario_cadastro' %}">Fazer Cadastro</a></p>
+            <p>Não possui uma conta? <a href="{% url 'funcionario_cadastro' %}">Fazer Cadastro</a></p>
 
-            <input type='submit' value='ENTRAR' class='btn btn-light' style='background-color:#007bff; color:white; border:none; padding:5px 20px;'>
+            <input type='submit' value='ENTRAR' class='btn btn-light'>
 
         </form>
     </div>

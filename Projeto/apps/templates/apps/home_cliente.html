@@ -1,1 +1,54 @@
-<h1>OLAAAA</h1>
+{% extends 'global/base.html' %}
+
+{% block content %}
+
+<div class="container marketing">
+
+  <!-- Three columns of text below the carousel -->
+  <div class="row">
+    <div class="col-lg-4">
+      <h2 class="fw-normal">Bem-vindo, {{ perfil.nome }}</h2>
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row">
+    {% if ordens_de_servico %}
+      {% for os in ordens_de_servico %}
+        <div class="col-lg-4">
+          <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/>
+          </svg>
+          <h2 class="fw-normal">{{ os.descricao }}</h2>
+          <p>
+            {% if os.status == 'esperando' %}
+              Esperando funcionário terminar
+            {% elif os.status == 'terminada' %}
+              Terminada
+            {% elif os.status == 'iniciado' %}
+              Conserto iniciado
+            {% elif os.status == 'finalizado' %}
+              Conserto finalizado
+            {% endif %}
+          </p>
+          <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+      {% endfor %}
+    {% else %}
+      <div class="col-lg-4">
+        <p>Não há nada por aqui...</p>
+      </div><!-- /.col-lg-4 -->
+    {% endif %}
+  </div><!-- /.row -->
+
+  <div class="row">
+    <div class="col-lg-4">
+      <a class="btn btn-primary" href="{% url 'cadastrar_os' %}" role="button">Cadastrar Ordem de Serviço</a>
+    </div>
+  </div>
+
+</div><!-- /.container -->
+
+{% endblock %}

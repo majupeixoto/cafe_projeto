@@ -126,8 +126,14 @@ def home_cliente(request):
         return render(request, 'apps/home_cliente.html')
 
 @login_required
+<<<<<<< HEAD
 def cadastrar_os(request):
     usuario = request.user
+=======
+def cadastrar_os_cliente(request):
+    user = request.user
+    usuario = Perfil.objects.get(username=user.username)
+>>>>>>> 0a2329f901928f7c8a97d7f5c96426beeaf27a8e
 
     if usuario.funcionario == 1:
         return redirect(cliente_login)
