@@ -21,10 +21,9 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-
     if "usuario" in request.session:
         del request.session["usuario"]
-    return redirect(login_view)
+    return redirect('login')
 
 
 def cliente_login(request): # VIEW CORRETA
@@ -121,7 +120,7 @@ def home_cliente(request):
     usuario = Perfil.objects.get(username=user.username)
 
     if usuario.funcionario == 1:
-        return redirect(cliente_login)
+        return redirect(login)
     else:
         if request.user.is_anonymous:
             return redirect(login)
@@ -136,7 +135,7 @@ def cadastrar_os_cliente(request):
     usuario = Perfil.objects.get(username=user.username)
 
     if usuario.funcionario == 1:
-        return redirect(cliente_login)
+        return redirect(login)
     else:
         if request.method == 'POST':
             aparelho = request.POST['aparelho']
