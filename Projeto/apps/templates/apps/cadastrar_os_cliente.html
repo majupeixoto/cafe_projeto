@@ -1,0 +1,21 @@
+{% extends 'global/base.html' %}
+
+{% block body %}
+    <h2>Cadastrar Nova Ordem de Serviço</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="aparelho">Aparelho:</label><br>
+        <input type="text" id="aparelho" name="aparelho" required><br><br>
+
+        <label for="garantia">Garantia:</label><br>
+        <input type="checkbox" id="garantia" name="garantia"><a>Sim</a>
+        <input type="checkbox" id="garantia" name="garantia"><a>Não</a><br><br>
+
+        <label for="descricao_problema">Descrição do Problema:</label><br>
+        <textarea id="descricao_problema" name="descricao_problema" rows="4" cols="50" required></textarea><br><br>
+
+        <input type="submit" value="Cadastrar">
+    </form>
+{% endblock %}
