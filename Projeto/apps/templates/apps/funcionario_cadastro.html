@@ -3,7 +3,7 @@
 {% block body %}
     <h2>Prezado funcionário,<br>preencha as seguintes informações para realizar seu cadastro:</h2>
 
-    <form action="{% url 'funcionario_cadastro' %}" method="POST">
+    <form class = "login" action="{% url 'funcionario_cadastro' %}" method="POST">
         {% csrf_token %}
 
         {% if messages %}
