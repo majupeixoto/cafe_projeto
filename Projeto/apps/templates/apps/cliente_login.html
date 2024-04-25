@@ -15,16 +15,16 @@
                 </ul>
             {% endif %}
 
-            <label for="username" style="display: block; font-weight: bold;">USERNAME</label>
-            <input type="text" id="username" name="username" placeholder="Username" required style="margin-bottom: 20px;"><br>
+            <label for="username">USERNAME</label>
+            <input type="text" id="username" name="username" placeholder="Username" required><br>
 
-            <label for="senha" style="display: block; font-weight: bold;">SENHA</label>
-            <input type="password" id="senha" name="senha" placeholder="Senha" required style="margin-bottom: 20px;"><br><br>
+            <label for="senha">SENHA</label>
+            <input type="password" id="senha" name="senha" placeholder="Senha" required><br><br>
 
-            <input type='submit' value='ENTRAR' class='btn btn-light' style='background-color:#007bff; color:white; border:none; padding:5px 20px;'>
+            <input type='submit' value='ENTRAR' class='btn btn-light'>
 
         </form>
         <br><br>
-        <p style='text-align:center;'>Não possui uma conta? <a href="{% url 'cliente_cadastro' %}">Fazer Cadastro</a></p>
+        <p>Não possui uma conta? <a href="{% url 'cliente_cadastro' %}">Fazer Cadastro</a></p>
     </div>
 {% endblock %}
