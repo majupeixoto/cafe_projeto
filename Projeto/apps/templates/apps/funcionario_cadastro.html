@@ -1,7 +1,7 @@
 {% extends 'global/base_logins.html' %}
 
 {% block body %}
-    <h2>Prezado funcionário,<br>preencha as seguintes informações para realizar seu cadastro:</h2>
+    <h2>Cadastro de FUNCIONÁRIO<br></h2>
 
     <form class = "login" action="{% url 'funcionario_cadastro' %}" method="POST">
         {% csrf_token %}
