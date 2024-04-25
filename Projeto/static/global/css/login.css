@@ -3,6 +3,7 @@
     align-items: center;
     margin: 0 auto; /* Centralizar horizontalmente */
     max-width: 400px; /* Definir a largura máxima do container */
+    width: 100%;
 }
 
 .logo-placeholder {
@@ -50,10 +51,13 @@ h2 {
     background-color: #007bff; /* Cor do botão primário */
     border: none;
     border-radius: 5px;
-    text-decoration: center;
     text-align: center;
     align-items: center;
     margin-bottom: 10px; /* Espaço entre os botões */
+}
+
+.botao-funcionario {
+    background-color: #33bba7; /* Cor personalizada */
 }
 
 .btn:hover, .btn:focus {
@@ -69,16 +73,10 @@ h2 {
 }
 
 /* Estilos para o formulário */
-.container {
-    text-align: center;
-    width: 100%;
-}
 
 form {
     width: 80%;
-    border: 1px solid #000000;
     padding: 30px;
-    box-shadow: 0 0 10px #ccc;
     border-radius: 8px;
     margin: 0 auto; /* Centraliza horizontalmente */
     max-width: 600px; /* Limita a largura do formulário */
