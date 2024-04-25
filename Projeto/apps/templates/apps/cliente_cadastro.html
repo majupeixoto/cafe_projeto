@@ -2,9 +2,9 @@
 
 {% block body %}
     <div class="container">
-        <h2>Prezado cliente,<br>preencha as seguintes informações para realizar seu cadastro:</h2>
+        <h2>FAÇA SEU CADASTRO<br></h2>
 
-        <form action="{% url 'cliente_cadastro' %}" method="post">
+        <form class="login" action="{% url 'cliente_cadastro' %}" method="post">
             {% csrf_token %}
             
             <label for="id_username">Username:</label><br>
