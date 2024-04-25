@@ -7,7 +7,7 @@
   <!-- Three columns of text below the carousel -->
   <div class="row">
     <div class="col-lg-4">
-      <h2 class="fw-normal">Bem-vindo, {{ perfil.nome }}</h2>
+      <h2 class="fw-normal">Bem-vindo, {{ Perfil.nome }}</h2>
     </div>
   </div>
 
@@ -40,14 +40,14 @@
       <div class="col-lg-4">
         <p>Não há nada por aqui...</p>
       </div><!-- /.col-lg-4 -->
+      <div class="row">
+        <div class="col-lg-4">
+          <a class="btn btn-primary" href="{% url 'cadastrar_os_cliente' %}" role="button">Cadastrar Ordem de Serviço</a>
+        </div>
+      </div>
+    
     {% endif %}
   </div><!-- /.row -->
-
-  <div class="row">
-    <div class="col-lg-4">
-      <a class="btn btn-primary" href="{% url 'cadastrar_os_cliente' %}" role="button">Cadastrar Ordem de Serviço</a>
-    </div>
-  </div>
 
 </div><!-- /.container -->
 
