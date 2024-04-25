@@ -1,8 +1,10 @@
 .container {
-    align-items: center;
-    margin: 0 auto; /* Centralizar horizontalmente */
-    max-width: 400px; /* Definir a largura máxima do container */
-    width: 100%;
+    display: flex; /* Habilita flexbox */
+    flex-direction: column; /* Coloca elementos em coluna */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    min-height: 100vh; /* Garante que preencha a altura da tela */
+    margin: 0 auto; /* Centraliza horizontalmente o contêiner dentro do pai */
 }
 
 .logo-placeholder {
