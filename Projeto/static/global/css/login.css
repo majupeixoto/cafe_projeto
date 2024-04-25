@@ -1,5 +1,4 @@
 .container {
-    text-align: center;
     align-items: center;
     margin: 0 auto; /* Centralizar horizontalmente */
     max-width: 400px; /* Definir a largura máxima do container */
