@@ -4,7 +4,7 @@
     <div class="container">
         <h2>LOGIN CLIENTE</h2>
 
-        <form class="login" method="post">
+        <form class="login login-cliente" method="post">
             {% csrf_token %}
             
             {% if messages %}
@@ -16,7 +16,7 @@
             {% endif %}
 
             <input type="text" id="username" name="username" placeholder="Username" required><br>
-
+            
             <input type="password" id="senha" name="senha" placeholder="Senha" required><br><br>
 
             <input type='submit' value='ENTRAR' class='btn btn-light'>
