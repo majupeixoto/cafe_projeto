@@ -21,17 +21,18 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect(login)
 
-def cliente_login(request):
+    if "usuario" in request.session:
+        del request.session["usuario"]
+    return redirect(login_view)
+
+
+def cliente_login(request): # VIEW CORRETA
     if request.method == 'POST':
         username = request.POST['username']
         senha = request.POST['senha']
-        print(f"esse é o user que recebi: {username}\n")
+
         user = authenticate(username=username, password=senha)
-        print(f"esse é a senha que recebi: {senha}\n")
-        print(user)
-        print("\n")
         if user is not None:
             login(request, user)
             return redirect(home_cliente)
@@ -41,7 +42,7 @@ def cliente_login(request):
 
     return render(request, 'apps/cliente_login.html')
 
-def funcionario_login(request):
+def funcionario_login(request): # VIEW CORRETA
     if request.method == 'POST':
         username = request.POST['username']
         senha = request.POST['senha']
@@ -56,7 +57,7 @@ def funcionario_login(request):
     
     return render(request, 'apps/funcionario_login.html')
 
-def cliente_cadastro(request):
+def cliente_cadastro(request): # VIEW CORRETA
     if request.method == 'POST':
         username = request.POST['username']
         nome = request.POST['nome']
@@ -84,7 +85,7 @@ def cliente_cadastro(request):
 
     return render(request, 'apps/cliente_cadastro.html')
 
-def funcionario_cadastro(request):
+def funcionario_cadastro(request): # VIEW CORRETA
     if request.method == "POST":
         username = request.POST['username']
         nome = request.POST['nome']
@@ -110,10 +111,40 @@ def funcionario_cadastro(request):
     
     return render(request, 'apps/funcionario_cadastro.html')
 
+
+
+# PÁGINAS CIENTE
 @login_required
 def home_cliente(request):
-    return render(request, 'apps/home_cliente.html')
+    user = request.user
 
+    usuario = Perfil.objects.get(username=user.username)
+
+    if usuario.funcionario == 1:
+        return redirect(cliente_login)
+    else:
+        return render(request, 'apps/home_cliente.html')
+
+@login_required
+def registrar_os(request):
+    user = request.user
+    usuario = Perfil.objects.get(username=user.username)
+
+    if usuario.funcionario == 1:
+        return redirect(cliente_login)
+    else:
+        if request.method == 'POST':
+            aparelho = request.POST['aparelho']
+            garantia = request.POST['']
+            descricao_problema = request.POST['descricao_problema']
+
+            os = OrdemServico.objects.create(aparelho = aparelho, garantia = garantia, 
+                                            descricao_problema=descricao_problema)
+            
+        return render(request, 'apps/#')
+
+
+# PÁGINAS FUNCIONÁRIO
 @login_required
 def servicos(request):
     user = request.user

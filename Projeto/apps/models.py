@@ -19,3 +19,20 @@ class Perfil(models.Model):
 
     def __str__(self):
         return (self.nome)
+    
+
+class OrdemServico(models.Model):
+    status = [
+        (None, "Ordem de serviço enviada"),
+        ('Ordem de serviço iniciada', 'Ordem de serviço iniciada'),
+        ('Em análise', 'Em análise'),
+        ('Aguardando peça', 'Aguardando peça'),
+        ('Em conserto', 'Em conserto'),
+        ('Pronto', 'Pronto'),
+    ]
+    aparelho = models.CharField(max_length=255)
+    garantia = models.BooleanField(choices=[(True, 'Sim'), (False, 'Não')])
+    descricao_problema = models.CharField(max_length=255)
+
+    def __str__(self):
+        return (self.aparelho) 
