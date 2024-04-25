@@ -26,7 +26,7 @@
 * SR1
 
 * Backlog - Jira
-* ![print backlog](![WhatsApp Image 2024-04-25 at 16 52 31](https://github.com/majupeixoto/vitu_projeto/assets/142419595/5148184b-3b68-45cc-af1e-e6b1727611d5))
+* (![WhatsApp Image 2024-04-25 at 16 52 31](https://github.com/majupeixoto/vitu_projeto/assets/142419595/5148184b-3b68-45cc-af1e-e6b1727611d5)
 
 * Quadro - Jira
-* ![print backlog](![WhatsApp Image 2024-04-25 at 16 53 08](https://github.com/majupeixoto/vitu_projeto/assets/142419595/2658136f-a877-429a-8282-fe4c25a5b3ad))
+* (![WhatsApp Image 2024-04-25 at 16 53 08](https://github.com/majupeixoto/vitu_projeto/assets/142419595/2658136f-a877-429a-8282-fe4c25a5b3ad)
