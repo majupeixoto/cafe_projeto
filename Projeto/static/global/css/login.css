@@ -43,7 +43,7 @@ h2 {
 }
 
 .btn {
-    width: 100%; /* Largura dos botões */
+    width: auto; /* Largura dos botões */
     padding: 10px;
     font-size: 18px;
     font-weight: bold;
@@ -75,8 +75,6 @@ h2 {
 /* Estilos para o formulário */
 
 form {
-    width: 80%;
-    padding: 30px;
     border-radius: 8px;
     margin: 0 auto; /* Centraliza horizontalmente */
     max-width: 600px; /* Limita a largura do formulário */
