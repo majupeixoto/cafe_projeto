@@ -10,4 +10,5 @@ urlpatterns = [
     path('funcionario_login/', views.funcionario_login, name='funcionario_login'),  # Login do funcionário
     path('funcionario_cadastro/', views.funcionario_cadastro, name='funcionario_cadastro'),  # Cadastro do funcionário
     path('home_cliente/', views.home_cliente, name='home_cliente'),  # Cadastro do funcionário
+    path('cadastrar_os_cliente/', views.cadastrar_os_cliente, name='cadastrar_os_cliente'),  # Cadastro OS por parte do cliente
 ]

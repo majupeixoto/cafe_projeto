@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Perfil
+from .models import *
 from django.contrib import auth
 from django.http import HttpResponse
 
@@ -141,7 +141,7 @@ def cadastrar_os_cliente(request):
             os = OrdemServico.objects.create(aparelho = aparelho, garantia = garantia, 
                                             descricao_problema=descricao_problema)
             
-        return render(request, 'apps/#')
+        return render(request, 'apps/cadastrar_os_cliente.html')
 
 
 # PÁGINAS FUNCIONÁRIO
