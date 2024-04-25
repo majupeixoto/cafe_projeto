@@ -27,11 +27,8 @@
                 <label for="senha">Senha:</label>
                 <input type="password" placeholder="Senha" id="password" name="senha" value="{{senha}}" required>
             </div>
-
-            <p>Não possui uma conta? <a href="{% url 'funcionario_cadastro' %}">Fazer Cadastro</a></p>
-
             <input type='submit' value='ENTRAR' class='btn btn-light'>
-
         </form>
+        <p>Não possui uma conta? <a href="{% url 'funcionario_cadastro' %}">Fazer Cadastro</a></p>
     </div>
 {% endblock %}
