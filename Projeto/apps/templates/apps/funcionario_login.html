@@ -16,15 +16,10 @@
                 </ul>
             {% endif %}
 
-            <!-- Campo de Username -->
-            <div>
-                <input type="text" placeholder="Username" id="username" name="username" value="{{username}}" required>
-            </div>
-
-            <!-- Campo de Senha -->
-            <div>
-                <input type="password" placeholder="Senha" id="password" name="senha" value="{{senha}}" required>
-            </div>
+            <input type="text" placeholder="Username" id="username" name="username" value="{{username}}" required>
+           
+            <input type="password" placeholder="Senha" id="password" name="senha" value="{{senha}}" required>
+            
             <input type='submit' value='ENTRAR' class='btn btn-light'>
         </form>
         <p>Não possui uma conta? <a href="{% url 'funcionario_cadastro' %}">Fazer Cadastro</a></p>
