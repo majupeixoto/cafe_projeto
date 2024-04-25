@@ -31,3 +31,9 @@
 
 ### Quadro - Jira
  (![WhatsApp Image 2024-04-25 at 16 53 08](https://github.com/majupeixoto/vitu_projeto/assets/142419595/2658136f-a877-429a-8282-fe4c25a5b3ad)
+
+- [Histórias](https://drive.google.com/drive/folders/12Modz1yczDOfG8SjGML6RIbQjwDkxM0i?usp=sharing)
+- [Relato de programação em pares]()
+- [Protótipo de baixa fidelidade](https://drive.google.com/drive/folders/1yDUq-M4q6PSr9e3Axv-ywMGPRb3DATYG?usp=sharing)
+- [Diagrama de Atividades](![Diagrama de atividades - cliente - SR1 (1)](https://github.com/majupeixoto/vitu_projeto/assets/142419595/dc1780b3-697f-45f9-a594-f60fe60bbabb)
+)
