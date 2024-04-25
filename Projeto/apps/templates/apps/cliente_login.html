@@ -1,10 +1,10 @@
 {% extends 'global/base_logins.html' %}
 
 {% block body %}
-    <div class="container" style="text-align: center;">
-        <h2 style="font-weight: bold;">LOGIN CLIENTE</h2>
+    <div class="container">
+        <h2>LOGIN CLIENTE</h2>
 
-        <form method="post" style="text-align: center;">
+        <form class="login" method="post">
             {% csrf_token %}
             
             {% if messages %}
