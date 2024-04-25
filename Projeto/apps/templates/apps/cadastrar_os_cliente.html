@@ -9,9 +9,12 @@
         <label for="aparelho">Aparelho:</label><br>
         <input type="text" id="aparelho" name="aparelho" required><br><br>
 
-        <label for="garantia">Garantia:</label><br>
-        <input type="checkbox" id="garantia" name="garantia"><a>Sim</a>
-        <input type="checkbox" id="garantia" name="garantia"><a>Não</a><br><br>
+        <label>Garantia:</label><br>
+        <input type="radio" name="garantia" id="garantia_sim" value="True" required>
+        <label for="id_garantia_sim">Sim</label>
+
+        <input type="radio" name="garantia" id="garantia_nao" value="False" required>
+        <label for="garantia_nao">Não</label><br><br>
 
         <label for="descricao_problema">Descrição do Problema:</label><br>
         <textarea id="descricao_problema" name="descricao_problema" rows="4" cols="50" required></textarea><br><br>

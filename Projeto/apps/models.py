@@ -33,6 +33,7 @@ class OrdemServico(models.Model):
     aparelho = models.CharField(max_length=255)
     garantia = models.BooleanField(choices=[(True, 'Sim'), (False, 'Não')])
     descricao_problema = models.CharField(max_length=255)
+    perfil_os = models.ForeignKey(Perfil, on_delete=models.PROTECT, default = None)
 
     def __str__(self):
         return (self.aparelho) 

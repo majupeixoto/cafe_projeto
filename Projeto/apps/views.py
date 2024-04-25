@@ -123,7 +123,12 @@ def home_cliente(request):
     if usuario.funcionario == 1:
         return redirect(cliente_login)
     else:
-        return render(request, 'apps/home_cliente.html')
+        if request.user.is_anonymous:
+            return redirect(login)
+        else:
+            ordens = OrdemServico.objects.filter(perfil_os=usuario)
+            return render(request, 'apps/home_cliente.html', {'ordens': ordens})
+
 
 @login_required
 def cadastrar_os_cliente(request):
@@ -135,12 +140,19 @@ def cadastrar_os_cliente(request):
     else:
         if request.method == 'POST':
             aparelho = request.POST['aparelho']
-            garantia = request.POST['']
+            garantia = request.POST['garantia'] == 'True'
             descricao_problema = request.POST['descricao_problema']
 
-            OrdemServico.objects.create(aparelho = aparelho, garantia = garantia, 
-                                            descricao_problema=descricao_problema)
-            
+            # Cria uma nova OrdemServico associada ao perfil do usuário logado
+            OrdemServico.objects.create(
+                aparelho=aparelho,
+                garantia=garantia,
+                descricao_problema=descricao_problema,
+                perfil_os = usuario
+            )
+
+            return redirect(home_cliente)
+
         return render(request, 'apps/cadastrar_os_cliente.html')
 
 
