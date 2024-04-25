@@ -31,7 +31,7 @@
 ## SR1
   
 - [Histórias](https://drive.google.com/drive/folders/12Modz1yczDOfG8SjGML6RIbQjwDkxM0i?usp=sharing)
-- [Relato de programação em pares]()
+- [Relato de programação em pares](https://docs.google.com/document/d/1aClDI74VvrUdzjil-syrFw4i6dOA9TfyOZ6haFZ-5O0/edit)
 - [Protótipo de baixa fidelidade](https://drive.google.com/drive/folders/1yDUq-M4q6PSr9e3Axv-ywMGPRb3DATYG?usp=sharing)
 
 ### Backlog - Jira
