@@ -9,13 +9,10 @@ from django.contrib.auth.models import User
 # python manage.py migrate
 # python manage.py runserver
 
-class Usuario(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class Perfil(models.Model):
     nome = models.CharField(max_length=255)
     username = models.CharField(max_length=30, unique=True)
-    email = models.EmailField(unique=True)
-    senha = models.CharField(max_length=255)
-    cpf = models.CharField(max_length=11, unique=True)
+    cpf = models.CharField(max_length=11)
     contato = models.CharField(max_length=11)
 
     funcionario = models.IntegerField()
