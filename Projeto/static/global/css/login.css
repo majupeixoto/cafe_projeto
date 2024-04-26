@@ -78,7 +78,7 @@ h2 {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: #2e54d1;
     color: white;
     cursor: pointer;
 }
@@ -94,7 +94,7 @@ p {
 
 p a {
     text-decoration: none;
-    color: #007bff;
+    color: #;
 }
 
 p a:hover {
