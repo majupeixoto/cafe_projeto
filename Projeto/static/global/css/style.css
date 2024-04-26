@@ -88,9 +88,7 @@ ul li.item-menu a .icon > i {
     overflow: hidden; /* Para garantir que a imagem não ultrapasse as bordas */
 }
 
-
 .bd-placeholder-img {
-    display: block;
     width: auto;
     height: auto;
     margin-bottom: 6px; /* Espaçamento inferior para a imagem */
@@ -106,3 +104,4 @@ ul li.item-menu a .icon > i {
 .form-group{
     font-size: larger;
 }
+
