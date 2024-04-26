@@ -19,13 +19,21 @@ h2 {
     font-size: xx-large;
 }
 
-.botao-funcionario{
-    background-color: #33bba7;
-}
-
 .botao {
     text-decoration: none;
     color: white;
+}
+.botao-funcionario {
+    background-color: #33bba7; /* cor inicial */
+    border: none; /* para remover o contorno */
+}
+
+.botao-funcionario:hover {
+    background-color: #288f84; /* cor quando o mouse passa por cima */
+}
+
+.botao:hover {
+    color: lightgray; /* cor do texto quando o mouse passa por cima */
 }
 
 .container {
@@ -70,7 +78,7 @@ h2 {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: #2e54d1;
     color: white;
     cursor: pointer;
 }
@@ -86,7 +94,7 @@ p {
 
 p a {
     text-decoration: none;
-    color: #007bff;
+    color: #;
 }
 
 p a:hover {
