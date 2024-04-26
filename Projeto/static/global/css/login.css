@@ -25,7 +25,7 @@ h2 {
 }
 
 .container {
-    width: 500px; /* Defina a largura desejada */
+    max-width: 400px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -36,8 +36,8 @@ h2 {
     transform: translate(-50%, -50%);
 }
 
-.cadastro {
-    width: 500px; /* Defina a largura desejada */
+.cadastrar {
+    max-width: 400px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -55,15 +55,15 @@ h2 {
 .login input[type="text"],
 .login input[type="password"] {
     width: 100%;
-    margin-bottom: 1px;
-    padding: 1px;
+    margin-bottom: 10px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 .login input[type="submit"] {
-    width: 00%;
-    margin-bottom: 1px;
+    width: 100%;
+    padding: 10px;
     border: none;
     border-radius: 5px;
     background-color: #007bff;
@@ -88,5 +88,4 @@ p a {
 p a:hover {
     text-decoration: underline;
 }
-
 
