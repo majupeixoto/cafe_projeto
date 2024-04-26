@@ -164,7 +164,6 @@ STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Diretórios de arquivos static
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    os.path.join(BASE_DIR, 'Projeto/static'),
 ]
 
 # Default primary key field type
