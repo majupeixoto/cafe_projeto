@@ -25,14 +25,11 @@ h2 {
 }
 
 .container {
-    max-width: 400px;
+    width: 500px; /* Defina a largura desejada */
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
-}
-
-.container {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -46,15 +43,15 @@ h2 {
 .login input[type="text"],
 .login input[type="password"] {
     width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
+    margin-bottom: 1px;
+    padding: 1px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 .login input[type="submit"] {
-    width: 100%;
-    padding: 10px;
+    width: 00%;
+    margin-bottom: 1px;
     border: none;
     border-radius: 5px;
     background-color: #007bff;
