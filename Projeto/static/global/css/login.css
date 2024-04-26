@@ -19,6 +19,10 @@ h2 {
     font-size: xx-large;
 }
 
+.botao-funcionario{
+    background-color: #33bba7;
+}
+
 .botao {
     text-decoration: none;
     color: white;
