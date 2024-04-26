@@ -95,6 +95,7 @@ ul li.item-menu a .icon > i {
     height: auto;
     margin-bottom: 6px; /* Espaçamento inferior para a imagem */
     border-radius: 20px; /* Valor aumentado para tornar a borda mais redonda */
+}
 
 .btn-lg, 
 .text-center{
