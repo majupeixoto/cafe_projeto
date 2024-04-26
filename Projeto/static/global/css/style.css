@@ -81,7 +81,7 @@ ul li.item-menu a .icon > i {
     padding-top: 40px;
 }
 
-card {
+.card {
     width: 18rem; /* Reduzindo ainda mais a largura do card */
     padding: 20px; /* Reduzindo ainda mais o espaçamento interno do card */
     border-radius: 20px; /* Reduzindo ainda mais o raio das bordas arredondadas */
