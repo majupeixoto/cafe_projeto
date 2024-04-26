@@ -30,7 +30,7 @@ if NOT_PROD:
     DEBUG = True
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = 'django-insecure-u!_v*wt5r0(wwmnqtp2q_70ep6hz(#)_^hpkh^l7z4278c07gk'
-    ALLOWED_HOSTS = ['virtu.azurewebsites.net']
+    ALLOWED_HOSTS = []
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -163,7 +163,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 # Diretórios de arquivos static
 STATICFILES_DIRS = [
-    BASE_DIR / 'static'
+    BASE_DIR / 'static',
+    os.path.join(BASE_DIR, 'Projeto/static'),
 ]
 
 # Default primary key field type
