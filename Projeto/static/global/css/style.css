@@ -81,13 +81,23 @@ ul li.item-menu a .icon > i {
     padding-top: 40px;
 }
 
-.bd-placeholder-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.card {
+    width: 18rem; /* Reduzindo ainda mais a largura do card */
+    padding: 20px; /* Reduzindo ainda mais o espaçamento interno do card */
+    border-radius: 20px; /* Reduzindo ainda mais o raio das bordas arredondadas */
+    overflow: hidden; /* Para garantir que a imagem não ultrapasse as bordas */
 }
 
-.btn-lg,
+
+.bd-placeholder-img {
+    display: block;
+    width: auto;
+    height: auto;
+    margin-bottom: 6px; /* Espaçamento inferior para a imagem */
+    border-radius: 20px; /* Valor aumentado para tornar a borda mais redonda */
+}
+
+.btn-lg, 
 .text-center{
     margin-top: 20px;
 }
