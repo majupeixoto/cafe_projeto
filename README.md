@@ -34,6 +34,7 @@
 - [Relato de programação em pares](https://docs.google.com/document/d/1aClDI74VvrUdzjil-syrFw4i6dOA9TfyOZ6haFZ-5O0/edit)
 - [Protótipo de baixa fidelidade](https://drive.google.com/drive/folders/1yDUq-M4q6PSr9e3Axv-ywMGPRb3DATYG?usp=sharing)
 - [Azure](virtu.azurewebsites.net)
+- - [Link do projeto na Azure](https://virtu.azurewebsites.net)
 
 ### Backlog - Jira
    ![WhatsApp Image 2024-04-25 at 16 52 31](https://github.com/majupeixoto/vitu_projeto/assets/142419595/5148184b-3b68-45cc-af1e-e6b1727611d5)
