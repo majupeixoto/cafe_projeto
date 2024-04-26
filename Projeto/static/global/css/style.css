@@ -81,7 +81,7 @@ ul li.item-menu a .icon > i {
     padding-top: 40px;
 }
 
-.card {
+card {
     width: 18rem; /* Reduzindo ainda mais a largura do card */
     padding: 20px; /* Reduzindo ainda mais o espaçamento interno do card */
     border-radius: 20px; /* Reduzindo ainda mais o raio das bordas arredondadas */
@@ -89,14 +89,13 @@ ul li.item-menu a .icon > i {
 }
 
 .bd-placeholder-img {
-    display: block;
     width: auto;
     height: auto;
     margin-bottom: 6px; /* Espaçamento inferior para a imagem */
     border-radius: 20px; /* Valor aumentado para tornar a borda mais redonda */
 }
 
-.btn-lg,
+.btn-lg, 
 .text-center{
     margin-top: 20px;
 }
@@ -105,3 +104,4 @@ ul li.item-menu a .icon > i {
 .form-group{
     font-size: larger;
 }
+
