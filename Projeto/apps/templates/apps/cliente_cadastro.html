@@ -7,29 +7,24 @@
         <form class="login" action="{% url 'cliente_cadastro' %}" method="post">
             {% csrf_token %}
             
-            <label for="id_username">Username:</label><br>
-            <input type="text" id="id_username" name="username" required><br><br>
+            <input type="text" placeholder="Username" id="id_username" name="username" required><br><br>
 
-            <label for="id_nome">Nome:</label><br>
-            <input type="text" id="id_nome" name="nome" required><br><br>
+            <input type="text" placeholder="Nome" id="id_nome" name="nome" required><br><br>
 
-            <label for="id_cpf">CPF:</label><br>
-            <input type="text" id="id_cpf" name="cpf" required><br><br>
-
+            <input type="text" placeholder="CPF" id="id_cpf" name="cpf" required><br><br>
+            
             <label for="id_data_nascimento">Data de Nascimento:</label><br>
             <input type="date" id="id_data_nascimento" name="data_nascimento" required><br><br>
 
-            <label for="id_contato">Número para contato:</label><br>
-            <input type="text" id="id_contato" name="contato" required><br><br>
+            <input type="text" placeholder="Número para contato" id="id_contato" name="contato" required><br><br>
 
-            <label for="id_email">Email:</label><br>
-            <input type="text" id="id_email" name="email" required><br><br>
+            <input type="text" placeholder="Email" id="id_email" name="email" required><br><br>
 
-            <label for="id_senha">Senha:</label><br>
-            <input type="password" id="id_senha" name="senha" required><br><br>
 
-            <label for="id_confirmar_senha">Confirmar Senha:</label><br>
-            <input type="password" id="id_confirmar_senha" name="confirmar_senha" required><br><br>
+            <input type="password" placeholder="Senha" id="id_senha" name="senha" required><br><br>
+
+            <input type="password" placeholder="Confirmar Senha" id="id_confirmar_senha" name="confirmar_senha" required><br><br>
+            
             <input type='submit' value='Cadastrar' class='btn btn-light'>
 
         </form>
