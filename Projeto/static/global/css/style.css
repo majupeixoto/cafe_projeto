@@ -87,4 +87,12 @@ ul li.item-menu a .icon > i {
     margin-right: auto;
 }
 
+.btn-lg,
+.text-center{
+    margin-top: 20px;
+}
 
+.h2 text-center,
+.form-group{
+    font-size: larger;
+}
