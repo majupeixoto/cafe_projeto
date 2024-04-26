@@ -88,11 +88,21 @@ ul li.item-menu a .icon > i {
     overflow: hidden; /* Para garantir que a imagem não ultrapasse as bordas */
 }
 
+<<<<<<< HEAD
 .bd-placeholder-img {
     display: block;
     width: auto;
     height: auto;
     margin-bottom: 6px; /* Espaçamento inferior para a imagem */
     border-radius: 20px; /* Valor aumentado para tornar a borda mais redonda */
+=======
+.btn-lg,
+.text-center{
+    margin-top: 20px;
+>>>>>>> 40caf99ab1d2ffdbb69842627273ca7c4961098c
 }
 
+.h2 text-center,
+.form-group{
+    font-size: larger;
+}
