@@ -1,49 +1,50 @@
 {% extends 'global/base_logins.html' %}
 
 {% block body %}
-    <h2>Prezado funcionário,<br>preencha as seguintes informações para realizar seu cadastro:</h2>
+    <div class="container">
+        <h2>Cadastro</h2>
 
-    <form class = "login" action="{% url 'funcionario_cadastro' %}" method="POST">
-        {% csrf_token %}
+        <form class="login cadastro-form" action="{% if form_type == 'cliente' %}{% url 'cliente_cadastro' %}{% elif form_type == 'funcionario' %}{% url 'funcionario_cadastro' %}{% endif %}" method="post">
+            {% csrf_token %}
 
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             
-        <!-- Campo de Email da Empresa -->
-        <div>
-            <label for="id_email">Email da Empresa:</label>
-            <input type="email" id="id_email" name="email" required>
-        </div>
+            <div>
+                <label for="id_email">Email da Empresa:</label>
+                <input type="text" id="id_email" name="email" required>
+            </div>
 
-        <!-- Campo de Username -->
-        <div>
-            <label for="id_username">Username:</label>
-            <input type="text" id="id_username" name="username" required>
-        </div>
-        
-        <!-- Campo de Nome -->
-        <div>
-            <label for="id_nome">Nome:</label>
-            <input type="text" id="id_nome" name="nome" required>
-        </div>
+            <!-- Campo de Username -->
+            <div>
+                <label for="id_username">Username:</label>
+                <input type="text" id="id_username" name="username" required>
+            </div>
+            
+            <!-- Campo de Nome -->
+            <div>
+                <label for="id_nome">Nome:</label>
+                <input type="text" id="id_nome" name="nome" required>
+            </div>
 
-        <!-- Campo de Senha -->
-        <div>
-            <label for="id_senha">Senha:</label>
-            <input type="password" id="id_senha" name="senha" required>
-        </div>
+            <!-- Campo de Senha -->
+            <div>
+                <label for="id_senha">Senha:</label>
+                <input type="password" id="id_senha" name="senha" required>
+            </div>
 
-        <!-- Campo de Confirmar Senha -->
-        <div>
-            <label for="id_confirmar_senha">Confirmar Senha:</label>
-            <input type="password" id="id_confirmar_senha" name="confirmar_senha" required>
-        </div>
+            <!-- Campo de Confirmar Senha -->
+            <div>
+                <label for="id_confirmar_senha">Confirmar Senha:</label>
+                <input type="password" id="id_confirmar_senha" name="confirmar_senha" required>
+            </div>
 
-        <button type="submit">Cadastrar</button>
-    </form>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
 {% endblock %}

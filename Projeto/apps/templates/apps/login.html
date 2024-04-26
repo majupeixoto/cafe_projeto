@@ -2,16 +2,15 @@
 {% load static %}
 
 {% block body %}
-    <div class="container">
         <div class="logo-placeholder">
-            <img src="{% static 'global/img/logo.PNG' %}" alt="Logo VBox">
+            <img src="{% static 'global/img/logo.png' %}" alt="Logo VBox">
         </div>
         <h1>VBox</h1>
         <h2>Bem Vindo!</h2>
         <form method="post">
             {% csrf_token %}
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-primary" type="submit" id="cliente" name="tipo_usuario" value="cliente">
+                <button class="btn btn-primary botao-cliente" type="submit" id="cliente" name="tipo_usuario" value="cliente">
                     <a href="{% url 'cliente_login' %}" class="botao">SOU CLIENTE</a>
                 </button>
                 <button class="btn btn-primary botao-funcionario" type="submit" id="funcionario" name="tipo_usuario" value="funcionario" style="background-color: #33bba7;">
@@ -19,5 +18,4 @@
                 </button>                
             </div>
         </form>
-    </div>
 {% endblock %}

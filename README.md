@@ -22,3 +22,24 @@
 * Maria Eduarda --> megagl@cesar.school
 * Maria Isabel --> miaap@cesar.school
 * Matheus Alves --> masc@cesar.school
+
+## Links
+
+- [Jira](https://cesar-team-js3yxxb6.atlassian.net/jira/software/projects/KAN/boards/1)
+  
+
+## SR1
+  
+- [Histórias](https://drive.google.com/drive/folders/12Modz1yczDOfG8SjGML6RIbQjwDkxM0i?usp=sharing)
+- [Relato de programação em pares](https://docs.google.com/document/d/1aClDI74VvrUdzjil-syrFw4i6dOA9TfyOZ6haFZ-5O0/edit)
+- [Protótipo de baixa fidelidade](https://drive.google.com/drive/folders/1yDUq-M4q6PSr9e3Axv-ywMGPRb3DATYG?usp=sharing)
+
+### Backlog - Jira
+   ![WhatsApp Image 2024-04-25 at 16 52 31](https://github.com/majupeixoto/vitu_projeto/assets/142419595/5148184b-3b68-45cc-af1e-e6b1727611d5)
+
+### Quadro - Jira
+   ![WhatsApp Image 2024-04-25 at 16 53 08](https://github.com/majupeixoto/vitu_projeto/assets/142419595/2658136f-a877-429a-8282-fe4c25a5b3ad)
+
+### Diagrama de Atividades
+  ![Diagrama de atividades - cliente - SR1 (1)](https://github.com/majupeixoto/vitu_projeto/assets/142419595/dc1780b3-697f-45f9-a594-f60fe60bbabb)
+
