@@ -8,7 +8,7 @@
 
 body {
     height: 900vh; /* isso é só para aumentar a largura da página */
-    background-color: #fff5ea;
+    background-color: #ffeedd;
 }
 
 /* PERSONALIZAÇÕES ESPECÍFICAS */
@@ -79,4 +79,20 @@ ul li.item-menu a .icon > i {
 .corpo {
     margin-left: 120px;
     padding-top: 40px;
+}
+
+.bd-placeholder-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-lg,
+.text-center{
+    margin-top: 20px;
+}
+
+.h2 text-center,
+.form-group{
+    font-size: larger;
 }
