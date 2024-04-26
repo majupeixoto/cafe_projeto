@@ -44,3 +44,5 @@
 ### Diagrama de Atividades
   ![Diagrama de atividades - cliente - SR1 (1)](https://github.com/majupeixoto/vitu_projeto/assets/142419595/dc1780b3-697f-45f9-a594-f60fe60bbabb)
 
+### Issues
+![image](https://github.com/lua-mf/vitu_projeto/assets/143026488/eca7a77f-4f8f-4756-8df0-6b32252b1400)
