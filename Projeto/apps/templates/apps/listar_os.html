@@ -17,6 +17,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Aparelho</th>
                     <th scope="col">Modelo</th>
+                    <th scope="col">Açoes</th> <!-- Nova coluna para botões de ação -->
                 </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,12 @@
                         <td>{{ os.email }}</td>
                         <td>{{ os.aparelho }}</td>
                         <td>{{ os.modelo }}</td>
+                        <td>
+                            <form action="{% url 'excluir_os' os.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

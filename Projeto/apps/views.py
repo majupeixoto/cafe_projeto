@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,  get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -186,3 +186,12 @@ def listar_os(request): #listar todas as os feitas
         else:
             ordens = OrdemServico.objects.all()
             return render(request, 'apps/listar_os.html', {'funcionario': 1, 'ordens': ordens})
+
+
+# VIEW DOS DOIS
+def excluir_os(request, pk):
+    os = get_object_or_404(OrdemServico, pk=pk)
+    if request.method == 'POST':
+        os.delete()
+        return redirect('listar_os')  # Redireciona para a lista de OS após a exclusão
+    return render(request, 'excluir_os.html', {'os': os})

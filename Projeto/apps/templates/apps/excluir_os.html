@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir OS</title>
+</head>
+<body>
+    <h1>Excluir OS</h1>
+    <p>Tem certeza de que deseja excluir a OS "{{ ordem }}"?</p>
+    <form action="{% url 'excluir_os' ordem.pk %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Confirmar exclusão">
+    </form>
+    <a href="{% url 'listar_os' %}">Cancelar</a>
+</body>
+</html>
