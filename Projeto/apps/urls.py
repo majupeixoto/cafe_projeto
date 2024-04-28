@@ -11,4 +11,5 @@ urlpatterns = [
     path('funcionario_cadastro/', views.funcionario_cadastro, name='funcionario_cadastro'),  # Cadastro do funcionário
     path('home_cliente/', views.home_cliente, name='home_cliente'),  # Cadastro do funcionário
     path('cadastrar_os_cliente/', views.cadastrar_os_cliente, name='cadastrar_os_cliente'),  # Cadastro OS por parte do cliente
+    path('listar_os/', views.listar_os, name='listar_os'),  # Listas de todas as OS cadastradas 
 ]
