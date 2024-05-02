@@ -8,20 +8,21 @@
             </div> <!-- btn-expandir -->
 
             <ul>
-                {% if funcionario == 1 %}
+                {% if funcionario == 1 %} <!-- MENU FUNCIONÁRIO-->
                 <li class="item-menu">
-                    <a href="{% url 'servicos'%}">
+                    <a href="{% url 'servicos' %}">
                         <span class="icon"><i class="bi bi-house"></i></span><!--link do ícone-->
                         <span class="txt-link">Servicos</span>
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#">
+                    <a href="{% url 'listar_os' %}">
                         <span class="icon"><i class="bi bi-ui-radios"></i></span><!--link do ícone-->
                         <span class="txt-link">OS</span>
                     </a>
                 </li>
-                {% else %}
+
+                {% else %} <!--MENU CLIENTE-->
                 <li class="item-menu">
                     <a href="{% url 'home_cliente' %}">
                         <span class="icon"><i class="bi bi-box"></i></span><!--link do ícone-->
@@ -34,7 +35,8 @@
                         <span class="txt-link">Cadastrar OS</span>
                     </a>
                 </li>
-                {% endif %}
+
+                {% endif %} <!-- LOGIN/LOGOUT DOS DOIS-->
                 <li class="item-menu">
                     <a href="#">
                         <span class="icon"><i class="bi bi-person-circle"></i></span><!--link do ícone-->

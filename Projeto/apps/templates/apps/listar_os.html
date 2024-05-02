@@ -1,0 +1,48 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-8">
+        <h2 class="fw-normal">Ordens de serviços cadastradas!</h2>
+        </div>
+    </div>
+    <div>
+        {% if ordens %}
+            <table class="table table-striped-columns">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Aparelho</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Açoes</th> <!-- Nova coluna para botões de ação -->
+                </tr>
+                </thead>
+                <tbody>
+                    {% for os in ordens %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ ... }}</td> <!--primeiro nome-->
+                        <td>{{ ... }}</td> <!--último nome-->
+                        <td>{{ os.email }}</td>
+                        <td>{{ os.aparelho }}</td>
+                        <td>{{ os.modelo }}</td>
+                        <td>
+                            <form action="{% url 'excluir_os' os.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+        <div class="col-lg-4">
+            <p>Não há nada por aqui...</p>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

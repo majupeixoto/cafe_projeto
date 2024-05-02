@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,  get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -7,6 +7,7 @@ from .models import *
 from django.contrib import auth
 from django.http import HttpResponse
 
+#VIEWS DE LOGIN
 def login_view(request):
     if request.method == 'POST':
         tipo_usuario = request.POST.get('tipo_usuario')
@@ -51,7 +52,7 @@ def funcionario_login(request): # VIEW CORRETA
             login(request, user)
             return redirect(servicos)
         else:
-            messages.error(request, 'Erro ao autenticar o cliente. Por favor, tente novamente.')
+            messages.error(request, 'Erro ao autenticar o funcionário. Por favor, tente novamente.')
             return redirect('funcionario_login')
     
     return render(request, 'apps/funcionario_login.html')
@@ -110,9 +111,10 @@ def funcionario_cadastro(request): # VIEW CORRETA
     
     return render(request, 'apps/funcionario_cadastro.html')
 
+# FINAL DAS VIEWS DE LOGIN
 
 
-# PÁGINAS CIENTE
+# VIEWS DA CONTA CLIENTE
 @login_required
 def home_cliente(request):
     user = request.user
@@ -154,8 +156,10 @@ def cadastrar_os_cliente(request):
 
         return render(request, 'apps/cadastrar_os_cliente.html')
 
+#FINAL DAS VIEWS DA CONTA CLIENTE
 
-# PÁGINAS FUNCIONÁRIO
+
+# VIEWS DO FUNCIONÁRIO
 @login_required
 def servicos(request):
     user = request.user
@@ -165,4 +169,29 @@ def servicos(request):
     if usuario.funcionario == 0:
         return redirect(funcionario_login)
     else:
-        return render(request, 'apps/servicos.html')
+        # colocar aq a opção de filter o que ele editou
+        return render(request, 'apps/servicos.html', {'funcionario':1})
+
+@login_required
+def listar_os(request): #listar todas as os feitas 
+    user = request.user
+
+    usuario = Perfil.objects.get(username=user)
+
+    if usuario.funcionario == 0:
+        return redirect(funcionario_login)
+    else:
+        if request.user.is_anonymous:
+            return redirect(login)
+        else:
+            ordens = OrdemServico.objects.all()
+            return render(request, 'apps/listar_os.html', {'funcionario': 1, 'ordens': ordens})
+
+
+# VIEW DOS DOIS
+def excluir_os(request, pk):
+    os = get_object_or_404(OrdemServico, pk=pk)
+    if request.method == 'POST':
+        os.delete()
+        return redirect('listar_os')  # Redireciona para a lista de OS após a exclusão
+    return render(request, 'excluir_os.html', {'os': os})
