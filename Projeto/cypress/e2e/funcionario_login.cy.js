@@ -5,5 +5,6 @@ describe('test login_funcionario', () => {
         cy.get('#username').type('lala');
         cy.get('#password').type('123')
         cy.get('.btn').click()
+        cy.url().should('include', 'servicos')
     })
 })
