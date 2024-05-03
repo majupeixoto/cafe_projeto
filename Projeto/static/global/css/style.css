@@ -5,12 +5,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif; /* fonte da letra do site */
-}
+    font-family: "PT Mono", monospace;
+    font-weight: 400;
+    font-style: normal;}
 
 body {
-    height: 100vh; /* isso é só para aumentar a largura da página */
-    background-color: #ffeedd;
+    height: 100vh;
+    background-image: url('../img/background-site3.png'); /* Corrigi o caminho da imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* PERSONALIZAÇÕES ESPECÍFICAS */
@@ -26,7 +30,7 @@ nav.menu-lateral {
     top: 0;
     left: 0;
     overflow: hidden;
-    transition: .2s;
+    transition: width 0.2s; /* Melhorei a legibilidade aqui */
 }
 
 nav.menu-lateral:hover {
@@ -46,11 +50,11 @@ nav.menu-lateral:hover {
 
 ul {
     list-style-type: none;
-    padding-left: 0; /* removendo o padding padrão */
+    padding-left: 0;
 }
 
 ul li.item-menu {
-    transition: .2s;
+    transition: background-color 0.2s; /* Melhorei a legibilidade aqui */
 }
 
 ul li.item-menu:hover {
@@ -63,17 +67,17 @@ ul li.item-menu a {
     font-size: 20px;
     padding: 20px 4%;
     display: flex;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
     line-height: 40px;
 }
 
 ul li.item-menu a .txt-link {
-    margin-left: 40px; /* Ajuste o espaço entre o ícone e o texto */
+    margin-left: 40px;
 }
 
 ul li.item-menu a .icon > i {
     font-size: 30px;
-    margin-left: 9px; /* ajustado */
+    margin-left: 9px;
 }
 
 /* ORGANIZANDO O CORPO */
@@ -84,26 +88,25 @@ ul li.item-menu a .icon > i {
 }
 
 .card {
-    width: 18rem; /* Reduzindo ainda mais a largura do card */
-    padding: 20px; /* Reduzindo ainda mais o espaçamento interno do card */
-    border-radius: 20px; /* Reduzindo ainda mais o raio das bordas arredondadas */
-    overflow: hidden; /* Para garantir que a imagem não ultrapasse as bordas */
+    width: 18rem;
+    padding: 20px;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 .bd-placeholder-img {
-    width: auto;
+    width: 100%;
     height: auto;
-    margin-bottom: 6px; /* Espaçamento inferior para a imagem */
-    border-radius: 20px; /* Valor aumentado para tornar a borda mais redonda */
+    margin-bottom: 6px;
+    border-radius: 20px;
 }
 
-.btn-lg, 
-.text-center{
+.btn-lg,
+.text-center {
     margin-top: 20px;
 }
 
-.h2 text-center,
-.form-group{
+h2.text-center, /* Corrigi a seleção do h2 */
+.form-group {
     font-size: larger;
 }
-
