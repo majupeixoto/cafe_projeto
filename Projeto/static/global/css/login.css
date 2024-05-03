@@ -50,16 +50,29 @@ h2 {
     color: white;
 }
 .botao-funcionario {
-    background-color: #33bba7; /* cor inicial */
+    background-color: #d9d9d9; /* cor inicial */
     border: none; /* para remover o contorno */
 }
 
 .botao-funcionario:hover {
-    background-color: #288f84; /* cor quando o mouse passa por cima */
+    background-color: #d9d9d9; /* cor quando o mouse passa por cima */
 }
 
 .botao:hover {
-    color: lightgray; /* cor do texto quando o mouse passa por cima */
+    color: var(--color-neutral-30); /* cor do texto quando o mouse passa por cima */
+}
+
+.botao-cliente {
+    background-color: #d9d9d9; /* cor inicial */
+    border: none; /* para remover o contorno */
+}
+
+.botao-cliente:hover {
+    background-color: #d9d9d9; /* cor quando o mouse passa por cima */
+}
+
+.botao:hover {
+    color: var(--color-neutral-30); /* cor do texto quando o mouse passa por cima */
 }
 
 .container {
