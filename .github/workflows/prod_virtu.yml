@@ -28,11 +28,7 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: |
-          cd Projeto/
-          pip install -r requirements.txt
-          npm ci
-          cd ..
+        run: pip install -r Projeto/requirements.txt
 
       - name: Run local server
         run: |
