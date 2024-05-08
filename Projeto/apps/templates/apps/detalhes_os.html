@@ -18,6 +18,17 @@
                 <h5>Modelo do aparelho: {{ detalhes_da_os.modelo }}</h5>
                 <h5>Detalhamento do problema: {{ detalhes_da_os.descricao_problema }}</h5>
                 <h5>Status: {{ detalhes_da_os.status }}</h5>
+                {% if os.status == 'Enviada' %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="responsabilizar">Responsabilizar-se</button>
+                    </form>
+                {% else %}
+                    <div>
+                        {% csrf_token %}
+                        <h3>Responsável: {{ funcionario_responsavel }}</h3>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

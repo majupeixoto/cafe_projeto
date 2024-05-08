@@ -200,7 +200,13 @@ def detalhes_os(request, os_id):
         else:
             os = get_object_or_404(OrdemServico, id=os_id)
             detalhes_da_os = os.detalhes()
-            ...
+
+            if request.method == 'POST':
+                if os.status == 'Enviada' and 'responsabilizar' in request.POST:
+                    os.funcionario_responsavel = usuario
+                    os.status = 'Iniciada'
+                    os.save()
+                    return redirect(servicos)
 
     return render(request, 'apps/detalhes_os.html', {'funcionario': 1, 'os': os, 'detalhes_da_os': detalhes_da_os})
 

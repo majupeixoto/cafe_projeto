@@ -26,11 +26,15 @@
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ ... }}</td> <!--primeiro nome-->
                         <td>{{ ... }}</td> <!--último nome-->
-                        <td>{{ os.email }}</td>
+                        <td>{{ os.contato }}</td>
                         <td>{{ os.aparelho }}</td>
                         <td>{{ os.modelo }}</td>
+                        {% if os.funcionario_responsavel %}
+                            <p>Responsável: {{ os.funcionario_responsavel }}</p>
+                        {% endif %}
                         <td>
                             <div class="btn-group">
+                                {% csrf_token %}
                                 <a href="{% url 'detalhes_os' os.id%}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
                             </div>
                             <form action="{% url 'excluir_os' os.id %}" method="POST">
