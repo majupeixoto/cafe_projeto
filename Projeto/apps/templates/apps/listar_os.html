@@ -30,6 +30,9 @@
                         <td>{{ os.aparelho }}</td>
                         <td>{{ os.modelo }}</td>
                         <td>
+                            <div class="btn-group">
+                                <a href="{% url 'detalhes_os' os.id%}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
+                            </div>
                             <form action="{% url 'excluir_os' os.id %}" method="POST">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger">Excluir</button>
