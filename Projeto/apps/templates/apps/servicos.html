@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container marketing">
 
-    <!-- Three columns of text below the carousel -->
+    <!-- Bem-vindo -->
     <div class="row">
         <div class="col-lg-8">
             <h2 class="fw-normal">Bem-vindo, {{ user.username }}!</h2>
@@ -13,13 +13,14 @@
 
     <hr class="featurette-divider">
 
+    <!-- Exibição das ordens de serviço -->
     <div class="row">
-        {% if ordens %}
-            {% for os in ordens %}
+        {% if ordens_servico %}
+            {% for os in ordens_servico %}
             <div class="col-lg-4">
                 <div class="card" style="width: 18rem;">
-                {% if cliente.imagem %}
-                <img src="{% static 'global/img/fundo.png' %}" class="card-img-top" alt="{{ os.descricao }}">
+                {% if os.cliente.imagem %}
+                <img src="{% static os.cliente.imagem.url %}" class="card-img-top" alt="{{ os.descricao }}">
                 {% else %}
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
                     role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -29,10 +30,11 @@
                 </svg>
                 {% endif %}
                 <div class="card-body">
+                    <p class="card-text">Nome cliente: {{ os.perfil_os.username }}</p>
                     <p class="card-text">Aparelho: {{ os.aparelho }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a href="#" class="btn btn-sm btn-outline-secondary">Ver mais</a>
+                            <a href="{% url 'detalhes_os' os.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
                         </div>
                     </div>
                 </div>
@@ -41,40 +43,10 @@
             {% endfor %}
         {% else %}
             <div class="col-lg-4">
-                <p>Não há nada por aqui...</p>
+                <p>Não há ordens de serviço atribuídas a você.</p>
             </div><!-- /.col-lg-4 -->
         {% endif %}
     </div><!-- /.row -->
 
 </div><!-- /.container -->
 {% endblock %}
-
-
-
-
-<!--<div class="grid text-center" style="margin-left: 100px;">
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                {% if cliente.imagem %}
-                <img src="{{ ... }}" class="card-img-top" alt="{{ ... }}">
-                {% else %}
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                    role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#55595c"></rect>
-                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ ... }}</text>
-                </svg>
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title"> Cliente: ...{{ ... }}</h5>
-                    <p class="card-text">Aparelho: ...{{ ... }}</p>
-                    <p class="card-text">Garantia: ...</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a href="..." class="btn btn-sm btn-outline-secondary">Ver mais</a>
-                        </div>
-                    </div>
-                </div>
-            </div>   
-        </div>
-    </div>-->

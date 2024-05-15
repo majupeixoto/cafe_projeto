@@ -142,11 +142,13 @@ def cadastrar_os_cliente(request):
         if request.method == 'POST':
             aparelho = request.POST['aparelho']
             garantia = request.POST['garantia'] == 'True'
+            modelo = request.POST['garantia']
             descricao_problema = request.POST['descricao_problema']
 
             # Cria uma nova OrdemServico associada ao perfil do usuário logado
             OrdemServico.objects.create(
                 aparelho=aparelho,
+                modelo=modelo,
                 garantia=garantia,
                 descricao_problema=descricao_problema,
                 perfil_os = usuario
@@ -170,7 +172,8 @@ def servicos(request):
         return redirect(login)
     else:
         # colocar aq a opção de filter o que ele editou
-        return render(request, 'apps/servicos.html', {'funcionario': 1})
+        ordens_servico = OrdemServico.objects.filter(funcionario_responsavel=usuario)
+        return render(request, 'apps/servicos.html', {'funcionario': 1, 'ordens_servico': ordens_servico})
 
 @login_required
 def listar_os(request): #listar todas as os feitas 
@@ -216,7 +219,7 @@ def detalhes_os(request, os_id):
                     os.save()
 
             # Adicione o nome do funcionário responsável ao contexto
-            funcionario_responsavel = os.funcionario_responsavel.nome if os.funcionario_responsavel else None
+            funcionario_responsavel = os.funcionario_responsavel.username if os.funcionario_responsavel else None
 
     return render(request, 'apps/detalhes_os.html', {'funcionario': 1, 'os': os, 'detalhes_da_os': detalhes_da_os, 'funcionario_responsavel': funcionario_responsavel})
 
