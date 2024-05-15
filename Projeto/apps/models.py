@@ -39,16 +39,15 @@ class OrdemServico(models.Model):
 
     def detalhes(self):
         return {
-            'aparelho': self.aparelho,
-            'modelo': self.modelo,
-            'garantia': 'Sim' if self.garantia else 'Não',
-            'descricao_problema': self.descricao_problema,
-            'cliente_nome': self.perfil_os.nome if self.perfil_os else None,
-            'cliente_cpf': self.perfil_os.cpf if self.perfil_os else None,
-            'cliente_contato': self.perfil_os.contato if self.perfil_os else None,
-            # Adicione mais informações do cliente conforme necessário
-            'status': self.get_status_display()  # Obter a representação legível do status
-        }
+        'aparelho': self.aparelho,
+        'modelo': self.modelo,
+        'garantia': 'Sim' if self.garantia else 'Não',
+        'descricao_problema': self.descricao_problema,
+        'cliente_nome': self.perfil_os.nome if self.perfil_os else None,
+        'cliente_cpf': self.perfil_os.cpf if self.perfil_os else None,
+        'cliente_contato': self.perfil_os.contato if self.perfil_os else None,
+        'status': self.get_status_display()  # Obter a representação legível do status
+    }
 
     def __str__(self):
         return (self.aparelho) 

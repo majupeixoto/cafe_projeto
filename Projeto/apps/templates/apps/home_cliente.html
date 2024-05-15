@@ -8,7 +8,7 @@
   <!-- Three columns of text below the carousel -->
   <div class="row">
     <div class="col-lg-8">
-      <h2 class="fw-normal">Bem-vindo!{{ ordens.nome_cliente }}</h2>
+      <h2 class="fw-normal">Bem-vindo!{{ user.username }}</h2>
     </div>
   </div>
 
@@ -31,6 +31,7 @@
             {% endif %}
             <div class="card-body">
                 <p class="card-text">Aparelho: {{ os.aparelho }}</p>
+                <p class="card-text">Aparelho: {{ os.status }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <a href="#" class="btn btn-sm btn-outline-secondary">Ver mais</a>

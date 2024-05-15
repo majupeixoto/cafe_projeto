@@ -12,8 +12,7 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
+                    <th scope="col">Nome</th>
                     <th scope="col">Email</th>
                     <th scope="col">Aparelho</th>
                     <th scope="col">Modelo</th>
@@ -24,9 +23,8 @@
                     {% for os in ordens %}
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ ... }}</td> <!--primeiro nome-->
-                        <td>{{ ... }}</td> <!--último nome-->
-                        <td>{{ os.contato }}</td>
+                        <td>{{ os.perfil_os.username }}</td> <!--primeiro nome-->
+                        <td>{{ os.perfil_os.contato }}</td>
                         <td>{{ os.aparelho }}</td>
                         <td>{{ os.modelo }}</td>
                         {% if os.funcionario_responsavel %}
