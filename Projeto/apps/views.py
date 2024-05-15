@@ -167,10 +167,10 @@ def servicos(request):
     usuario = Perfil.objects.get(username=user.username)
 
     if usuario.funcionario == 0:
-        return redirect(funcionario_login)
+        return redirect(login)
     else:
         # colocar aq a opção de filter o que ele editou
-        return render(request, 'apps/servicos.html', {'funcionario':1})
+        return render(request, 'apps/servicos.html', {'funcionario': 1})
 
 @login_required
 def listar_os(request): #listar todas as os feitas 
@@ -179,7 +179,7 @@ def listar_os(request): #listar todas as os feitas
     usuario = Perfil.objects.get(username=user)
 
     if usuario.funcionario == 0:
-        return redirect(funcionario_login)
+        return redirect(login)
     else:
         if request.user.is_anonymous:
             return redirect(login)
@@ -187,6 +187,38 @@ def listar_os(request): #listar todas as os feitas
             ordens = OrdemServico.objects.all()
             return render(request, 'apps/listar_os.html', {'funcionario': 1, 'ordens': ordens})
 
+@login_required
+def detalhes_os(request, os_id):
+    user = request.user
+    usuario = Perfil.objects.get(username=user.username)
+
+    if usuario.funcionario == 0:
+        return redirect(login)
+    else:
+        if request.user.is_anonymous:
+            return redirect(login)
+        else:
+            os = get_object_or_404(OrdemServico, id=os_id)
+            detalhes_da_os = os.detalhes()
+
+            if request.method == 'POST':
+                if os.status == 'Enviada' and 'responsabilizar' in request.POST:
+                    os.funcionario_responsavel = usuario
+                    os.status = 'Iniciada'
+                    os.save()
+                
+                # Verifica se o formulário de atualização do status foi submetido
+                if 'atualizar_status' in request.POST:
+                    # Atualiza o status da ordem de serviço com base no valor selecionado no formulário
+                    novo_status = request.POST.get('status')
+                    os.status = novo_status
+                    # Salva as alterações na ordem de serviço
+                    os.save()
+
+            # Adicione o nome do funcionário responsável ao contexto
+            funcionario_responsavel = os.funcionario_responsavel.nome if os.funcionario_responsavel else None
+
+    return render(request, 'apps/detalhes_os.html', {'funcionario': 1, 'os': os, 'detalhes_da_os': detalhes_da_os, 'funcionario_responsavel': funcionario_responsavel})
 
 # VIEW DOS DOIS
 def excluir_os(request, pk):

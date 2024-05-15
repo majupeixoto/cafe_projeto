@@ -1,0 +1,35 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row align-items-center"> <!-- Centralizando verticalmente -->
+            <!-- Conteúdo à esquerda -->
+            <div class="col-md-6">
+                <h2>{{ os.id }}</h2> <!-- código da OS-->
+
+                <h5>Nome do Cliente: {{ os.perfil_os.nome }}</h5>
+                <h5>Email: {{ detalhes_da_os.cliente_contato }}</h5>
+                <h5>Garantia: {{ detalhes_da_os.garantia }}</h5>
+            </div>
+
+            <!-- Conteúdo à direita -->
+            <div class="col-md-6">
+                <h5>Aparelho: {{ detalhes_da_os.aparelho }}</h5>
+                <h5>Modelo do aparelho: {{ detalhes_da_os.modelo }}</h5>
+                <h5>Detalhamento do problema: {{ detalhes_da_os.descricao_problema }}</h5>
+                <h5>Status: {{ detalhes_da_os.status }}</h5>
+                {% if os.status == 'Enviada' %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="responsabilizar">Responsabilizar-se</button>
+                    </form>
+                {% else %}
+                    <div>
+                        {% csrf_token %}
+                        <h3>Responsável: {{ funcionario_responsavel }}</h3>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

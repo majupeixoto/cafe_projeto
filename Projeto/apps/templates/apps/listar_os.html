@@ -12,8 +12,7 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
+                    <th scope="col">Nome</th>
                     <th scope="col">Email</th>
                     <th scope="col">Aparelho</th>
                     <th scope="col">Modelo</th>
@@ -24,12 +23,18 @@
                     {% for os in ordens %}
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ ... }}</td> <!--primeiro nome-->
-                        <td>{{ ... }}</td> <!--último nome-->
-                        <td>{{ os.email }}</td>
+                        <td>{{ os.perfil_os.username }}</td> <!--primeiro nome-->
+                        <td>{{ os.perfil_os.contato }}</td>
                         <td>{{ os.aparelho }}</td>
                         <td>{{ os.modelo }}</td>
+                        {% if os.funcionario_responsavel %}
+                            <p>Responsável: {{ os.funcionario_responsavel }}</p>
+                        {% endif %}
                         <td>
+                            <div class="btn-group">
+                                {% csrf_token %}
+                                <a href="{% url 'detalhes_os' os.id%}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
+                            </div>
                             <form action="{% url 'excluir_os' os.id %}" method="POST">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger">Excluir</button>
