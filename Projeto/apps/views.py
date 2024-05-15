@@ -206,9 +206,19 @@ def detalhes_os(request, os_id):
                     os.funcionario_responsavel = usuario
                     os.status = 'Iniciada'
                     os.save()
-                    return redirect(servicos)
+                
+                # Verifica se o formulário de atualização do status foi submetido
+                if 'atualizar_status' in request.POST:
+                    # Atualiza o status da ordem de serviço com base no valor selecionado no formulário
+                    novo_status = request.POST.get('status')
+                    os.status = novo_status
+                    # Salva as alterações na ordem de serviço
+                    os.save()
 
-    return render(request, 'apps/detalhes_os.html', {'funcionario': 1, 'os': os, 'detalhes_da_os': detalhes_da_os})
+            # Adicione o nome do funcionário responsável ao contexto
+            funcionario_responsavel = os.funcionario_responsavel.nome if os.funcionario_responsavel else None
+
+    return render(request, 'apps/detalhes_os.html', {'funcionario': 1, 'os': os, 'detalhes_da_os': detalhes_da_os, 'funcionario_responsavel': funcionario_responsavel})
 
 # VIEW DOS DOIS
 def excluir_os(request, pk):

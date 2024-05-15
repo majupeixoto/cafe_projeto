@@ -37,6 +37,9 @@ class OrdemServico(models.Model):
     perfil_os = models.ForeignKey(Perfil, on_delete=models.PROTECT, default = None)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Enviada')
 
+    # Adicione este campo para representar o funcionário responsável
+    funcionario_responsavel = models.ForeignKey(Perfil, on_delete=models.SET_NULL, null=True, blank=True, related_name='ordens_responsavel')
+
     def detalhes(self):
         return {
         'aparelho': self.aparelho,
