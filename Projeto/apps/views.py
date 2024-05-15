@@ -142,7 +142,7 @@ def cadastrar_os_cliente(request):
         if request.method == 'POST':
             aparelho = request.POST['aparelho']
             garantia = request.POST['garantia'] == 'True'
-            modelo = request.POST['garantia']
+            modelo = request.POST['modelo']
             descricao_problema = request.POST['descricao_problema']
 
             # Cria uma nova OrdemServico associada ao perfil do usuário logado
