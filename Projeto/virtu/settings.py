@@ -69,8 +69,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.apps.AppsConfig',
     "whitenoise.runserver_nostatic",
+    'apps.apps.AppsConfig',
 ]
 
 MIDDLEWARE = [
@@ -85,10 +85,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'virtu.urls'
-
-LOGIN_URL = 'funcionario_login'
-LOGIN_REDIRECT_URL = 'servicos'  # Ou a URL para onde você deseja redirecionar após o login
-LOGOUT_REDIRECT_URL = '/'
 
 TEMPLATES = [
     {
