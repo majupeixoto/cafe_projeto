@@ -27,9 +27,6 @@
                         <td>{{ os.perfil_os.contato }}</td>
                         <td>{{ os.aparelho }}</td>
                         <td>{{ os.modelo }}</td>
-                        {% if os.funcionario_responsavel %}
-                            <p>Responsável: {{ os.funcionario_responsavel }}</p>
-                        {% endif %}
                         <td>
                             <div class="btn-group">
                                 {% csrf_token %}

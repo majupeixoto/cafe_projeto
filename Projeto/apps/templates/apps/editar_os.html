@@ -4,27 +4,19 @@
     <div class="container mt-5">
         <div class="row align-items-center">
             <div class="col-md-6">
-                <h2>Editar OS ID: {{ os.id }}</h2>
+                <h2>Número da OS: {{ os.numero }}</h2>
                 <h5>Nome do Cliente: {{ os.perfil_os.nome }}</h5>
                 <h5>Contato: {{ os.perfil_os.contato }}</h5>
                 <h5>Garantia: {{ os.garantia }}</h5>
+                <h5>Aparelho: {{ os.aparelho }}</h5>
+                <h5>Modelo do aparelho: {{ os.modelo }}</h5>
+                <h5>Problema relatado: {{ os.descricao_problema }}</h5>
             </div>
 
             <div class="col-md-6">
                 <form method="post">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <label for="aparelho">Aparelho:</label>
-                        <input type="text" id="aparelho" name="aparelho" value="{{ os.aparelho }}" class="form-control" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="modelo">Modelo do Aparelho:</label>
-                        <input type="text" id="modelo" name="modelo" value="{{ os.modelo }}" class="form-control" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="descricao_problema">Detalhamento do Problema:</label>
-                        <textarea id="descricao_problema" name="descricao_problema" class="form-control">{{ os.descricao_problema }}</textarea>
-                    </div>
+
                     <div class="form-group">
                         <label for="comentarios_cliente">Comentários para o Cliente:</label>
                         <textarea id="comentarios_cliente" name="comentarios_cliente" class="form-control">{{ os.comentarios_cliente }}</textarea>
