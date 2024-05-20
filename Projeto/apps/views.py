@@ -203,6 +203,7 @@ def detalhes_os(request, os_id):
         else:
             os = get_object_or_404(OrdemServico, id=os_id)
             detalhes_da_os = os.detalhes()
+            numero_os = os.numero
 
             if request.method == 'POST':
                 if os.status == 'Enviada' and 'responsabilizar' in request.POST:
@@ -229,7 +230,8 @@ def detalhes_os(request, os_id):
             context = {
                 'funcionario': 1, 'os': os, 
                 'detalhes_da_os': detalhes_da_os, 
-                'funcionario_responsavel': funcionario_responsavel
+                'funcionario_responsavel': funcionario_responsavel,
+                'numero_os': numero_os
             }
 
     return render(request, 'apps/detalhes_os.html', context)

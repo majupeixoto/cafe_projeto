@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 
 # Create your models here.
 
@@ -45,6 +46,21 @@ class OrdemServico(models.Model):
     comentarios_cliente = models.TextField(blank=True, null=True)
     anotacoes_internas = models.TextField(blank=True, null=True)
     problema_detectado = models.TextField(blank=True, null=True)
+
+    numero = models.CharField(max_length=10, unique=True)  # Campo para armazenar o número da ordem de serviço
+
+    def save(self, *args, **kwargs):
+        if not self.numero:  # Verifica se o número da ordem já foi atribuído
+            year = datetime.now().year  # Obtém o ano atual
+            prefix = str(year)[-2:]  # Obtém os últimos dois dígitos do ano
+            last_order = OrdemServico.objects.filter(numero__startswith=prefix).order_by('-numero').first()
+            if last_order:  # Se já existem ordens de serviço cadastradas no ano corrente
+                last_number = int(last_order.numero[-3:])  # Obtém o número da última ordem de serviço
+                new_number = last_number + 1  # Calcula o novo número da ordem de serviço
+            else:
+                new_number = 1  # Se não há ordens de serviço cadastradas no ano corrente, o número será 1
+            self.numero = f"{prefix}{new_number:03d}"  # Formata o número da ordem de serviço com três dígitos, ex: 25001
+        super().save(*args, **kwargs)
 
     def detalhes(self):
         return {

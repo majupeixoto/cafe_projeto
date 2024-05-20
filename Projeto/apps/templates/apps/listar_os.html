@@ -22,7 +22,7 @@
                 <tbody>
                     {% for os in ordens %}
                     <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
+                        <th scope="row">{{ os.numero }}</th>
                         <td>{{ os.perfil_os.username }}</td> <!--primeiro nome-->
                         <td>{{ os.perfil_os.contato }}</td>
                         <td>{{ os.aparelho }}</td>
