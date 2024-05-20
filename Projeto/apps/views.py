@@ -216,6 +216,11 @@ def detalhes_os(request, os_id):
                     novo_status = request.POST.get('status')
                     os.status = novo_status
                     # Salva as alterações na ordem de serviço
+                    # Atualiza outros campos
+                    os.descricao_problema = request.POST.get('descricao_problema')
+                    os.comentarios_cliente = request.POST.get('comentarios_cliente')
+                    os.anotacoes_internas = request.POST.get('anotacoes_internas')
+                    os.problema_detectado = request.POST.get('problema_detectado')
                     os.save()
 
             # Adicione o nome do funcionário responsável ao contexto
