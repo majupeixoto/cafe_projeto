@@ -1,0 +1,43 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2>Editar OS ID: {{ os.id }}</h2>
+                <h5>Nome do Cliente: {{ os.perfil_os.username }}</h5>
+                <h5>Contato: {{ os.perfil_os.contato }}</h5>
+                <h5>Garantia: {{ os.garantia }}</h5>
+            </div>
+
+            <div class="col-md-6">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="aparelho">Aparelho:</label>
+                        <input type="text" id="aparelho" name="aparelho" value="{{ os.aparelho }}" class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="modelo">Modelo do Aparelho:</label>
+                        <input type="text" id="modelo" name="modelo" value="{{ os.modelo }}" class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao_problema">Detalhamento do Problema:</label>
+                        <textarea id="descricao_problema" name="descricao_problema" class="form-control">{{ os.descricao_problema }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select id="status" name="status" class="form-control">
+                            <option value="Iniciada" {% if os.status == 'Iniciada' %}selected{% endif %}>Iniciada</option>
+                            <option value="Em_analise" {% if os.status == 'Em_analise' %}selected{% endif %}>Em análise</option>
+                            <option value="Aguardando_peca" {% if os.status == 'Aguardando_peca' %}selected{% endif %}>Aguardando peça</option>
+                            <option value="Em_conserto" {% if os.status == 'Em_conserto' %}selected{% endif %}>Em conserto</option>
+                            <option value="Pronto" {% if os.status == 'Pronto' %}selected{% endif %}>Pronto</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

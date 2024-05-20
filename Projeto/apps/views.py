@@ -223,6 +223,27 @@ def detalhes_os(request, os_id):
 
     return render(request, 'apps/detalhes_os.html', {'funcionario': 1, 'os': os, 'detalhes_da_os': detalhes_da_os, 'funcionario_responsavel': funcionario_responsavel})
 
+@login_required
+def editar_os(request, os_id):
+    os = get_object_or_404(OrdemServico, id=os_id)
+    user = request.user
+    usuario = Perfil.objects.get(username=user.username)
+
+    if usuario.funcionario == 0:
+        return redirect(login)
+    else:
+        if os.funcionario_responsavel != usuario:
+            return redirect('detalhes_os', os_id=os.id)
+
+        if request.method == 'POST':
+            os.status = request.POST.get('status')
+            os.descricao_problema = request.POST.get('descricao_problema')
+            os.save()
+            return redirect('detalhes_os', os_id=os.id)
+
+    return render(request, 'apps/editar_os.html', {'funcionario': 1, 'os': os})
+
+
 # VIEW DOS DOIS
 def excluir_os(request, pk):
     os = get_object_or_404(OrdemServico, pk=pk)
