@@ -226,7 +226,13 @@ def detalhes_os(request, os_id):
             # Adicione o nome do funcionário responsável ao contexto
             funcionario_responsavel = os.funcionario_responsavel.username if os.funcionario_responsavel else None
 
-    return render(request, 'apps/detalhes_os.html', {'funcionario': 1, 'os': os, 'detalhes_da_os': detalhes_da_os, 'funcionario_responsavel': funcionario_responsavel})
+            context = {
+                'funcionario': 1, 'os': os, 
+                'detalhes_da_os': detalhes_da_os, 
+                'funcionario_responsavel': funcionario_responsavel
+            }
+
+    return render(request, 'apps/detalhes_os.html', context)
 
 @login_required
 def editar_os(request, os_id):
