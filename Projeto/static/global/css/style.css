@@ -11,7 +11,7 @@
 
 body {
     height: 100vh;
-    background-image: url('../img/background-site3.png'); /* Corrigi o caminho da imagem de fundo */
+    background-image: url('../img/fundo1.png'); /* Corrigi o caminho da imagem de fundo */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

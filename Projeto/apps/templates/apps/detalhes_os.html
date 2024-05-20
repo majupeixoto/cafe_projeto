@@ -5,10 +5,10 @@
         <div class="row align-items-center"> <!-- Centralizando verticalmente -->
             <!-- Conteúdo à esquerda -->
             <div class="col-md-6">
-                <h2>{{ os.id }}</h2> <!-- código da OS-->
+                <h2>{{ os.numero }}</h2> <!-- código da OS-->
 
-                <h5>Nome do Cliente: {{ os.perfil_os.nome }}</h5>
-                <h5>Email: {{ detalhes_da_os.cliente_contato }}</h5>
+                <h5>Nome do Cliente: {{ os.perfil_os.username }}</h5>
+                <h5>Contato: {{ detalhes_da_os.cliente_contato }}</h5>
                 <h5>Garantia: {{ detalhes_da_os.garantia }}</h5>
             </div>
 
@@ -16,8 +16,11 @@
             <div class="col-md-6">
                 <h5>Aparelho: {{ detalhes_da_os.aparelho }}</h5>
                 <h5>Modelo do aparelho: {{ detalhes_da_os.modelo }}</h5>
-                <h5>Detalhamento do problema: {{ detalhes_da_os.descricao_problema }}</h5>
+                <h5>Problema relatado: {{ detalhes_da_os.descricao_problema }}</h5>
+                <h5>Anotações Internas: {{ detalhes_da_os.anotacoes_internas|default:"Nenhuma informação inserida" }}</h5>
+                <h5>Problema detectado: {{ detalhes_da_os.problema_detectado|default:"Nenhuma informação inserida" }}</h5>
                 <h5>Status: {{ detalhes_da_os.status }}</h5>
+
                 {% if os.status == 'Enviada' %}
                     <form method="post">
                         {% csrf_token %}
@@ -26,7 +29,11 @@
                 {% else %}
                     <div>
                         {% csrf_token %}
-                        <h3>Responsável: {{ funcionario_responsavel }}</h3>
+                        <h3>Responsável: {{ funcionario_responsavel|default:"OS sem responsável" }}</h3>
+                        <h5>Comentários para o Cliente: {{ detalhes_da_os.comentarios_cliente|default:"Nenhum comentário feito" }}</h5>
+                        <div class="btn-group">
+                            <a href="{% url 'editar_os' os.id %}" class="btn btn-sm btn-outline-secondary">Atualizar</a>
+                        </div>
                     </div>
                 {% endif %}
             </div>

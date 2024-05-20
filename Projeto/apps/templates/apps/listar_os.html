@@ -13,7 +13,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Contato</th>
                     <th scope="col">Aparelho</th>
                     <th scope="col">Modelo</th>
                     <th scope="col">Açoes</th> <!-- Nova coluna para botões de ação -->
@@ -22,14 +22,11 @@
                 <tbody>
                     {% for os in ordens %}
                     <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
+                        <th scope="row">{{ os.numero }}</th>
                         <td>{{ os.perfil_os.username }}</td> <!--primeiro nome-->
                         <td>{{ os.perfil_os.contato }}</td>
                         <td>{{ os.aparelho }}</td>
                         <td>{{ os.modelo }}</td>
-                        {% if os.funcionario_responsavel %}
-                            <p>Responsável: {{ os.funcionario_responsavel }}</p>
-                        {% endif %}
                         <td>
                             <div class="btn-group">
                                 {% csrf_token %}

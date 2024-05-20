@@ -142,11 +142,13 @@ def cadastrar_os_cliente(request):
         if request.method == 'POST':
             aparelho = request.POST['aparelho']
             garantia = request.POST['garantia'] == 'True'
+            modelo = request.POST['modelo']
             descricao_problema = request.POST['descricao_problema']
 
             # Cria uma nova OrdemServico associada ao perfil do usuário logado
             OrdemServico.objects.create(
                 aparelho=aparelho,
+                modelo=modelo,
                 garantia=garantia,
                 descricao_problema=descricao_problema,
                 perfil_os = usuario
@@ -170,7 +172,8 @@ def servicos(request):
         return redirect(login)
     else:
         # colocar aq a opção de filter o que ele editou
-        return render(request, 'apps/servicos.html', {'funcionario': 1})
+        ordens_servico = OrdemServico.objects.filter(funcionario_responsavel=usuario)
+        return render(request, 'apps/servicos.html', {'funcionario': 1, 'ordens_servico': ordens_servico})
 
 @login_required
 def listar_os(request): #listar todas as os feitas 
@@ -200,6 +203,7 @@ def detalhes_os(request, os_id):
         else:
             os = get_object_or_404(OrdemServico, id=os_id)
             detalhes_da_os = os.detalhes()
+            numero_os = os.numero
 
             if request.method == 'POST':
                 if os.status == 'Enviada' and 'responsabilizar' in request.POST:
@@ -213,12 +217,47 @@ def detalhes_os(request, os_id):
                     novo_status = request.POST.get('status')
                     os.status = novo_status
                     # Salva as alterações na ordem de serviço
+                    # Atualiza outros campos
+                    os.descricao_problema = request.POST.get('descricao_problema')
+                    os.comentarios_cliente = request.POST.get('comentarios_cliente')
+                    os.anotacoes_internas = request.POST.get('anotacoes_internas')
+                    os.problema_detectado = request.POST.get('problema_detectado')
                     os.save()
 
             # Adicione o nome do funcionário responsável ao contexto
-            funcionario_responsavel = os.funcionario_responsavel.nome if os.funcionario_responsavel else None
+            funcionario_responsavel = os.funcionario_responsavel.username if os.funcionario_responsavel else None
 
-    return render(request, 'apps/detalhes_os.html', {'funcionario': 1, 'os': os, 'detalhes_da_os': detalhes_da_os, 'funcionario_responsavel': funcionario_responsavel})
+            context = {
+                'funcionario': 1, 'os': os, 
+                'detalhes_da_os': detalhes_da_os, 
+                'funcionario_responsavel': funcionario_responsavel,
+                'numero_os': numero_os
+            }
+
+    return render(request, 'apps/detalhes_os.html', context)
+
+@login_required
+def editar_os(request, os_id):
+    os = get_object_or_404(OrdemServico, id=os_id)
+    user = request.user
+    usuario = Perfil.objects.get(username=user.username)
+
+    if usuario.funcionario == 0:
+        return redirect(login)
+    else:
+        if os.funcionario_responsavel != usuario:
+            return redirect('detalhes_os', os_id=os.id)
+
+        if request.method == 'POST':
+            os.status = request.POST.get('status')
+            os.comentarios_cliente = request.POST.get('comentarios_cliente')
+            os.anotacoes_internas = request.POST.get('anotacoes_internas')
+            os.problema_detectado = request.POST.get('problema_detectado')
+            os.save()
+            return redirect('detalhes_os', os_id=os.id)
+
+    return render(request, 'apps/editar_os.html', {'funcionario': 1, 'os': os})
+
 
 # VIEW DOS DOIS
 def excluir_os(request, pk):

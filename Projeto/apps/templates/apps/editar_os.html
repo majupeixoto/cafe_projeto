@@ -1,0 +1,48 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2>Número da OS: {{ os.numero }}</h2>
+                <h5>Nome do Cliente: {{ os.perfil_os.nome }}</h5>
+                <h5>Contato: {{ os.perfil_os.contato }}</h5>
+                <h5>Garantia: {{ os.garantia }}</h5>
+                <h5>Aparelho: {{ os.aparelho }}</h5>
+                <h5>Modelo do aparelho: {{ os.modelo }}</h5>
+                <h5>Problema relatado: {{ os.descricao_problema }}</h5>
+            </div>
+
+            <div class="col-md-6">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="comentarios_cliente">Comentários para o Cliente:</label>
+                        <textarea id="comentarios_cliente" name="comentarios_cliente" class="form-control">{{ os.comentarios_cliente }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="anotacoes_internas">Anotações Internas:</label>
+                        <textarea id="anotacoes_internas" name="anotacoes_internas" class="form-control">{{ os.anotacoes_internas }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="problema_detectado">Problema Detectado:</label>
+                        <textarea id="problema_detectado" name="problema_detectado" class="form-control">{{ os.problema_detectado }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select id="status" name="status" class="form-control">
+                            <option value="Iniciada" {% if os.status == 'Iniciada' %}selected{% endif %}>Iniciada</option>
+                            <option value="Em_analise" {% if os.status == 'Em_analise' %}selected{% endif %}>Em análise</option>
+                            <option value="Aguardando_peca" {% if os.status == 'Aguardando_peca' %}selected{% endif %}>Aguardando peça</option>
+                            <option value="Aguardando_reparo" {% if os.status == 'Aguardando_reparo' %}selected{% endif %}>Aguardando reparo</option>
+                            <option value="Em_reparo" {% if os.status == 'Em_reparo' %}selected{% endif %}>Em reparo</option>
+                            <option value="Pronto" {% if os.status == 'Pronto' %}selected{% endif %}>Pronto</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Atualizar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
