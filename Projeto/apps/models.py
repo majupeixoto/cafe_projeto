@@ -27,7 +27,8 @@ class OrdemServico(models.Model):
         ('Iniciada', 'Ordem de serviço iniciada'),
         ('Em_analise', 'Em análise'),
         ('Aguardando_peca', 'Aguardando peça'),
-        ('Em_conserto', 'Em conserto'),
+        ('Aguardando_reparo', 'Aguardando reparo'),
+        ('Em_reparo', 'Em reparo'),
         ('Pronto', 'Pronto'),
     ]
     aparelho = models.CharField(max_length=255)
@@ -40,6 +41,11 @@ class OrdemServico(models.Model):
     # Adicione este campo para representar o funcionário responsável
     funcionario_responsavel = models.ForeignKey(Perfil, on_delete=models.SET_NULL, null=True, blank=True, related_name='ordens_responsavel')
 
+    # Novos campos
+    comentarios_cliente = models.TextField(blank=True, null=True)
+    anotacoes_internas = models.TextField(blank=True, null=True)
+    problema_detectado = models.TextField(blank=True, null=True)
+
     def detalhes(self):
         return {
         'aparelho': self.aparelho,
@@ -49,7 +55,10 @@ class OrdemServico(models.Model):
         'cliente_nome': self.perfil_os.username if self.perfil_os else None,
         'cliente_cpf': self.perfil_os.cpf if self.perfil_os else None,
         'cliente_contato': self.perfil_os.contato if self.perfil_os else None,
-        'status': self.get_status_display()  # Obter a representação legível do status
+        'status': self.get_status_display(),  # Obter a representação legível do status
+        'comentarios_cliente': self.comentarios_cliente,
+        'anotacoes_internas': self.anotacoes_internas,
+        'problema_detectado': self.problema_detectado,
     }
 
     def __str__(self):

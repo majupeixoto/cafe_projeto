@@ -238,6 +238,9 @@ def editar_os(request, os_id):
         if request.method == 'POST':
             os.status = request.POST.get('status')
             os.descricao_problema = request.POST.get('descricao_problema')
+            os.comentarios_cliente = request.POST.get('comentarios_cliente')
+            os.anotacoes_internas = request.POST.get('anotacoes_internas')
+            os.problema_detectado = request.POST.get('problema_detectado')
             os.save()
             return redirect('detalhes_os', os_id=os.id)
 

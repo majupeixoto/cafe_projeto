@@ -19,25 +19,26 @@
             {% for os in ordens_servico %}
             <div class="col-lg-4">
                 <div class="card" style="width: 18rem;">
-                {% if os.cliente.imagem %}
-                <img src="{% static os.cliente.imagem.url %}" class="card-img-top" alt="{{ os.descricao }}">
-                {% else %}
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                    role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#55595c"></rect>
-                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ os.descricao }}</text>
-                </svg>
-                {% endif %}
-                <div class="card-body">
-                    <p class="card-text">Nome cliente: {{ os.perfil_os.username }}</p>
-                    <p class="card-text">Aparelho: {{ os.aparelho }}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a href="{% url 'editar_os' os.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
+                    <p class="card-text">Código da OS: {{ os.id }}</p>
+                    {% if os.cliente.imagem %}
+                    <img src="{% static os.cliente.imagem.url %}" class="card-img-top" alt="{{ os.descricao }}">
+                    {% else %}
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                        role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#55595c"></rect>
+                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ os.descricao }}</text>
+                    </svg>
+                    {% endif %}
+                    <div class="card-body">
+                        <p class="card-text">Nome cliente: {{ os.perfil_os.username }}</p>
+                        <p class="card-text">Aparelho: {{ os.aparelho }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{% url 'editar_os' os.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div> 
             {% endfor %}
