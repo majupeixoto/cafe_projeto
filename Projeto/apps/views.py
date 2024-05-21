@@ -222,6 +222,7 @@ def detalhes_os(request, os_id):
                     os.comentarios_cliente = request.POST.get('comentarios_cliente')
                     os.anotacoes_internas = request.POST.get('anotacoes_internas')
                     os.problema_detectado = request.POST.get('problema_detectado')
+                    os.tipo_atendimento = request.POST.get('tipo_atendimento')  # Atualiza o tipo de atendimento
                     os.save()
 
             # Adicione o nome do funcionário responsável ao contexto
@@ -253,6 +254,7 @@ def editar_os(request, os_id):
             os.comentarios_cliente = request.POST.get('comentarios_cliente')
             os.anotacoes_internas = request.POST.get('anotacoes_internas')
             os.problema_detectado = request.POST.get('problema_detectado')
+            os.tipo_atendimento = request.POST.get('tipo_atendimento')
             os.save()
             return redirect('detalhes_os', os_id=os.id)
 

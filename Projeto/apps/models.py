@@ -32,6 +32,20 @@ class OrdemServico(models.Model):
         ('Em_reparo', 'Em reparo'),
         ('Pronto', 'Pronto'),
     ]
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Enviada')
+
+    TIPOS_ATENDIMENTO = [
+        ('-', '-'),
+        ('FON', 'Fora on site'),
+        ('FB', 'Fora Balcão'),
+        ('GS', 'Garantia serviço'),
+        ('GB', 'Garantia balcão'),
+        ('GON', 'Garantia on site'),
+        ('GIN', 'Garantia instalação'),
+        ('GRIN', 'Garantia reincidência'),
+    ]
+    tipo_atendimento = models.CharField(max_length=4, choices=TIPOS_ATENDIMENTO, default='-')
+
     aparelho = models.CharField(max_length=255)
     modelo = models.CharField(max_length=255)
     garantia = models.BooleanField(choices=[(True, 'Sim'), (False, 'Não')])
@@ -75,6 +89,7 @@ class OrdemServico(models.Model):
         'comentarios_cliente': self.comentarios_cliente,
         'anotacoes_internas': self.anotacoes_internas,
         'problema_detectado': self.problema_detectado,
+        'tipo_atendimento': self.get_tipo_atendimento_display(),  # Obter a representação legível do tipo de atendimento
     }
 
     def __str__(self):

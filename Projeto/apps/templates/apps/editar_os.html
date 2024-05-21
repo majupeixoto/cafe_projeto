@@ -40,6 +40,19 @@
                             <option value="Pronto" {% if os.status == 'Pronto' %}selected{% endif %}>Pronto</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="tipo_atendimento">Tipo de Atendimento:</label>
+                        <select id="tipo_atendimento" name="tipo_atendimento" class="form-control">
+                            <option value="-" {% if os.tipo_atendimento == '-' %}selected{% endif %}>-</option>
+                            <option value="FON" {% if os.tipo_atendimento == 'FON' %}selected{% endif %}>Fora on site</option>
+                            <option value="FB" {% if os.tipo_atendimento == 'FB' %}selected{% endif %}>Fora Balcão</option>
+                            <option value="GS" {% if os.tipo_atendimento == 'GS' %}selected{% endif %}>Garantia serviço</option>
+                            <option value="GB" {% if os.tipo_atendimento == 'GB' %}selected{% endif %}>Garantia balcão</option>
+                            <option value="GON" {% if os.tipo_atendimento == 'GON' %}selected{% endif %}>Garantia on site</option>
+                            <option value="GIN" {% if os.tipo_atendimento == 'GIN' %}selected{% endif %}>Garantia instalação</option>
+                            <option value="GRIN" {% if os.tipo_atendimento == 'GRIN' %}selected{% endif %}>Garantia reincidência</option>
+                        </select>
+                    </div>                    
                     <button type="submit" class="btn btn-primary">Atualizar</button>
                 </form>
             </div>
