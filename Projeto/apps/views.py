@@ -191,53 +191,6 @@ def listar_os(request): #listar todas as os feitas
             return render(request, 'apps/listar_os.html', {'funcionario': 1, 'ordens': ordens})
 
 @login_required
-def detalhes_os(request, os_id):
-    user = request.user
-    usuario = Perfil.objects.get(username=user.username)
-
-    if usuario.funcionario == 0:
-        return redirect(login)
-    else:
-        if request.user.is_anonymous:
-            return redirect(login)
-        else:
-            os = get_object_or_404(OrdemServico, id=os_id)
-            detalhes_da_os = os.detalhes()
-            numero_os = os.numero
-
-            if request.method == 'POST':
-                if os.status == 'Enviada' and 'responsabilizar' in request.POST:
-                    os.funcionario_responsavel = usuario
-                    os.status = 'Iniciada'
-                    os.save()
-                
-                # Verifica se o formulário de atualização do status foi submetido
-                if 'atualizar_status' in request.POST:
-                    # Atualiza o status da ordem de serviço com base no valor selecionado no formulário
-                    novo_status = request.POST.get('status')
-                    os.status = novo_status
-                    # Salva as alterações na ordem de serviço
-                    # Atualiza outros campos
-                    os.descricao_problema = request.POST.get('descricao_problema')
-                    os.comentarios_cliente = request.POST.get('comentarios_cliente')
-                    os.anotacoes_internas = request.POST.get('anotacoes_internas')
-                    os.problema_detectado = request.POST.get('problema_detectado')
-                    os.tipo_atendimento = request.POST.get('tipo_atendimento')  # Atualiza o tipo de atendimento
-                    os.save()
-
-            # Adicione o nome do funcionário responsável ao contexto
-            funcionario_responsavel = os.funcionario_responsavel.username if os.funcionario_responsavel else None
-
-            context = {
-                'funcionario': 1, 'os': os, 
-                'detalhes_da_os': detalhes_da_os, 
-                'funcionario_responsavel': funcionario_responsavel,
-                'numero_os': numero_os
-            }
-
-    return render(request, 'apps/detalhes_os.html', context)
-
-@login_required
 def editar_os(request, os_id):
     os = get_object_or_404(OrdemServico, id=os_id)
     user = request.user
@@ -262,6 +215,58 @@ def editar_os(request, os_id):
 
 
 # VIEW DOS DOIS
+@login_required
+def detalhes_os(request, os_id):
+    user = request.user
+    usuario = Perfil.objects.get(username=user.username)
+    os = get_object_or_404(OrdemServico, id=os_id)
+    detalhes_da_os = os.detalhes()
+    numero_os = os.numero
+
+    if usuario.funcionario == 1:
+        # Lógica para funcionários
+        if request.method == 'POST':
+            if os.status == 'Enviada' and 'responsabilizar' in request.POST:
+                os.funcionario_responsavel = usuario
+                os.status = 'Iniciada'
+                os.save()
+
+            # Verifica se o formulário de atualização do status foi submetido
+            if 'atualizar_status' in request.POST:
+                # Atualiza o status da ordem de serviço com base no valor selecionado no formulário
+                novo_status = request.POST.get('status')
+                os.status = novo_status
+                # Salva as alterações na ordem de serviço
+                os.descricao_problema = request.POST.get('descricao_problema')
+                os.comentarios_cliente = request.POST.get('comentarios_cliente')
+                os.anotacoes_internas = request.POST.get('anotacoes_internas')
+                os.problema_detectado = request.POST.get('problema_detectado')
+                os.tipo_atendimento = request.POST.get('tipo_atendimento')  # Atualiza o tipo de atendimento
+                os.save()
+
+        # Adicione o nome do funcionário responsável ao contexto
+        funcionario_responsavel = os.funcionario_responsavel.username if os.funcionario_responsavel else None
+
+        context = {
+            'funcionario': 1, 
+            'os': os, 
+            'detalhes_da_os': detalhes_da_os, 
+            'funcionario_responsavel': funcionario_responsavel,
+            'numero_os': numero_os
+        }
+
+        return render(request, 'apps/detalhes_os.html', context)
+
+    else:
+        # Lógica para clientes
+        context = {
+            'funcionario': 0, 
+            'os': os, 
+            'detalhes_da_os': detalhes_da_os, 
+            'numero_os': numero_os
+        }
+        return render(request, 'apps/detalhes_os_cliente.html', context)
+
 def excluir_os(request, pk):
     os = get_object_or_404(OrdemServico, pk=pk)
     if request.method == 'POST':
