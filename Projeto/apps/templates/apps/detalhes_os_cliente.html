@@ -3,27 +3,34 @@
 {% block content %}
 
     <title>Detalhes da Ordem de Serviço</title>
-    <!-- Adicione links para seus arquivos de estilo CSS, se necessário -->
-</head>
-<body>
-    <h1>Detalhes da Ordem de Serviço</h1>
-    
-    <h2>Número da OS: {{ os.numero_os }}</h2>
-    <p>Descrição do Problema: {{ os.descricao_problema }}</p>
-    <p>Status: {{ os.status }}</p>
+    <section class="flex parent">
+        <div class="card" style="width: 18rem;">
+            {% if cliente.imagem %}
+            <img src="{'#'}" class="card-img-top" alt="{{ os.descricao }}">
+            {% else %}
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c"></rect>
+                <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ os.descricao }}</text>
+            </svg>
+            {% endif %}
+        </div>
+        <div class="div2">
+            <h2>Histórico de Atualizações</h2>
+            <ul>
+                {% for atualizacao in historico_atualizacoes %}
+                    <li>{{ atualizacao.data }} - {{ atualizacao.usuario }} atualizou o status para {{ atualizacao.novo_status }}</li>
+                    <!-- Adicione mais informações de atualização conforme necessário -->
+                {% endfor %}
+            </ul>
+        </div>
 
-    <h2>Histórico de Atualizações</h2>
-    <ul>
-        {% for atualizacao in historico_atualizacoes %}
-            <li>{{ atualizacao.data }} - {{ atualizacao.usuario }} atualizou o status para {{ atualizacao.novo_status }}</li>
-            <!-- Adicione mais informações de atualização conforme necessário -->
-        {% endfor %}
-    </ul>
-
-    <!-- Adicione mais detalhes da OS conforme necessário -->
-
-    <!-- Adicione links para voltar para a página anterior, se necessário -->
-
-    <!-- Adicione scripts JavaScript, se necessário -->
+        <div class="div3">
+            <!-- Adicione mais detalhes da OS conforme necessário -->
+            <!-- Adicione links para voltar para a página anterior, se necessário -->
+            <!-- Adicione scripts JavaScript, se necessário -->
+        </div>
+    </section>
 
 {% endblock %}
