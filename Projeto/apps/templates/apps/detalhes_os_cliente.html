@@ -17,19 +17,38 @@
             {% endif %}
         </div>
         <div class="div2">
-            <h2>Histórico de Atualizações</h2>
+            <h2>Aparelho: {{ os.aparelho }}</h2>
             <ul>
-                {% for atualizacao in historico_atualizacoes %}
-                    <li>{{ atualizacao.data }} - {{ atualizacao.usuario }} atualizou o status para {{ atualizacao.novo_status }}</li>
-                    <!-- Adicione mais informações de atualização conforme necessário -->
-                {% endfor %}
+                <h2>Nº da OS: {{ os.numero|default:"-" }}</h2>
+                <h2>Data de entrada: colocar dps</h2>
+                <h2>Cliente: {{ os.perfil_os.username }}</h2>
+                <h2>Tipo de atendimento: {{ detalhes_da_os.tipo_atendimento }}</h2>
+                <h2>Status: {{ detalhes_da_os.status }}</h2>
             </ul>
         </div>
 
         <div class="div3">
-            <!-- Adicione mais detalhes da OS conforme necessário -->
-            <!-- Adicione links para voltar para a página anterior, se necessário -->
-            <!-- Adicione scripts JavaScript, se necessário -->
+
+     <section class="step-wizard">
+            <ul class="step-wizard-list">
+                <li class="step-wizard-item">
+                    <span class="progress-count">1</span>
+                    <span class="progress-label">Billing Info</span>
+                </li>
+                <li class="step-wizard-item current-item">
+                    <span class="progress-count">2</span>
+                    <span class="progress-label">Payment Method</span>
+                </li>
+                <li class="step-wizard-item">
+                    <span class="progress-count">3</span>
+                    <span class="progress-label">Checkout</span>
+                </li>
+                <li class="step-wizard-item">
+                    <span class="progress-count">4</span>
+                    <span class="progress-label">Success</span>
+                </li>
+            </ul>
+        </section>
         </div>
     </section>
 
