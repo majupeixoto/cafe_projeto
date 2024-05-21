@@ -13,6 +13,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
+                    <th scope="col">Funcionário responsável</th>
                     <th scope="col">Contato</th>
                     <th scope="col">Aparelho</th>
                     <th scope="col">Modelo</th>
@@ -22,8 +23,9 @@
                 <tbody>
                     {% for os in ordens %}
                     <tr>
-                        <th scope="row">{{ os.numero }}</th>
+                        <th scope="row">{{ os.numero|default:"-" }}</th>
                         <td>{{ os.perfil_os.username }}</td> <!--primeiro nome-->
+                        <td>{{ os.funcionario_responsavel.username|default:"Sem responsável" }}</td> <!--primeiro nome-->
                         <td>{{ os.perfil_os.contato }}</td>
                         <td>{{ os.aparelho }}</td>
                         <td>{{ os.modelo }}</td>
