@@ -170,13 +170,7 @@ def funcionario_perfil(request):
     if usuario.funcionario == 0:
         return redirect(login)
     else:
-        first_name = user.first_name
-        last_name = user.last_name
-        context = {
-            'first_name': first_name,
-            'last_name': last_name
-        }
-        return render(request, 'apps/funcionario_perfil.html', context)
+        return render(request, 'apps/funcionario_perfil.html')
 
 @login_required
 def servicos(request):
