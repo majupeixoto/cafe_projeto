@@ -16,5 +16,6 @@ urlpatterns = [
     path('listar_os/', views.listar_os, name='listar_os'),  # Listas de todas as OS cadastradas 
     path('excluir_os/<int:pk>/', views.excluir_os, name='excluir_os'),
     path('detalhes_os_cliente/<int:os_id>/', views.detalhes_os, name='detalhes_os_cliente'),
-
+    path('funcionario_perfil/', views.funcionario_perfil, name='funcionario_perfil'),
+    path('conta/excluir_conta/', views.excluir_conta, name='excluir_conta'),
 ]

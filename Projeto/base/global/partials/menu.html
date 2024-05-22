@@ -22,6 +22,13 @@
                     </a>
                 </li>
 
+                <li class="item-menu">
+                    <a href="{% url 'funcionario_perfil' %}">
+                        <span class="icon"><i class="bi bi-person-circle"></i></span><!--link do ícone-->
+                        <span class="txt-link">Conta</span>
+                    </a>
+                </li>
+
                 {% else %} <!--MENU CLIENTE-->
                 <li class="item-menu">
                     <a href="{% url 'home_cliente' %}">
@@ -35,15 +42,14 @@
                         <span class="txt-link">Cadastrar OS</span>
                     </a>
                 </li>
-
-                {% endif %} <!-- LOGIN/LOGOUT DOS DOIS-->
                 <li class="item-menu">
                     <a href="#">
                         <span class="icon"><i class="bi bi-person-circle"></i></span><!--link do ícone-->
                         <span class="txt-link">Conta</span>
                     </a>
                 </li>
-                <!-- Adicionando o botão de logout -->
+
+                {% endif %} <!-- LOGIN/LOGOUT DOS DOIS-->
                 <li class="item-menu">
                     <a href="{% url 'logout' %}">
                         <span class="icon"><i class="bi bi-box-arrow-left"></i></span><!--link do ícone-->

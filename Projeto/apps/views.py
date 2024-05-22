@@ -163,9 +163,24 @@ def cadastrar_os_cliente(request):
 
 # VIEWS DO FUNCIONÁRIO
 @login_required
+def funcionario_perfil(request):
+    user = request.user
+    usuario = Perfil.objects.get(username=user.username)
+
+    if usuario.funcionario == 0:
+        return redirect(login)
+    else:
+        first_name = user.first_name
+        last_name = user.last_name
+        context = {
+            'first_name': first_name,
+            'last_name': last_name
+        }
+        return render(request, 'apps/funcionario_perfil.html', context)
+
+@login_required
 def servicos(request):
     user = request.user
-
     usuario = Perfil.objects.get(username=user.username)
 
     if usuario.funcionario == 0:
@@ -267,9 +282,19 @@ def detalhes_os(request, os_id):
         }
         return render(request, 'apps/detalhes_os_cliente.html', context)
 
+@login_required
 def excluir_os(request, pk):
     os = get_object_or_404(OrdemServico, pk=pk)
     if request.method == 'POST':
         os.delete()
         return redirect('listar_os')  # Redireciona para a lista de OS após a exclusão
     return render(request, 'excluir_os.html', {'os': os})
+
+@login_required
+def excluir_conta(request):
+    if request.method == 'POST':
+        user = request.user
+        user.delete()
+        messages.success(request, 'Sua conta foi excluída com sucesso!')
+        return redirect('login')
+    return render(request, 'apps/excluir_conta.html')
