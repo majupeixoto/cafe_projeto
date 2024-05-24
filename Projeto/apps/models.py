@@ -50,8 +50,8 @@ class OrdemServico(models.Model):
     modelo = models.CharField(max_length=255)
     garantia = models.BooleanField(choices=[(True, 'Sim'), (False, 'Não')])
     descricao_problema = models.CharField(max_length=255)
-    perfil_os = models.ForeignKey(Perfil, on_delete=models.PROTECT, default = None)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Enviada')
+    perfil_os = models.ForeignKey(Perfil, on_delete=models.PROTECT, default=None)
+    imagem = models.ImageField(upload_to='imagens_os/', blank=True, null=True)  # Campo para a imagem
 
     # Adicione este campo para representar o funcionário responsável
     funcionario_responsavel = models.ForeignKey(Perfil, on_delete=models.SET_NULL, null=True, blank=True, related_name='ordens_responsavel')
@@ -78,19 +78,19 @@ class OrdemServico(models.Model):
 
     def detalhes(self):
         return {
-        'aparelho': self.aparelho,
-        'modelo': self.modelo,
-        'garantia': 'Sim' if self.garantia else 'Não',
-        'descricao_problema': self.descricao_problema,
-        'cliente_nome': self.perfil_os.username if self.perfil_os else None,
-        'cliente_cpf': self.perfil_os.cpf if self.perfil_os else None,
-        'cliente_contato': self.perfil_os.contato if self.perfil_os else None,
-        'status': self.get_status_display(),  # Obter a representação legível do status
-        'comentarios_cliente': self.comentarios_cliente,
-        'anotacoes_internas': self.anotacoes_internas,
-        'problema_detectado': self.problema_detectado,
-        'tipo_atendimento': self.get_tipo_atendimento_display(),  # Obter a representação legível do tipo de atendimento
-    }
+            'aparelho': self.aparelho,
+            'modelo': self.modelo,
+            'garantia': 'Sim' if self.garantia else 'Não',
+            'descricao_problema': self.descricao_problema,
+            'cliente_nome': self.perfil_os.username if self.perfil_os else None,
+            'cliente_cpf': self.perfil_os.cpf if self.perfil_os else None,
+            'cliente_contato': self.perfil_os.contato if self.perfil_os else None,
+            'status': self.get_status_display(),  # Obter a representação legível do status
+            'comentarios_cliente': self.comentarios_cliente,
+            'anotacoes_internas': self.anotacoes_internas,
+            'problema_detectado': self.problema_detectado,
+            'tipo_atendimento': self.get_tipo_atendimento_display(),  # Obter a representação legível do tipo de atendimento
+        }
 
     def __str__(self):
-        return (self.aparelho) 
+        return self.aparelho

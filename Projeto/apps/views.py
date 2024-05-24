@@ -144,6 +144,7 @@ def cadastrar_os_cliente(request):
             garantia = request.POST['garantia'] == 'True'
             modelo = request.POST['modelo']
             descricao_problema = request.POST['descricao_problema']
+            imagem = request.FILES.get('imagem')  # Obtém a imagem do formulário
 
             # Cria uma nova OrdemServico associada ao perfil do usuário logado
             OrdemServico.objects.create(
@@ -151,7 +152,8 @@ def cadastrar_os_cliente(request):
                 modelo=modelo,
                 garantia=garantia,
                 descricao_problema=descricao_problema,
-                perfil_os = usuario
+                perfil_os=usuario,
+                imagem=imagem  # Adiciona a imagem ao objeto OrdemServico
             )
 
             return redirect(home_cliente)

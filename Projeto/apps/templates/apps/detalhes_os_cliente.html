@@ -5,8 +5,8 @@
 <title>Detalhes da Ordem de Serviço</title>
 <section class="flex parent">
     <div class="card" style="width: 18rem;">
-        {% if cliente.imagem %}
-        <img src="{{ cliente.imagem.url }}" class="card-img-top" alt="{{ os.descricao }}">
+        {% if os.imagem %}
+        <img src="{{ os.imagem.url }}" class="card-img-top" alt="{{ os.descricao }}">
         {% else %}
         <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
             role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
