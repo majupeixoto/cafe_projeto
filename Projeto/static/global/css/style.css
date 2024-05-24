@@ -251,3 +251,12 @@ body {
 .current-item .progress-count {
     color: #21d4fd;
 }
+
+.form-group {
+    margin-top: 20px;
+}
+
+textarea[readonly] {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+}
