@@ -303,10 +303,14 @@ def excluir_os(request, pk):
 
 @login_required
 def excluir_conta(request):
+    usuario = Perfil.objects.get(username=request.user.username)
+
     if request.method == 'POST':
-        user = request.user
-        perfil = Perfil.objects.get(username=user.username)
-        perfil.delete()
-        user.delete()
+        usuario.delete()
+        request.user.delete()
         return redirect('login')
-    return render(request, 'apps/excluir_conta.html')
+    
+    if usuario.funcionario == 0:
+        return render(request, 'apps/excluir_conta.html')
+    else:
+        return render(request, 'apps/excluir_conta.html', {'funcionario': 1})
