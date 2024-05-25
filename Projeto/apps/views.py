@@ -77,7 +77,7 @@ def cliente_cadastro(request): # VIEW CORRETA
             return render(request, 'apps/cliente_cadastro.html', {"erro": "Email já está sendo usado"})
 
         user = User.objects.create_user(username=username, email=email, password=senha)
-        Perfil.objects.create(username=username, funcionario=0, cpf = cpf, contato = contato)
+        Perfil.objects.create(username=username, funcionario=0, cpf=cpf, contato=contato, nome=nome)
 
         login(request, user)
         request.session["usuario"] = username
@@ -103,7 +103,11 @@ def funcionario_cadastro(request): # VIEW CORRETA
             return render(request, 'apps/funcionario_cadastro.html', {"erro": "Email já está sendo usado"})
         
         user = User.objects.create_user(username=username, email=email, password=senha)
-        Perfil.objects.create(username=username, funcionario=1)
+        Perfil.objects.create(
+            username=username, 
+            funcionario=1,
+            nome=nome
+        )
 
         login(request, user)
         request.session["usuario"] = username
@@ -115,6 +119,17 @@ def funcionario_cadastro(request): # VIEW CORRETA
 
 
 # VIEWS DA CONTA CLIENTE
+@login_required
+def cliente_perfil(request):
+    user = request.user
+    usuario = Perfil.objects.get(username=user.username)
+
+    if usuario.funcionario == 1:
+        return redirect(login)
+    else:
+        nome_completo = usuario.nome
+        return render(request, 'apps/cliente_perfil.html', {'nome_completo': nome_completo})
+
 @login_required
 def home_cliente(request):
     user = request.user
@@ -172,7 +187,8 @@ def funcionario_perfil(request):
     if usuario.funcionario == 0:
         return redirect(login)
     else:
-        return render(request, 'apps/funcionario_perfil.html')
+        nome_completo = usuario.nome
+        return render(request, 'apps/funcionario_perfil.html', {'nome_completo': nome_completo})
 
 @login_required
 def servicos(request):
