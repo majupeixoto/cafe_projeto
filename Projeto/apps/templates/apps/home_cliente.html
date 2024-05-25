@@ -5,7 +5,7 @@
 
 <div class="container marketing">
 
-  <!-- Three columns of text below the carousel -->
+  <!-- Welcome message -->
   <div class="row">
     <div class="col-lg-8">
       <h2 class="fw-normal">Bem-vindo, {{ user.username }}!</h2>
@@ -14,11 +14,12 @@
 
   <hr class="featurette-divider">
 
+  <!-- Cards Section with Glass Effect -->
   <div class="row">
     {% if ordens %}
       {% for os in ordens %}
-        <div class="col-lg-4">
-          <div class="card" style="width: 18rem;">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="card glass-card h-100">
             {% if os.imagem %}
             <img src="{{ os.imagem.url }}" class="card-img-top" alt="{{ os.descricao }}">
             {% else %}
@@ -44,13 +45,12 @@
     {% else %}
       <div class="col-lg-4">
         <p>Não há nada por aqui...</p>
-      </div><!-- /.col-lg-4 -->
+      </div>
       <div class="row">
         <div class="col-lg-4">
           <a class="btn btn-primary" href="{% url 'cadastrar_os_cliente' %}" role="button">Cadastrar Ordem de Serviço</a>
         </div>
       </div>
-    
     {% endif %}
   </div><!-- /.row -->
 

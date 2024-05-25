@@ -89,6 +89,43 @@ ul li.item-menu a .icon > i {
     padding-top: 40px;
 }
 
+/* Glass Effect for Cards */
+.glass-card {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Additional Styling for Card Content */
+.card-body {
+    color: #fff;
+}
+
+.card-text {
+    color: #fff;
+}
+
+.btn-outline-secondary {
+    color: #fff;
+    border-color: #fff;
+}
+
+.btn-outline-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: #fff;
+}
+
+/* Card Styles */
 .card {
     width: 18rem;
     padding: 20px;
