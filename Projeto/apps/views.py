@@ -35,7 +35,7 @@ def cliente_login(request): # VIEW CORRETA
         user = authenticate(username=username, password=senha)
         if user is not None:
             login(request, user)
-            return redirect(home_cliente)
+            return redirect('home_cliente')
         else:
             messages.error(request, 'Erro ao autenticar o cliente. Por favor, tente novamente.')
             return redirect('cliente_login')
@@ -188,7 +188,7 @@ def funcionario_perfil(request):
         return redirect(login)
     else:
         nome_completo = usuario.nome
-        return render(request, 'apps/funcionario_perfil.html', {'nome_completo': nome_completo})
+        return render(request, 'apps/funcionario_perfil.html', {'funcionario': 1, 'nome_completo': nome_completo})
 
 @login_required
 def servicos(request):
@@ -205,7 +205,6 @@ def servicos(request):
 @login_required
 def listar_os(request): #listar todas as os feitas 
     user = request.user
-
     usuario = Perfil.objects.get(username=user)
 
     if usuario.funcionario == 0:
@@ -306,7 +305,8 @@ def excluir_os(request, pk):
 def excluir_conta(request):
     if request.method == 'POST':
         user = request.user
+        perfil = Perfil.objects.get(username=user.username)
+        perfil.delete()
         user.delete()
-        messages.success(request, 'Sua conta foi excluída com sucesso!')
         return redirect('login')
     return render(request, 'apps/excluir_conta.html')

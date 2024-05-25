@@ -18,6 +18,12 @@ class Perfil(models.Model):
 
     funcionario = models.IntegerField()
 
+    def delete(self, *args, **kwargs):
+        # Atualiza as tarefas antes de deletar o perfil
+        OrdemServico.objects.filter(funcionario_responsavel=self).update(funcionario_responsavel=None, status='Enviada')
+        super().delete(*args, **kwargs)
+
+
     def __str__(self):
         return (self.nome)
 
@@ -50,7 +56,7 @@ class OrdemServico(models.Model):
     modelo = models.CharField(max_length=255)
     garantia = models.BooleanField(choices=[(True, 'Sim'), (False, 'Não')])
     descricao_problema = models.CharField(max_length=255)
-    perfil_os = models.ForeignKey(Perfil, on_delete=models.PROTECT, default=None)
+    perfil_os = models.ForeignKey(Perfil, on_delete=models.CASCADE, default=None)
     imagem = models.ImageField(upload_to='imagens_os/', blank=True, null=True)  # Campo para a imagem
 
     # Adicione este campo para representar o funcionário responsável

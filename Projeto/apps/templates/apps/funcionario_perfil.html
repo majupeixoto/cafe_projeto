@@ -2,6 +2,7 @@
 
 {% block content %}
     <div class="container mt-5">
+        {% csrf_token %}
         <h1>Meu Perfil</h1>
         <p><strong>Nome:</strong> {{ nome_completo }}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
