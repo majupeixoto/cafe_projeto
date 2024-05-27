@@ -118,17 +118,30 @@ def funcionario_cadastro(request): # VIEW CORRETA
 # FINAL DAS VIEWS DE LOGIN
 
 
-# VIEWS DA CONTA CLIENTE
 @login_required
 def cliente_perfil(request):
     user = request.user
-    usuario = Perfil.objects.get(username=user.username)
+    try:
+        # Suponho que o modelo Perfil esteja vinculado ao User pelo campo 'username'.
+        # Se não for, ajuste para o campo correto que conecta Perfil ao User.
+        usuario = Perfil.objects.get(username=user.username)
+    except Perfil.DoesNotExist:
+        # Se o perfil não for encontrado, redirecione para um local apropriado,
+        # como a página de login ou uma página de erro.
+        return redirect('nome_da_url_de_login')
 
     if usuario.funcionario == 1:
-        return redirect(login)
+        # Redirecione se o usuário for funcionário para a página de login ou outra página adequada.
+        return redirect('nome_da_url_de_login_ou_outra')
     else:
-        nome_completo = usuario.nome
-        return render(request, 'apps/cliente_perfil.html', {'nome_completo': nome_completo})
+        # Passe todas as informações relevantes para o template.
+        context = {
+            'nome_completo': usuario.nome,
+            'email': user.email,
+            'cpf': usuario.cpf,
+            'contato': usuario.contato
+        }
+        return render(request, 'apps/cliente_perfil.html', context)
 
 @login_required
 def home_cliente(request):
@@ -314,3 +327,36 @@ def excluir_conta(request):
         return render(request, 'apps/excluir_conta.html')
     else:
         return render(request, 'apps/excluir_conta.html', {'funcionario': 1})
+
+
+@login_required
+def cliente_editar_perfil(request):
+    try:
+        # Tenta recuperar o perfil baseado no nome de usuário associado ao usuário atual.
+        usuario = Perfil.objects.get(username=request.user.username)
+    except Perfil.DoesNotExist:
+        # Se o perfil não existir, opcionalmente, redirecione ou exiba uma mensagem.
+        messages.error(request, 'Perfil não encontrado.')
+        return redirect('alguma_url_de_fallback')
+
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        cpf = request.POST.get('cpf')
+        contato = request.POST.get('contato')
+        email = request.POST.get('email')
+
+        user = request.user
+        user.email = email
+        user.save()
+
+        # Atualiza o perfil do usuário com as novas informações.
+        usuario.nome = nome
+        usuario.cpf = cpf
+        usuario.contato = contato
+        usuario.save()
+
+        # Mensagem de sucesso após salvar as alterações.
+        messages.success(request, 'Perfil atualizado com sucesso!')
+        return redirect('cliente_perfil')
+
+    return render(request, 'apps/cliente_editar_perfil.html', {'perfil': usuario})
