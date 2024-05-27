@@ -19,4 +19,6 @@ urlpatterns = [
     path('funcionario_perfil/', views.funcionario_perfil, name='funcionario_perfil'),
     path('cliente_perfil/', views.cliente_perfil, name='cliente_perfil'),
     path('conta/excluir_conta/', views.excluir_conta, name='excluir_conta'),
+    path('cliente_editar_perfil/', views.cliente_editar_perfil, name='cliente_editar_perfil'),
+
 ]
