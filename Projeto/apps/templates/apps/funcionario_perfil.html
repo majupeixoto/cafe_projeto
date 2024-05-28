@@ -3,10 +3,11 @@
 {% block content %}
 <div class="container mt-5">
     <h1>Meu Perfil</h1>
-    <p><strong>Nome:</strong> {{ perfil.nome }}</p> <!-- Atualizado para usar o objeto perfil diretamente -->
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>CPF:</strong> {{ perfil.cpf }}</p> <!-- Adicionado campo CPF -->
-    <p><strong>Contato:</strong> {{ perfil.contato }}</p> <!-- Adicionado campo Contato -->
+    <br>
+    <p><strong>Nome:</strong> {{ perfil.nome }}</p>
+    <p><strong>Email:</strong> {{ perfil.user.email }}</p>
+    <p><strong>CPF:</strong> {{ perfil.cpf }}</p>
+    <p><strong>Contato:</strong> {{ perfil.contato }}</p>
     <a href="{% url 'funcionario_editar_perfil' %}" class="btn btn-primary">Editar Perfil</a>
     <a href="{% url 'excluir_conta' %}" class="btn btn-danger">Excluir Conta</a>
 </div>

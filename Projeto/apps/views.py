@@ -363,32 +363,31 @@ def cliente_editar_perfil(request):
 
 @login_required
 def funcionario_editar_perfil(request):
-    try:
-        # Tenta recuperar o perfil baseado no nome de usuário associado ao usuário atual.
-        perfil = Perfil.objects.get(username=request.user.username)
-    except Perfil.DoesNotExist:
-        # Se o perfil não existir, opcionalmente, redirecione ou exiba uma mensagem.
-        messages.error(request, 'Perfil não encontrado.')
-        return redirect('nome_da_url_de_login')  # Ajuste para a URL de redirecionamento apropriada
+    # Usando get_object_or_404 para simplificar a busca e tratamento de erro
+    perfil = get_object_or_404(Perfil, username=request.user.username)
 
     if request.method == 'POST':
         nome = request.POST.get('nome')
-        cpf = request.POST.get('cpf')  # Agora tratando o campo CPF
-        contato = request.POST.get('contato')  # Agora tratando o campo Contato
+        cpf = request.POST.get('cpf')
+        contato = request.POST.get('contato')
         email = request.POST.get('email')
 
         user = request.user
-        user.email = email
-        user.save()
+        if email:  # Verifica se o campo email foi preenchido
+            user.email = email
+            user.save()
 
-        # Atualiza o perfil do usuário com as novas informações.
-        perfil.nome = nome
-        perfil.cpf = cpf  # Salva o novo CPF
-        perfil.contato = contato  # Salva o novo Contato
+        # Atualizações do perfil são feitas apenas se os campos foram devidamente preenchidos
+        if nome:
+            perfil.nome = nome
+        if cpf:
+            perfil.cpf = cpf
+        if contato:
+            perfil.contato = contato
+
         perfil.save()
-
-        # Mensagem de sucesso após salvar as alterações.
         messages.success(request, 'Perfil atualizado com sucesso!')
-        return redirect('funcionario_perfil')  # Redireciona para a página de perfil do funcionário
-
-    return render(request, 'apps/funcionario_editar_perfil.html', {'perfil': perfil})
+        return redirect('funcionario_perfil')
+    else:
+        # Passa o perfil ao template para preencher os campos existentes com dados atuais
+        return render(request, 'apps/funcionario_editar_perfil.html', {'perfil': perfil})
