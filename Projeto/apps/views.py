@@ -360,3 +360,35 @@ def cliente_editar_perfil(request):
         return redirect('cliente_perfil')
 
     return render(request, 'apps/cliente_editar_perfil.html', {'perfil': usuario})
+
+@login_required
+def funcionario_editar_perfil(request):
+    try:
+        # Tenta recuperar o perfil baseado no nome de usuário associado ao usuário atual.
+        perfil = Perfil.objects.get(username=request.user.username)
+    except Perfil.DoesNotExist:
+        # Se o perfil não existir, opcionalmente, redirecione ou exiba uma mensagem.
+        messages.error(request, 'Perfil não encontrado.')
+        return redirect('nome_da_url_de_login')  # Ajuste para a URL de redirecionamento apropriada
+
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        cpf = request.POST.get('cpf')  # Agora tratando o campo CPF
+        contato = request.POST.get('contato')  # Agora tratando o campo Contato
+        email = request.POST.get('email')
+
+        user = request.user
+        user.email = email
+        user.save()
+
+        # Atualiza o perfil do usuário com as novas informações.
+        perfil.nome = nome
+        perfil.cpf = cpf  # Salva o novo CPF
+        perfil.contato = contato  # Salva o novo Contato
+        perfil.save()
+
+        # Mensagem de sucesso após salvar as alterações.
+        messages.success(request, 'Perfil atualizado com sucesso!')
+        return redirect('funcionario_perfil')  # Redireciona para a página de perfil do funcionário
+
+    return render(request, 'apps/funcionario_editar_perfil.html', {'perfil': perfil})
