@@ -195,13 +195,20 @@ def cadastrar_os_cliente(request):
 @login_required
 def funcionario_perfil(request):
     user = request.user
-    usuario = Perfil.objects.get(username=user.username)
+    perfil = get_object_or_404(Perfil, username=user.username)
 
-    if usuario.funcionario == 0:
-        return redirect(login)
+    if perfil.funcionario == 0:
+        return redirect('login')
     else:
-        nome_completo = usuario.nome
-        return render(request, 'apps/funcionario_perfil.html', {'funcionario': 1, 'nome_completo': nome_completo})
+        context = {
+            'nome_completo': perfil.nome,
+            'email': user.email,  # Passa o email do objeto User associado
+            'cpf': perfil.cpf,
+            'contato': perfil.contato,
+            'funcionario': 1  # Assegura que o menu lateral de funcionário seja exibido
+        }
+        return render(request, 'apps/funcionario_perfil.html', context)
+
 
 @login_required
 def servicos(request):
@@ -363,8 +370,11 @@ def cliente_editar_perfil(request):
 
 @login_required
 def funcionario_editar_perfil(request):
-    # Usando get_object_or_404 para simplificar a busca e tratamento de erro
-    perfil = get_object_or_404(Perfil, username=request.user.username)
+    user = request.user
+    perfil = get_object_or_404(Perfil, username=user.username)
+
+    if perfil.funcionario == 0:
+        return redirect('login')
 
     if request.method == 'POST':
         nome = request.POST.get('nome')
@@ -372,12 +382,10 @@ def funcionario_editar_perfil(request):
         contato = request.POST.get('contato')
         email = request.POST.get('email')
 
-        user = request.user
-        if email:  # Verifica se o campo email foi preenchido
+        if email:
             user.email = email
             user.save()
 
-        # Atualizações do perfil são feitas apenas se os campos foram devidamente preenchidos
         if nome:
             perfil.nome = nome
         if cpf:
@@ -389,5 +397,9 @@ def funcionario_editar_perfil(request):
         messages.success(request, 'Perfil atualizado com sucesso!')
         return redirect('funcionario_perfil')
     else:
-        # Passa o perfil ao template para preencher os campos existentes com dados atuais
-        return render(request, 'apps/funcionario_editar_perfil.html', {'perfil': perfil})
+        context = {
+            'perfil': perfil,
+            'user': user,
+            'funcionario': 1  # Indica que o usuário é um funcionário
+        }
+        return render(request, 'apps/funcionario_editar_perfil.html', context)
