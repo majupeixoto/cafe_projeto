@@ -58,6 +58,9 @@ class OrdemServico(models.Model):
     descricao_problema = models.CharField(max_length=255)
     perfil_os = models.ForeignKey(Perfil, on_delete=models.CASCADE, default=None)
     imagem = models.ImageField(upload_to='imagens_os/', blank=True, null=True)  # Campo para a imagem
+    avaliacao = models.IntegerField(blank=True, null=True) #campo para estrelas 
+    comentario_avaliacao = models.TextField(blank=True, null=True) #campo para comentario da avaliacao
+
 
     # Adicione este campo para representar o funcionário responsável
     funcionario_responsavel = models.ForeignKey(Perfil, on_delete=models.SET_NULL, null=True, blank=True, related_name='ordens_responsavel')

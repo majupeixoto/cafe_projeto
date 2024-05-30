@@ -24,6 +24,9 @@
             <h2>Cliente: {{ os.perfil_os.username }}</h2>
             <h2>Tipo de atendimento: {{ os.tipo_atendimento }}</h2>
             <h2>Status: {{ os.status }}</h2>
+            {% if os.status == 'Pronto' %}
+            <a href="{% url 'avaliar_os' os.id %}" class="btn btn-outline-secondary">Avaliar Ordem de Serviço</a>
+            {% endif %}
         </ul>
     </div>
 

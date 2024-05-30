@@ -187,6 +187,33 @@ def cadastrar_os_cliente(request):
             return redirect(home_cliente)
 
         return render(request, 'apps/cadastrar_os_cliente.html')
+    
+@login_required
+def avaliar_os(request, os_id):
+    os = get_object_or_404(OrdemServico, id=os_id)
+    if request.method == 'POST':
+        avaliacao = request.POST.get('avaliacao')
+        comentario_avaliacao = request.POST.get('comentario_avaliacao')
+
+        if avaliacao.strip() and avaliacao.isdigit():
+            avaliacao = int(avaliacao)
+            if 1 <= avaliacao <= 5:
+                os.avaliacao = avaliacao
+                os.comentario_avaliacao = comentario_avaliacao
+                os.save()
+                messages.success(request, 'Avaliação salva com sucesso!')
+                return redirect('detalhes_os', os_id=os.id)
+            else:
+                messages.error(request, 'Avaliação fora do intervalo permitido (1-5).')
+        else:
+            messages.error(request, 'Avaliação não é um número inteiro ou está vazia.')
+
+    context = {
+        'os': os,
+        'avaliacao': os.avaliacao,
+        'comentario_avaliacao': os.comentario_avaliacao
+    }
+    return render(request, 'apps/avaliar_os.html', context)
 
 #FINAL DAS VIEWS DA CONTA CLIENTE
 
