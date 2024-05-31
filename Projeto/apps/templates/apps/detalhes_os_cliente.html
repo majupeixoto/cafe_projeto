@@ -29,6 +29,11 @@
             {% endif %}
         </ul>
     </div>
+    {% if os.status == 'Enviada' %}
+    <div class="div3">
+        <h2>Aguardando funcionário se resposabilizar</h2>
+    </div>
+    {% else %}
 
     <div class="div3">
         <section class="step-wizard">
@@ -67,5 +72,7 @@
         </div>
     </div>
 </section>
+
+{% endif %}
 
 {% endblock %}
