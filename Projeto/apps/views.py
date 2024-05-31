@@ -295,6 +295,7 @@ def detalhes_os(request, os_id):
     os = get_object_or_404(OrdemServico, id=os_id)
     detalhes_da_os = os.detalhes()
     numero_os = os.numero
+    avaliacoes = OrdemServico.avalicao_os(os_id)
 
     if usuario.funcionario == 1:
         # Lógica para funcionários
@@ -325,7 +326,8 @@ def detalhes_os(request, os_id):
             'os': os, 
             'detalhes_da_os': detalhes_da_os, 
             'funcionario_responsavel': funcionario_responsavel,
-            'numero_os': numero_os
+            'numero_os': numero_os,
+            'avaliacoes': avaliacoes,
         }
 
         return render(request, 'apps/detalhes_os.html', context)
@@ -336,7 +338,8 @@ def detalhes_os(request, os_id):
             'funcionario': 0, 
             'os': os, 
             'detalhes_da_os': detalhes_da_os, 
-            'numero_os': numero_os
+            'numero_os': numero_os,
+            'avaliacoes': avaliacoes,
         }
         return render(request, 'apps/detalhes_os_cliente.html', context)
 
