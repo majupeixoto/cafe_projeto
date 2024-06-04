@@ -320,3 +320,85 @@ textarea[readonly] {
 .star-icon.ativo ~ .star-icon::before {
     content: "\2606";
 }
+
+@media (max-width: 767px) {
+    .step-wizard {
+        display: none;
+    }
+}
+
+
+    .parent {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .card {
+        flex: 1 1 100%;
+    }
+
+    .div2,
+    .div3 {
+        flex: 1 1 100%;
+    }
+
+    @media (min-width: 768px) {
+        .card {
+            flex: 0 0 18rem;
+        }
+
+        .div2 {
+            flex: 1;
+        }
+
+        .div3 {
+            flex: 1;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .step-wizard {
+            display: none;
+        }
+    }
+
+    .step-wizard-list {
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        padding: 0;
+    }
+
+    .step-wizard-item {
+        flex: 1;
+        text-align: center;
+        position: relative;
+    }
+
+    .step-wizard-item .progress-count {
+        display: inline-block;
+        background: #ccc;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        margin-bottom: 10px;
+    }
+
+    .step-wizard-item.current-item .progress-count {
+        background: #007bff;
+        color: #fff;
+    }
+
+    .step-wizard-item .progress-label {
+        display: block;
+    }
+
+    .form-group {
+        margin-top: 20px;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
