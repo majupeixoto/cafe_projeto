@@ -29,7 +29,7 @@
             <div id="avaliar">
                 {% if os.avaliacao %}
                 <a href="{% url 'avaliar_os' os.id %}" class="btn btn-outline-secondary">Editar Avaliação</a>
-                <span class="rating" data-rating="{{ os.avaliacao }}"></span>
+                <p>Sua avaliação:<span class="rating" data-rating="{{ os.avaliacao }}"></span></p>
                 {% else %}
                 <a href="{% url 'avaliar_os' os.id %}" class="btn btn-outline-secondary">Avaliar Ordem de Serviço</a>
                 {% endif %}
