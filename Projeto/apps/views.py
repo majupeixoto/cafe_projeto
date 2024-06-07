@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.utils.dateparse import parse_date
+from .utils import filtrar_ordens
 from .models import *
 from django.contrib import auth
 from django.http import HttpResponse
@@ -430,3 +432,15 @@ def funcionario_editar_perfil(request):
             'funcionario': 1  # Indica que o usuário é um funcionário
         }
         return render(request, 'apps/funcionario_editar_perfil.html', context)
+
+@login_required
+def listar_os(request):
+    user = request.user
+    usuario = Perfil.objects.get(username=user)
+
+    if usuario.funcionario == 0:
+        return redirect(login)
+    else:
+        ordens = OrdemServico.objects.all()
+        ordens, status, data_criacao = filtrar_ordens(request, ordens)
+        return render(request, 'apps/listar_os.html', {'funcionario': 1, 'ordens': ordens, 'status': status, 'data_criacao': data_criacao})
