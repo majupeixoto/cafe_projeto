@@ -56,10 +56,12 @@
                             <td>
                                 <div class="btn-group">
                                     <a href="{% url 'detalhes_os' os.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
-                                    <form action="{% url 'excluir_os' os.id %}" method="POST" class="d-inline">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
-                                    </form>
+                                    {% if os.funcionario_responsavel and os.funcionario_responsavel.username == usuario.username %}
+                                        <form action="{% url 'excluir_os' os.id %}" method="POST" class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                                        </form>
+                                    {% endif %}
                                 </div>
                             </td>
                         </tr>
