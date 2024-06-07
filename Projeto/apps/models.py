@@ -16,7 +16,7 @@ class Perfil(models.Model):
     cpf = models.CharField(max_length=11)
     contato = models.CharField(max_length=11)
 
-    funcionario = models.IntegerField()
+    funcionario = models.BooleanField()  # Campo booleano para distinguir entre cliente e funcionário
 
     def delete(self, *args, **kwargs):
         # Atualiza as tarefas antes de deletar o perfil

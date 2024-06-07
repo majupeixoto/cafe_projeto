@@ -14,7 +14,6 @@ def login_view(request):
     if request.method == 'POST':
         tipo_usuario = request.POST.get('tipo_usuario')
 
-
         if tipo_usuario == 'cliente':
             return redirect("cliente_login")
         elif tipo_usuario == 'funcionario':
@@ -28,36 +27,46 @@ def logout_view(request):
         del request.session["usuario"]
     return redirect('login')
 
-
-def cliente_login(request): # VIEW CORRETA
+def cliente_login(request):
     if request.method == 'POST':
         username = request.POST['username']
         senha = request.POST['senha']
 
         user = authenticate(username=username, password=senha)
         if user is not None:
-            login(request, user)
-            return redirect('home_cliente')
+            perfil = Perfil.objects.get(username=user.username)
+            if perfil.funcionario:
+                messages.error(request, 'Erro: Funcionário não pode acessar como cliente.')
+                return redirect('login')
+            else:
+                login(request, user)
+                return redirect('home_cliente')
         else:
             messages.error(request, 'Erro ao autenticar o cliente. Por favor, tente novamente.')
             return redirect('cliente_login')
 
     return render(request, 'apps/cliente_login.html')
 
-def funcionario_login(request): # VIEW CORRETA
+def funcionario_login(request):
     if request.method == 'POST':
         username = request.POST['username']
         senha = request.POST['senha']
 
         user = authenticate(username=username, password=senha)
         if user is not None:
-            login(request, user)
-            return redirect(servicos)
+            perfil = Perfil.objects.get(username=user.username)
+            if not perfil.funcionario:
+                messages.error(request, 'Erro: Cliente não pode acessar como funcionário.')
+                return redirect('login')
+            else:
+                login(request, user)
+                return redirect('servicos')
         else:
             messages.error(request, 'Erro ao autenticar o funcionário. Por favor, tente novamente.')
             return redirect('funcionario_login')
-    
+
     return render(request, 'apps/funcionario_login.html')
+
 
 def cliente_cadastro(request): # VIEW CORRETA
     if request.method == 'POST':
