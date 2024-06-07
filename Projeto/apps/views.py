@@ -265,10 +265,13 @@ def servicos(request):
 @login_required
 def listar_os(request):
     user = request.user
-    usuario = Perfil.objects.get(username=user.username)
+    try:
+        usuario = Perfil.objects.get(username=user.username)
+    except Perfil.DoesNotExist:
+        usuario = None
 
-    if usuario.funcionario == 0:
-        return redirect(login)
+    if usuario is None or usuario.funcionario == 0:
+        return redirect('login')
     else:
         ordens = OrdemServico.objects.all()
         ordens, status, data_criacao = filtrar_ordens(request, ordens)
@@ -279,6 +282,7 @@ def listar_os(request):
             'data_criacao': data_criacao,
             'usuario': usuario  # Passa o perfil do usuário logado para o contexto
         })
+
 
 @login_required
 def editar_os(request, os_id):
@@ -457,15 +461,3 @@ def funcionario_editar_perfil(request):
             'funcionario': 1  # Indica que o usuário é um funcionário
         }
         return render(request, 'apps/funcionario_editar_perfil.html', context)
-
-@login_required
-def listar_os(request):
-    user = request.user
-    usuario = Perfil.objects.get(username=user)
-
-    if usuario.funcionario == 0:
-        return redirect(login)
-    else:
-        ordens = OrdemServico.objects.all()
-        ordens, status, data_criacao = filtrar_ordens(request, ordens)
-        return render(request, 'apps/listar_os.html', {'funcionario': 1, 'ordens': ordens, 'status': status, 'data_criacao': data_criacao})
