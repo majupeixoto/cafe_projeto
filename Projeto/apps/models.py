@@ -16,7 +16,7 @@ class Perfil(models.Model):
     cpf = models.CharField(max_length=11)
     contato = models.CharField(max_length=11)
 
-    funcionario = models.IntegerField()
+    funcionario = models.BooleanField()  # Campo booleano para distinguir entre cliente e funcionário
 
     def delete(self, *args, **kwargs):
         # Atualiza as tarefas antes de deletar o perfil
@@ -56,33 +56,33 @@ class OrdemServico(models.Model):
     modelo = models.CharField(max_length=255)
     garantia = models.BooleanField(choices=[(True, 'Sim'), (False, 'Não')])
     descricao_problema = models.CharField(max_length=255)
-    perfil_os = models.ForeignKey(Perfil, on_delete=models.CASCADE, default=None)
-    imagem = models.ImageField(upload_to='imagens_os/', blank=True, null=True)  # Campo para a imagem
-    avaliacao = models.IntegerField(blank=True, null=True) #campo para estrelas 
-    comentario_avaliacao = models.TextField(blank=True, null=True) #campo para comentario da avaliacao
+    perfil_os = models.ForeignKey('Perfil', on_delete=models.CASCADE, default=None)
+    imagem = models.ImageField(upload_to='imagens_os/', blank=True, null=True)  
+    avaliacao = models.IntegerField(blank=True, null=True)
+    comentario_avaliacao = models.TextField(blank=True, null=True)
 
 
-    # Adicione este campo para representar o funcionário responsável
     funcionario_responsavel = models.ForeignKey(Perfil, on_delete=models.SET_NULL, null=True, blank=True, related_name='ordens_responsavel')
 
-    # Novos campos
+
     mensagem_funcionario = models.TextField(blank=True, null=True)
     anotacoes_internas = models.TextField(blank=True, null=True)
     problema_detectado = models.TextField(blank=True, null=True)
 
-    numero = models.CharField(max_length=10, unique=True)  # Campo para armazenar o número da ordem de serviço
+    numero = models.CharField(max_length=10, unique=True)
+    created_at = models.DateTimeField(default=datetime.now)  # Adiciona o campo de data de criação com um valor padrão
 
     def save(self, *args, **kwargs):
-        if not self.numero:  # Verifica se o número da ordem já foi atribuído
-            year = datetime.now().year  # Obtém o ano atual
-            prefix = str(year)[-2:]  # Obtém os últimos dois dígitos do ano
+        if not self.numero:
+            year = datetime.now().year
+            prefix = str(year)[-2:]
             last_order = OrdemServico.objects.filter(numero__startswith=prefix).order_by('-numero').first()
-            if last_order:  # Se já existem ordens de serviço cadastradas no ano corrente
-                last_number = int(last_order.numero[-3:])  # Obtém o número da última ordem de serviço
-                new_number = last_number + 1  # Calcula o novo número da ordem de serviço
+            if last_order:
+                last_number = int(last_order.numero[-3:])
+                new_number = last_number + 1
             else:
-                new_number = 1  # Se não há ordens de serviço cadastradas no ano corrente, o número será 1
-            self.numero = f"{prefix}{new_number:03d}"  # Formata o número da ordem de serviço com três dígitos, ex: 25001
+                new_number = 1
+            self.numero = f"{prefix}{new_number:03d}"
         super().save(*args, **kwargs)
 
     def detalhes(self):
@@ -94,11 +94,11 @@ class OrdemServico(models.Model):
             'cliente_nome': self.perfil_os.username if self.perfil_os else None,
             'cliente_cpf': self.perfil_os.cpf if self.perfil_os else None,
             'cliente_contato': self.perfil_os.contato if self.perfil_os else None,
-            'status': self.get_status_display(),  # Obter a representação legível do status
+            'status': self.get_status_display(),
             'mensagem_funcionario': self.mensagem_funcionario,
             'anotacoes_internas': self.anotacoes_internas,
             'problema_detectado': self.problema_detectado,
-            'tipo_atendimento': self.get_tipo_atendimento_display(),  # Obter a representação legível do tipo de atendimento
+            'tipo_atendimento': self.get_tipo_atendimento_display(),
         }
 
     def __str__(self):
