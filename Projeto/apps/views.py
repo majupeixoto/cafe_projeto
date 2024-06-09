@@ -132,24 +132,18 @@ def funcionario_cadastro(request): # VIEW CORRETA
 
 # FINAL DAS VIEWS DE LOGIN
 
-
+# FUNÇÕES DA CONTA CLIENTE
 @login_required
 def cliente_perfil(request):
     user = request.user
     try:
-        # Suponho que o modelo Perfil esteja vinculado ao User pelo campo 'username'.
-        # Se não for, ajuste para o campo correto que conecta Perfil ao User.
         usuario = Perfil.objects.get(username=user.username)
     except Perfil.DoesNotExist:
-        # Se o perfil não for encontrado, redirecione para um local apropriado,
-        # como a página de login ou uma página de erro.
-        return redirect('nome_da_url_de_login')
+        return redirect('login')
 
     if usuario.funcionario == 1:
-        # Redirecione se o usuário for funcionário para a página de login ou outra página adequada.
-        return redirect('nome_da_url_de_login_ou_outra')
+        return redirect('login')
     else:
-        # Passe todas as informações relevantes para o template.
         context = {
             'nome_completo': usuario.nome,
             'email': user.email,
@@ -157,6 +151,38 @@ def cliente_perfil(request):
             'contato': usuario.contato
         }
         return render(request, 'apps/cliente_perfil.html', context)
+
+@login_required
+def cliente_editar_perfil(request):
+    try:
+        # Tenta recuperar o perfil baseado no nome de usuário associado ao usuário atual.
+        usuario = Perfil.objects.get(username=request.user.username)
+    except Perfil.DoesNotExist:
+        # Se o perfil não existir, opcionalmente, redirecione ou exiba uma mensagem.
+        messages.error(request, 'Perfil não encontrado.')
+        return redirect('alguma_url_de_fallback')
+
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        cpf = request.POST.get('cpf')
+        contato = request.POST.get('contato')
+        email = request.POST.get('email')
+
+        user = request.user
+        user.email = email
+        user.save()
+
+        # Atualiza o perfil do usuário com as novas informações.
+        usuario.nome = nome
+        usuario.cpf = cpf
+        usuario.contato = contato
+        usuario.save()
+
+        # Mensagem de sucesso após salvar as alterações.
+        messages.success(request, 'Perfil atualizado com sucesso!')
+        return redirect('cliente_perfil')
+
+    return render(request, 'apps/cliente_editar_perfil.html', {'perfil': usuario})
 
 @login_required
 def home_cliente(request):
@@ -246,7 +272,6 @@ def lista_notifications(request):
             }
             return render(request, 'apps/lista_notifications.html', context)
 
-
 #FINAL DAS VIEWS DA CONTA CLIENTE
 
 
@@ -267,6 +292,42 @@ def funcionario_perfil(request):
             'funcionario': 1  # Assegura que o menu lateral de funcionário seja exibido
         }
         return render(request, 'apps/funcionario_perfil.html', context)
+
+@login_required
+def funcionario_editar_perfil(request):
+    user = request.user
+    perfil = get_object_or_404(Perfil, username=user.username)
+
+    if perfil.funcionario == 0:
+        return redirect('login')
+
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        cpf = request.POST.get('cpf')
+        contato = request.POST.get('contato')
+        email = request.POST.get('email')
+
+        if email:
+            user.email = email
+            user.save()
+
+        if nome:
+            perfil.nome = nome
+        if cpf:
+            perfil.cpf = cpf
+        if contato:
+            perfil.contato = contato
+
+        perfil.save()
+        messages.success(request, 'Perfil atualizado com sucesso!')
+        return redirect('funcionario_perfil')
+    else:
+        context = {
+            'perfil': perfil,
+            'user': user,
+            'funcionario': 1  # Indica que o usuário é um funcionário
+        }
+        return render(request, 'apps/funcionario_editar_perfil.html', context)
 
 
 @login_required
@@ -326,6 +387,26 @@ def editar_os(request, os_id):
 
     return render(request, 'apps/editar_os.html', {'funcionario': 1, 'os': os})
 
+@login_required
+def excluir_os(request, pk):
+    os = get_object_or_404(OrdemServico, pk=pk)
+
+    # Verifica se há um funcionário responsável pela OS
+    if not os.funcionario_responsavel:
+        return HttpResponseForbidden("Não é possível excluir uma OS sem um funcionário responsável.")
+
+    # Verifica se o usuário logado é o funcionário responsável pela OS
+    if os.funcionario_responsavel.username != request.user.username:
+        return HttpResponseForbidden("Você não tem permissão para excluir esta OS.")
+
+    if request.method == 'POST':
+        os.delete()
+        return redirect('listar_os')  # Redireciona para a lista de OS após a exclusão
+
+    return render(request, 'excluir_os.html', {'os': os})
+
+# FINAL DAS FUNÇÕES DO FUNCIONÁRIO
+
 
 # VIEW DOS DOIS
 @login_required
@@ -381,24 +462,6 @@ def detalhes_os(request, os_id):
         return render(request, 'apps/detalhes_os_cliente.html', context)
 
 @login_required
-def excluir_os(request, pk):
-    os = get_object_or_404(OrdemServico, pk=pk)
-
-    # Verifica se há um funcionário responsável pela OS
-    if not os.funcionario_responsavel:
-        return HttpResponseForbidden("Não é possível excluir uma OS sem um funcionário responsável.")
-
-    # Verifica se o usuário logado é o funcionário responsável pela OS
-    if os.funcionario_responsavel.username != request.user.username:
-        return HttpResponseForbidden("Você não tem permissão para excluir esta OS.")
-
-    if request.method == 'POST':
-        os.delete()
-        return redirect('listar_os')  # Redireciona para a lista de OS após a exclusão
-
-    return render(request, 'excluir_os.html', {'os': os})
-
-@login_required
 def excluir_conta(request):
     usuario = Perfil.objects.get(username=request.user.username)
 
@@ -411,72 +474,3 @@ def excluir_conta(request):
         return render(request, 'apps/excluir_conta.html')
     else:
         return render(request, 'apps/excluir_conta.html', {'funcionario': 1})
-
-
-@login_required
-def cliente_editar_perfil(request):
-    try:
-        # Tenta recuperar o perfil baseado no nome de usuário associado ao usuário atual.
-        usuario = Perfil.objects.get(username=request.user.username)
-    except Perfil.DoesNotExist:
-        # Se o perfil não existir, opcionalmente, redirecione ou exiba uma mensagem.
-        messages.error(request, 'Perfil não encontrado.')
-        return redirect('alguma_url_de_fallback')
-
-    if request.method == 'POST':
-        nome = request.POST.get('nome')
-        cpf = request.POST.get('cpf')
-        contato = request.POST.get('contato')
-        email = request.POST.get('email')
-
-        user = request.user
-        user.email = email
-        user.save()
-
-        # Atualiza o perfil do usuário com as novas informações.
-        usuario.nome = nome
-        usuario.cpf = cpf
-        usuario.contato = contato
-        usuario.save()
-
-        # Mensagem de sucesso após salvar as alterações.
-        messages.success(request, 'Perfil atualizado com sucesso!')
-        return redirect('cliente_perfil')
-
-    return render(request, 'apps/cliente_editar_perfil.html', {'perfil': usuario})
-
-@login_required
-def funcionario_editar_perfil(request):
-    user = request.user
-    perfil = get_object_or_404(Perfil, username=user.username)
-
-    if perfil.funcionario == 0:
-        return redirect('login')
-
-    if request.method == 'POST':
-        nome = request.POST.get('nome')
-        cpf = request.POST.get('cpf')
-        contato = request.POST.get('contato')
-        email = request.POST.get('email')
-
-        if email:
-            user.email = email
-            user.save()
-
-        if nome:
-            perfil.nome = nome
-        if cpf:
-            perfil.cpf = cpf
-        if contato:
-            perfil.contato = contato
-
-        perfil.save()
-        messages.success(request, 'Perfil atualizado com sucesso!')
-        return redirect('funcionario_perfil')
-    else:
-        context = {
-            'perfil': perfil,
-            'user': user,
-            'funcionario': 1  # Indica que o usuário é um funcionário
-        }
-        return render(request, 'apps/funcionario_editar_perfil.html', context)
