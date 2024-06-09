@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <h2 class="text-center">Cadastrar Nova Ordem de Serviço</h2>
 
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
 
                     <div class="row">
@@ -37,18 +37,21 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
                         <label for="descricao_problema">Descrição do Problema:</label>
                         <textarea type="text" class="form-control" id="descricao_problema" name="descricao_problema" rows="4" required></textarea>
                     </div>
 
+                    <div class="form-group">
+                        <label for="imagem">Imagem do Aparelho (opcional):</label>
+                        <input type="file" class="form-control-file" id="imagem" name="imagem">
+                    </div>
+
                     <div class="text-center">
-                        <input type="submit" value="Cadastrar">
+                        <input type="submit" value="Cadastrar" class="btn btn-primary">
                     </div>
                 </form>
             </div>
         </div>
     </div>
 {% endblock %}
-

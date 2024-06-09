@@ -18,7 +18,7 @@
         {% if ordens_servico %}
             {% for os in ordens_servico %}
             <div class="col-lg-4">
-                <div class="card" style="width: 18rem;">
+                <div class="card glass-card" style="width: 18rem;">
                     <p class="card-text">Código da OS: {{ os.numero }}</p>
                     {% if os.cliente.imagem %}
                     <img src="{% static os.cliente.imagem.url %}" class="card-img-top" alt="{{ os.descricao }}">

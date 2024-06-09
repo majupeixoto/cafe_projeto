@@ -1,0 +1,108 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+
+<title>Detalhes da Ordem de Serviço</title>
+
+<section class="flex parent">
+    <div class="card" style="width: 18rem;">
+        {% if os.imagem %}
+        <img src="{{ os.imagem.url }}" class="card-img-top" alt="{{ os.descricao }}">
+        {% else %}
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+            role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#55595c"></rect>
+            <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ os.descricao }}</text>
+        </svg>
+        {% endif %}
+    </div>
+    <div class="div2">
+        <h2>Aparelho: {{ os.aparelho }}</h2>
+        <ul>
+            <h2>Nº da OS: {{ os.numero|default:"-" }}</h2>
+            <h2>Data de entrada: {{ os.data_entrada|date:"d/m/Y" }}</h2>
+            <h2>Cliente: {{ os.perfil_os.username }}</h2>
+            <h2>Tipo de atendimento: {{ os.tipo_atendimento }}</h2>
+            <h2>Status: {{ os.status }}</h2>
+            {% if os.status == 'Pronto' %}
+            <div id="avaliar">
+                {% if os.avaliacao %}
+                <a href="{% url 'avaliar_os' os.id %}" class="btn btn-outline-secondary">Editar Avaliação</a>
+                <p>Sua avaliação:<span class="rating" data-rating="{{ os.avaliacao }}"></span></p>
+                {% else %}
+                <a href="{% url 'avaliar_os' os.id %}" class="btn btn-outline-secondary">Avaliar Ordem de Serviço</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </ul>
+    </div>
+    {% if os.status == 'Enviada' %}
+    <div class="div3">
+        <h2>Aguardando funcionário se responsabilizar</h2>
+    </div>
+    {% else %}
+    <div class="div3">
+        <section class="step-wizard">
+            <ul class="step-wizard-list">
+                <li class="step-wizard-item {% if os.status == 'Iniciada' %}current-item{% endif %}">
+                    <span class="progress-count">1</span>
+                    <span class="progress-label">Iniciada</span>
+                </li>
+                <li class="step-wizard-item {% if os.status == 'Em_analise' %}current-item{% endif %}">
+                    <span class="progress-count">2</span>
+                    <span class="progress-label">Em análise</span>
+                </li>
+                <li class="step-wizard-item {% if os.status == 'Aguardando_peca' %}current-item{% endif %}">
+                    <span class="progress-count">3</span>
+                    <span class="progress-label">Aguardando peça</span>
+                </li>
+                <li class="step-wizard-item {% if os.status == 'Aguardando_reparo' %}current-item{% endif %}">
+                    <span class="progress-count">4</span>
+                    <span class="progress-label">Aguardando reparo</span>
+                </li>
+                <li class="step-wizard-item {% if os.status == 'Em_reparo' %}current-item{% endif %}">
+                    <span class="progress-count">5</span>
+                    <span class="progress-label">Em reparo</span>
+                </li>
+                <li class="step-wizard-item {% if os.status == 'Pronto' %}current-item{% endif %}">
+                    <span class="progress-count">6</span>
+                    <span class="progress-label">Pronto</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Caixa de texto para comentários do funcionário -->
+        <div class="form-group mt-4">
+            <label for="comentarios_funcionario">Comentários do Funcionário:</label>
+            <textarea id="comentarios_funcionario" class="form-control" rows="5" readonly>{{ os.mensagem_funcionario}}</textarea>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    function renderStars(rating) {
+        let stars = '';
+        for (let i = 0; i < 5; i++) {
+            if (i < rating) {
+                stars += '★'; // Filled star
+            } else {
+                stars += '☆'; // Empty star
+            }
+        }
+        return stars;
+    }
+
+    window.onload = function() {
+        var ratingElements = document.getElementsByClassName('rating');
+        for (var i = 0; i < ratingElements.length; i++) {
+            var ratingElement = ratingElements[i];
+            var rating = ratingElement.getAttribute('data-rating');
+            ratingElement.innerHTML = renderStars(rating);
+        }
+    }
+</script>
+
+{% endif %}
+
+{% endblock %}

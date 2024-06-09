@@ -7,17 +7,17 @@
     box-sizing: border-box;
     font-family: "PT Mono", monospace;
     font-weight: 400;
-    font-style: normal;}
+    font-style: normal;
+}
 
 body {
-    height: 100vh;
-    background-image: url('../img/fundo1.png'); /* Corrigi o caminho da imagem de fundo */
+    min-height: 100vh;
+    background-image: url('../img/fundo1.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
-
-/* PERSONALIZAÇÕES ESPECÍFICAS */
 
 /* MENU */
 nav.menu-lateral {
@@ -30,7 +30,7 @@ nav.menu-lateral {
     top: 0;
     left: 0;
     overflow: hidden;
-    transition: width 0.2s; /* Melhorei a legibilidade aqui */
+    transition: width 0.2s;
 }
 
 nav.menu-lateral:hover {
@@ -54,7 +54,7 @@ ul {
 }
 
 ul li.item-menu {
-    transition: background-color 0.2s; /* Melhorei a legibilidade aqui */
+    transition: background-color 0.2s;
 }
 
 ul li.item-menu:hover {
@@ -81,12 +81,48 @@ ul li.item-menu a .icon > i {
 }
 
 /* ORGANIZANDO O CORPO */
-
 .corpo {
     margin-left: 120px;
     padding-top: 40px;
 }
 
+/* Glass Effect for Cards */
+.glass-card {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Additional Styling for Card Content */
+.card-body {
+    color: #fff;
+}
+
+.card-text {
+    color: #fff;
+}
+
+.btn-outline-secondary {
+    color: #fff;
+    border-color: #fff;
+}
+
+.btn-outline-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: #fff;
+}
+
+/* Card Styles */
 .card {
     width: 18rem;
     padding: 20px;
@@ -106,7 +142,181 @@ ul li.item-menu a .icon > i {
     margin-top: 20px;
 }
 
-h2.text-center, /* Corrigi a seleção do h2 */
+h2.text-center,
 .form-group {
     font-size: larger;
+}
+
+/* Detalhes da OS para o Cliente */
+.parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+
+.div1 {
+    grid-area: 1 / 1 / 4 / 3;
+}
+
+.div2 {
+    grid-area: 1 / 3 / 4 / 6;
+}
+
+.div3 {
+    grid-area: 2 / 1 / 3 / 6;
+}
+
+.div3 {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.step-wizard-list {
+    background: #fff;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+    color: #333;
+    list-style-type: none;
+    border-radius: 10px;
+    display: flex;
+    padding: 20px 10px;
+    position: relative;
+    z-index: 10;
+    flex-wrap: wrap;
+}
+
+.step-wizard-item {
+    padding: 0 20px;
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-width: 170px;
+    position: relative;
+}
+
+.step-wizard-item + .step-wizard-item:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 19px;
+    background: #21d4fd;
+    width: 100%;
+    height: 2px;
+    transform: translateX(-50%);
+    z-index: -10;
+}
+
+.progress-count {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 600;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    color: transparent;
+}
+
+.progress-count:after {
+    content: "";
+    height: 40px;
+    width: 40px;
+    background: #21d4fd;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: -10;
+}
+
+.progress-count:before {
+    content: "";
+    height: 10px;
+    width: 20px;
+    border-left: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -60%) rotate(-45deg);
+    transform-origin: center center;
+}
+
+.progress-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.current-item .progress-count:before,
+.current-item ~ .step-wizard-item .progress-count:before {
+    display: none;
+}
+
+.current-item ~ .step-wizard-item .progress-count:after {
+    height: 10px;
+    width: 10px;
+}
+
+.current-item ~ .step-wizard-item .progress-label {
+    opacity: 0.5;
+}
+
+.current-item .progress-count:after {
+    background: #fff;
+    border: 2px solid #21d4fd;
+}
+
+.current-item .progress-count {
+    color: #21d4fd;
+}
+
+.form-group {
+    margin-top: 20px;
+}
+
+textarea[readonly] {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+}
+
+/* Avaliação da OS */
+.avaliacao {
+    display: flex;
+}
+
+.star-icon {
+    list-style-type: none;
+    cursor: pointer;
+    color: #ffe500;
+    font-size: 40px; /* alterar o tamanho das estrelas */
+}
+
+.star-icon::before {
+    content: "\2605";
+}
+
+.star-icon.ativo::before,
+.star-icon:hover::before,
+.star-icon:hover ~ .star-icon::before {
+    content: "\2605";
+}
+
+.star-icon.ativo ~ .star-icon::before {
+    content: "\2606";
 }

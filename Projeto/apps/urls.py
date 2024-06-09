@@ -15,4 +15,12 @@ urlpatterns = [
     path('cadastrar_os_cliente/', views.cadastrar_os_cliente, name='cadastrar_os_cliente'),  # Cadastro OS por parte do cliente
     path('listar_os/', views.listar_os, name='listar_os'),  # Listas de todas as OS cadastradas 
     path('excluir_os/<int:pk>/', views.excluir_os, name='excluir_os'),
+    path('avaliar_os/<int:os_id>/', views.avaliar_os, name='avaliar_os'),
+    path('detalhes_os_cliente/<int:os_id>/', views.detalhes_os, name='detalhes_os_cliente'),
+    path('funcionario_perfil/', views.funcionario_perfil, name='funcionario_perfil'),
+    path('cliente_perfil/', views.cliente_perfil, name='cliente_perfil'),
+    path('conta/excluir_conta/', views.excluir_conta, name='excluir_conta'),
+    path('cliente_editar_perfil/', views.cliente_editar_perfil, name='cliente_editar_perfil'),
+    path('funcionario_editar_perfil/', views.funcionario_editar_perfil, name='funcionario_editar_perfil'),
+    path('lista_notifications/', views.lista_notifications, name='lista_notifications'),
 ]

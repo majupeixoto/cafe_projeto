@@ -1,0 +1,17 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+<h2>Notificações</h2>
+<ul>
+    {% for notification in notifications %}
+    <li>
+        {{ notification.timestamp }} - {{ notification.actor }}: {{ notification.verb }} {{ notification.description }}
+        {% if notification.target %}
+            <a href="{% url 'detalhes_os_cliente' os_id=notification.target.id %}">Ver mais</a>
+        {% endif %}
+    </li>
+    {% empty %}
+    <li>Você não tem notificações.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

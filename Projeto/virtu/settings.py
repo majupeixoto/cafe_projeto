@@ -71,6 +71,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "whitenoise.runserver_nostatic",
     'apps.apps.AppsConfig',
+
+    'notifications',
 ]
 
 MIDDLEWARE = [

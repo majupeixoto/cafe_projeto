@@ -1,0 +1,47 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+
+<h1>Avaliar Ordem de Serviço</h1>
+<form method="post" id="avaliacaoForm">
+    {% csrf_token %}
+    <div class="avaliacao-container">
+        <ul class="avaliacao">
+            <li class="star-icon {% if avaliacao >= 1 %}ativo{% endif %}" data-avaliacao="1"></li>
+            <li class="star-icon {% if avaliacao >= 2 %}ativo{% endif %}" data-avaliacao="2"></li>
+            <li class="star-icon {% if avaliacao >= 3 %}ativo{% endif %}" data-avaliacao="3"></li>
+            <li class="star-icon {% if avaliacao >= 4 %}ativo{% endif %}" data-avaliacao="4"></li>
+            <li class="star-icon {% if avaliacao >= 5 %}ativo{% endif %}" data-avaliacao="5"></li>
+        </ul>
+        <input type="hidden" id="avaliacao" name="avaliacao" value="{{ avaliacao }}">
+        <div class="form-group">
+            <label for="comentario_avaliacao">Comentário:</label>
+            <textarea class="form-control" id="comentario_avaliacao" name="comentario_avaliacao" rows="3">{{ comentario_avaliacao }}</textarea>
+        </div>
+        <button id="avaliar" type="submit" class="btn btn-outline-secondary">Avalie!</button>
+    </div>
+</form>
+
+<script>
+    var stars = document.querySelectorAll('.star-icon');
+    var avaliacaoInput = document.getElementById('avaliacao');
+
+    stars.forEach(function(star) {
+        star.addEventListener('click', function() {
+            stars.forEach(function(s) {
+                s.classList.remove('ativo');
+            });
+            this.classList.add('ativo');
+            avaliacaoInput.value = this.getAttribute('data-avaliacao');
+        });
+    });
+
+    document.getElementById('avaliacaoForm').addEventListener('submit', function(e) {
+        if (!avaliacaoInput.value) {
+            e.preventDefault();
+            alert('Por favor, selecione uma avaliação.');
+        }
+    });
+</script>
+
+{% endblock %}

@@ -9,3 +9,8 @@ python-dotenv
 psycopg2-binary
 gunicorn
 whitenoise
+
+# extras para o projeto
+Pillow
+setuptools
+django-notifications-hq
