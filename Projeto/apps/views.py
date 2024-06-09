@@ -3,17 +3,20 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.utils.dateparse import parse_date
+from .utils import filtrar_ordens
 from .models import *
 from django.contrib import auth
 from django.http import HttpResponse
 from notifications.signals import notify
 from notifications.models import Notification
+from django.http import HttpResponseForbidden
+
 
 #VIEWS DE LOGIN
 def login_view(request):
     if request.method == 'POST':
         tipo_usuario = request.POST.get('tipo_usuario')
-
 
         if tipo_usuario == 'cliente':
             return redirect("cliente_login")
@@ -28,36 +31,46 @@ def logout_view(request):
         del request.session["usuario"]
     return redirect('login')
 
-
-def cliente_login(request): # VIEW CORRETA
+def cliente_login(request):
     if request.method == 'POST':
         username = request.POST['username']
         senha = request.POST['senha']
 
         user = authenticate(username=username, password=senha)
         if user is not None:
-            login(request, user)
-            return redirect('home_cliente')
+            perfil = Perfil.objects.get(username=user.username)
+            if perfil.funcionario:
+                messages.error(request, 'Erro: Funcionário não pode acessar como cliente.')
+                return redirect('login')
+            else:
+                login(request, user)
+                return redirect('home_cliente')
         else:
             messages.error(request, 'Erro ao autenticar o cliente. Por favor, tente novamente.')
             return redirect('cliente_login')
 
     return render(request, 'apps/cliente_login.html')
 
-def funcionario_login(request): # VIEW CORRETA
+def funcionario_login(request):
     if request.method == 'POST':
         username = request.POST['username']
         senha = request.POST['senha']
 
         user = authenticate(username=username, password=senha)
         if user is not None:
-            login(request, user)
-            return redirect(servicos)
+            perfil = Perfil.objects.get(username=user.username)
+            if not perfil.funcionario:
+                messages.error(request, 'Erro: Cliente não pode acessar como funcionário.')
+                return redirect('login')
+            else:
+                login(request, user)
+                return redirect('servicos')
         else:
             messages.error(request, 'Erro ao autenticar o funcionário. Por favor, tente novamente.')
             return redirect('funcionario_login')
-    
+
     return render(request, 'apps/funcionario_login.html')
+
 
 def cliente_cadastro(request): # VIEW CORRETA
     if request.method == 'POST':
@@ -269,18 +282,26 @@ def servicos(request):
         return render(request, 'apps/servicos.html', {'funcionario': 1, 'ordens_servico': ordens_servico})
 
 @login_required
-def listar_os(request): #listar todas as os feitas 
+def listar_os(request):
     user = request.user
-    usuario = Perfil.objects.get(username=user)
+    try:
+        usuario = Perfil.objects.get(username=user.username)
+    except Perfil.DoesNotExist:
+        usuario = None
 
-    if usuario.funcionario == 0:
-        return redirect(login)
+    if usuario is None or usuario.funcionario == 0:
+        return redirect('login')
     else:
-        if request.user.is_anonymous:
-            return redirect(login)
-        else:
-            ordens = OrdemServico.objects.all()
-            return render(request, 'apps/listar_os.html', {'funcionario': 1, 'ordens': ordens})
+        ordens = OrdemServico.objects.all()
+        ordens, status, data_criacao = filtrar_ordens(request, ordens)
+        return render(request, 'apps/listar_os.html', {
+            'funcionario': 1,
+            'ordens': ordens,
+            'status': status,
+            'data_criacao': data_criacao,
+            'usuario': usuario  # Passa o perfil do usuário logado para o contexto
+        })
+
 
 @login_required
 def editar_os(request, os_id):
@@ -362,9 +383,19 @@ def detalhes_os(request, os_id):
 @login_required
 def excluir_os(request, pk):
     os = get_object_or_404(OrdemServico, pk=pk)
+
+    # Verifica se há um funcionário responsável pela OS
+    if not os.funcionario_responsavel:
+        return HttpResponseForbidden("Não é possível excluir uma OS sem um funcionário responsável.")
+
+    # Verifica se o usuário logado é o funcionário responsável pela OS
+    if os.funcionario_responsavel.username != request.user.username:
+        return HttpResponseForbidden("Você não tem permissão para excluir esta OS.")
+
     if request.method == 'POST':
         os.delete()
         return redirect('listar_os')  # Redireciona para a lista de OS após a exclusão
+
     return render(request, 'excluir_os.html', {'os': os})
 
 @login_required

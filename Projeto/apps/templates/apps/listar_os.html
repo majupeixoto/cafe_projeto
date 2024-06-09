@@ -1,52 +1,77 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-lg-8">
-        <h2 class="fw-normal">Ordens de serviços cadastradas!</h2>
+            <h2 class="fw-normal">Ordens de serviços cadastradas!</h2>
         </div>
     </div>
+
+    <div class="row mb-3">
+        <div class="col-lg-12">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label for="status" class="form-label">Status</label>
+                    <select name="status" id="status" class="form-select">
+                        <option value="">Todos</option>
+                        {% for key, value in ordens.model.STATUS_CHOICES %}
+                            <option value="{{ key }}" {% if key == status %}selected{% endif %}>{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="data_criacao" class="form-label">Data de Criação</label>
+                    <input type="date" name="data_criacao" id="data_criacao" class="form-control" value="{{ data_criacao|default_if_none:'' }}">
+                </div>
+                <div class="col-md-4 align-self-end">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div>
         {% if ordens %}
-            <table class="table table-striped-columns">
+            <table class="table table-striped">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Funcionário responsável</th>
-                    <th scope="col">Contato</th>
-                    <th scope="col">Aparelho</th>
-                    <th scope="col">Modelo</th>
-                    <th scope="col">Açoes</th> <!-- Nova coluna para botões de ação -->
-                </tr>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Funcionário responsável</th>
+                        <th scope="col">Contato</th>
+                        <th scope="col">Aparelho</th>
+                        <th scope="col">Modelo</th>
+                        <th scope="col">Ações</th> <!-- Nova coluna para botões de ação -->
+                    </tr>
                 </thead>
                 <tbody>
                     {% for os in ordens %}
-                    <tr>
-                        <th scope="row">{{ os.numero|default:"-" }}</th>
-                        <td>{{ os.perfil_os.username }}</td> <!--primeiro nome-->
-                        <td>{{ os.funcionario_responsavel.username|default:"Sem responsável" }}</td> <!--primeiro nome-->
-                        <td>{{ os.perfil_os.contato }}</td>
-                        <td>{{ os.aparelho }}</td>
-                        <td>{{ os.modelo }}</td>
-                        <td>
-                            <div class="btn-group">
-                                {% csrf_token %}
-                                <a href="{% url 'detalhes_os' os.id%}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
-                            </div>
-                            <form action="{% url 'excluir_os' os.id %}" method="POST">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger">Excluir</button>
-                            </form>
-                        </td>
-                    </tr>
+                        <tr>
+                            <th scope="row">{{ os.numero|default:"-" }}</th>
+                            <td>{{ os.perfil_os.username }}</td> <!--primeiro nome-->
+                            <td>{{ os.funcionario_responsavel.username|default:"Sem responsável" }}</td> <!--primeiro nome-->
+                            <td>{{ os.perfil_os.contato }}</td>
+                            <td>{{ os.aparelho }}</td>
+                            <td>{{ os.modelo }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="{% url 'detalhes_os' os.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
+                                    {% if os.funcionario_responsavel and os.funcionario_responsavel.username == usuario.username %}
+                                        <form action="{% url 'excluir_os' os.id %}" method="POST" class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
         {% else %}
-        <div class="col-lg-4">
-            <p>Não há nada por aqui...</p>
-        </div>
+            <div class="col-lg-4">
+                <p>Não há nada por aqui...</p>
+            </div>
         {% endif %}
     </div>
 {% endblock %}
