@@ -11,6 +11,7 @@ from django.http import HttpResponse
 from notifications.signals import notify
 from notifications.models import Notification
 from django.http import HttpResponseForbidden
+import re
 
 
 #VIEWS DE LOGIN
@@ -90,6 +91,13 @@ def cliente_cadastro(request): # VIEW CORRETA
             return render(request, 'apps/cliente_cadastro.html', {"erro": "Usuário já existe"})
         elif User.objects.filter(email=email).exists():
             return render(request, 'apps/cliente_cadastro.html', {"erro": "Email já está sendo usado"})
+        
+        errors= validate_dados(nome, username, email, cpf, contato)
+
+        if errors:
+            for error in errors:
+                messages.error(request, error)
+            return render(request, 'apps/cliente_cadastro.html')
 
         user = User.objects.create_user(username=username, email=email, password=senha)
         Perfil.objects.create(username=username, funcionario=0, cpf=cpf, contato=contato, nome=nome)
@@ -116,6 +124,13 @@ def funcionario_cadastro(request): # VIEW CORRETA
             return render(request, 'apps/funcionario_cadastro.html', {"erro": "Usuário já existe"})
         elif User.objects.filter(email=email).exists():
             return render(request, 'apps/funcionario_cadastro.html', {"erro": "Email já está sendo usado"})
+        
+        errors= validate_dados(nome, username, email)
+
+        if errors:
+            for error in errors:
+                messages.error(request, error)
+            return render(request, 'apps/funcionario_cadastro.html')
         
         user = User.objects.create_user(username=username, email=email, password=senha)
         Perfil.objects.create(
@@ -474,3 +489,23 @@ def excluir_conta(request):
         return render(request, 'apps/excluir_conta.html')
     else:
         return render(request, 'apps/excluir_conta.html', {'funcionario': 1})
+
+def validate_dados(nome, username, email, cpf=None, contato=None):
+    errors = []
+
+    if not nome or len(nome) < 2:
+        errors.append("O nome deve ter pelo menos dois caracteres.")
+
+    if not username or len(username) < 3:
+        errors.append("O username deve ter pelo menos três caracteres.")
+
+    if email and not re.match(r'^[\w\.-]+@[\w\.-]+$', email):
+        errors.append("O email deve estar em um formato válido.")
+
+    if cpf is not None and len(cpf) != 11 and not cpf.isdigit():
+        errors.append("O CPF deve ter 11 dígitos numéricos.")
+
+    if contato is not None and len(contato) != 11 and not contato.isdigit():
+        errors.append("O contato deve ter 11 dígitos numéricos.")
+
+    return errors
