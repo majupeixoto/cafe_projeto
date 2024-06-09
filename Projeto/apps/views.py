@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from .models import *
 from django.contrib import auth
 from django.http import HttpResponse
+from notifications.signals import notify
+from notifications.models import Notification
 
 #VIEWS DE LOGIN
 def login_view(request):
@@ -146,7 +148,6 @@ def cliente_perfil(request):
 @login_required
 def home_cliente(request):
     user = request.user
-
     usuario = Perfil.objects.get(username=user.username)
 
     if usuario.funcionario == 1:
@@ -215,6 +216,24 @@ def avaliar_os(request, os_id):
     }
     return render(request, 'apps/avaliar_os.html', context)
 
+@login_required
+def lista_notifications(request):
+    user = request.user
+    usuario = Perfil.objects.get(username=user.username)
+
+    if usuario.funcionario == 1:
+        return redirect(login)
+    else:
+        if request.user.is_anonymous:
+            return redirect(login)
+        else:
+            notifications = request.user.notifications.unread()
+            context = {
+                'notifications': notifications,
+            }
+            return render(request, 'apps/lista_notifications.html', context)
+
+
 #FINAL DAS VIEWS DA CONTA CLIENTE
 
 
@@ -277,7 +296,7 @@ def editar_os(request, os_id):
 
         if request.method == 'POST':
             os.status = request.POST.get('status')
-            os.comentarios_cliente = request.POST.get('comentarios_cliente')
+            os.mensagem_funcionario = request.POST.get('mensagem_funcionario')
             os.anotacoes_internas = request.POST.get('anotacoes_internas')
             os.problema_detectado = request.POST.get('problema_detectado')
             os.tipo_atendimento = request.POST.get('tipo_atendimento')
@@ -311,7 +330,7 @@ def detalhes_os(request, os_id):
                 os.status = novo_status
                 # Salva as alterações na ordem de serviço
                 os.descricao_problema = request.POST.get('descricao_problema')
-                os.comentarios_cliente = request.POST.get('comentarios_cliente')
+                os.mensagem_funcionario = request.POST.get('mensagem_funcionario')
                 os.anotacoes_internas = request.POST.get('anotacoes_internas')
                 os.problema_detectado = request.POST.get('problema_detectado')
                 os.tipo_atendimento = request.POST.get('tipo_atendimento')  # Atualiza o tipo de atendimento

@@ -66,7 +66,7 @@ class OrdemServico(models.Model):
     funcionario_responsavel = models.ForeignKey(Perfil, on_delete=models.SET_NULL, null=True, blank=True, related_name='ordens_responsavel')
 
     # Novos campos
-    comentarios_cliente = models.TextField(blank=True, null=True)
+    mensagem_funcionario = models.TextField(blank=True, null=True)
     anotacoes_internas = models.TextField(blank=True, null=True)
     problema_detectado = models.TextField(blank=True, null=True)
 
@@ -95,7 +95,7 @@ class OrdemServico(models.Model):
             'cliente_cpf': self.perfil_os.cpf if self.perfil_os else None,
             'cliente_contato': self.perfil_os.contato if self.perfil_os else None,
             'status': self.get_status_display(),  # Obter a representação legível do status
-            'comentarios_cliente': self.comentarios_cliente,
+            'mensagem_funcionario': self.mensagem_funcionario,
             'anotacoes_internas': self.anotacoes_internas,
             'problema_detectado': self.problema_detectado,
             'tipo_atendimento': self.get_tipo_atendimento_display(),  # Obter a representação legível do tipo de atendimento

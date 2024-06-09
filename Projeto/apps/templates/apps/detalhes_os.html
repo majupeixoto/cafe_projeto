@@ -32,7 +32,7 @@
                     <div>
                         {% csrf_token %}
                         <h3>Responsável: {{ funcionario_responsavel|default:"OS sem responsável" }}</h3>
-                        <h5>Comentários para o Cliente: {{ detalhes_da_os.comentarios_cliente|default:"Nenhum comentário feito" }}</h5>
+                        <h5>Comentários para o Cliente: {{ detalhes_da_os.mensagem_funcionario|default:"Nenhum comentário feito" }}</h5>
                         <div class="btn-group">
                             <a href="{% url 'editar_os' os.id %}" class="btn btn-sm btn-outline-secondary">Atualizar</a>
                         </div>
