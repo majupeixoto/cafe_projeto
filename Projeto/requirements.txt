@@ -13,4 +13,4 @@ whitenoise
 # extras para o projeto
 Pillow
 setuptools
-django-notifications
+django-notifications-hq
