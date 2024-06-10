@@ -5,9 +5,7 @@
     --color-neutral-10: #171717; /* Cinza escuro */
     --color-neutral-30: #a8a29e; /* Cinza claro */
     --color-neutral-40: #f5f5f5; /* Branco */
-    --color-green-1: #595E4A;
-    --color-green-2: #7b7d66;
-    --color-green-3: #2e342a;
+    --color-background: #edf2f7;
 }
 
 *{
@@ -17,7 +15,7 @@
 }
 
 body {
-    background-image: url(../img/background-site.png);
+    background-color: var(--color-background);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
