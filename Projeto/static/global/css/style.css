@@ -113,7 +113,6 @@ ul li.item-menu a .icon > i {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Drop shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     color: #000; /* Texto preto */
-    width: 18rem;
     padding: 20px;
     overflow: hidden;
 }
@@ -148,7 +147,7 @@ ul li.item-menu a .icon > i {
     width: 100%;
     height: auto;
     margin-bottom: 6px;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .btn-lg,
@@ -365,57 +364,3 @@ textarea[readonly] {
     padding: 20px;
 }
 
-/*uploud de foto*/
-#picture__input {
-    display: none;
-  }
-  
-  .picture {
-    width: 200px;
-    height: 200px;
-    aspect-ratio: 16/9;
-    background: #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #aaa;
-    border: 2px dashed currentcolor;
-    cursor: pointer;
-    transition: color 300ms ease-in-out, background 300ms ease-in-out;
-    outline: none;
-    overflow: hidden;
-  }
-  
-  .picture:hover {
-    color: #777;
-    background: #ccc;
-  }
-  
-  .picture:active {
-    border-color: turquoise;
-    color: turquoise;
-    background: #eee;
-  }
-  
-  .picture:focus {
-    color: #777;
-    background: #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .picture__img {
-    max-width: 100%;
-  }
-
-  /* forms de nova os*/
-  .elementos{
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
