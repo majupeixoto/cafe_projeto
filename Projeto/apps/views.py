@@ -227,7 +227,7 @@ def cadastrar_os_cliente(request):
             garantia = request.POST['garantia'] == 'True'
             modelo = request.POST['modelo']
             descricao_problema = request.POST['descricao_problema']
-            imagem = request.FILES.get('imagem')  # Obtém a imagem do formulário
+            imagem = request.FILES.get('picture__input')  # Obtém a imagem do formulário
 
             # Cria uma nova OrdemServico associada ao perfil do usuário logado
             OrdemServico.objects.create(
