@@ -14,8 +14,8 @@
     --color-destaque-verde: #86D12E;
 }
 
-*{
-    font-family: "PT Mono", monospace;
+* {
+    font-family: "NanumGothic", monospace;
     font-weight: 400;
     font-style: normal;
 }
@@ -25,7 +25,9 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .logo-placeholder {
@@ -40,7 +42,7 @@ h1 {
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
-    font-size: 80px;
+    font-size: 60px;
     color: var(--color-azul-virtu);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* offsetX, offsetY, blurRadius, color */
 }
@@ -53,10 +55,10 @@ h2 {
 
 .botao-cliente,
 .botao-funcionario {
-    width: 100%;
-    font-size: xx-large;
+    width: 60%;
+    font-size: x-large;
     transition: background-color 0.3s, color 0.3s;
-    border-radius: 50px; 
+    border-radius: 50px;
 }
 
 .botao {
@@ -120,7 +122,7 @@ h2 {
     text-align: center;
 }
 
-#h2_login{
+#h2_login {
     text-align: center;
     margin-top: 10px;
     color: var(--color-neutral-10);
@@ -162,15 +164,56 @@ p a:hover {
     text-decoration: underline;
 }
 
-/* Grid Layout */
 .parent {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(7, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+/* Flexbox layout for responsiveness */
+.div_1_2 {
+    display: flex;
+    flex-wrap: wrap; /* Permite que as divs se ajustem em novas linhas */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    gap: 20px; /* Espaço entre as divs */
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.div1 {
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.div1 img {
+    max-width: 300px; /* Defina a largura máxima desejada */
+    height: auto; /* Isso garante que a altura seja ajustada automaticamente para manter a proporção da imagem */
+}
+
+
+.div2, .div3 {
+    flex: 1 1 300px; /* Permite que as divs cresçam e encolham, com um tamanho mínimo de 300px */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: transparent; /* Removendo fundo azul claro */
+}
+
+/* Media query para dispositivos móveis */
+@media (max-width: 768px) {
+    .div_1_2 {
+        flex-direction: column; /* Empilha as divs verticalmente */
     }
-    
-    .div1 { grid-area: 2 / 4 / 5 / 6; }
-    .div2 { grid-area: 5 / 3 / 6 / 5; }
-    .div3 { grid-area: 5 / 5 / 6 / 7; }
+
+    .botao-cliente,
+    .botao-funcionario {
+    width: 100%;
+}
+}
