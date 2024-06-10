@@ -17,7 +17,6 @@
     <!-- Exibição das ordens de serviço -->
     <div class="row">
         {% if ordens_servico %}
-            <div id="container-servicos" class="container">
                 <div class="row">
                     {% for os in ordens_servico %}
                     <div class="col-lg-4">
@@ -45,7 +44,6 @@
                         </div>
                     </div>
                     {% endfor %}
-                </div>
             </div>
         {% else %}
             <div class="col-lg-4">
