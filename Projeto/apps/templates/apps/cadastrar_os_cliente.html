@@ -1,95 +1,90 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-    <div class="container mt-4">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <h1>Novo Serviço</h1>
-
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="elementos">
-                        <div class="forms">
-                            <label>Foto</label>
-                            <label class="picture" for="picture__input" tabIndex="0">
-                                <span class="picture__image"></span>
-                            </label>
+<div class="center">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Novo Serviço</h1>
+        <div class="elementos centralizar">
+            <div class="forms">
+                <label>Foto</label>
+                <label class="picture" for="picture__input" tabIndex="0">
+                    <span class="picture__image"></span>
+                </label>
                               
-                            <input type="file" name="picture__input" id="picture__input">
-                        </div>
+                <input type="file" name="picture__input" id="picture__input">
+            </div>
     
-                        <div class="forms">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="aparelho" name="aparelho" placeholder="Tipo de aparelho" required>
-                                    </div>
-                                </div>
-        
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Modelo" required>
-                                    </div>
-                                </div>
-                            </div>
-        
-                            <div class="form-group">
-                                <textarea type="text" class="form-control" id="descricao_problema" name="descricao_problema" rows="5" placeholder="Descreva seu problema..." required></textarea>
-                            </div>
-                        </div>
-
-                        <div class="forms">
-                            <div class="form-group text-center">
-                                <label>Garantia:</label><br>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="garantia" id="garantia_sim" value="True" required>
-                                    <label class="form-check-label" for="garantia_sim">Sim</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="garantia" id="garantia_nao" value="False" required>
-                                    <label class="form-check-label" for="garantia_nao">Não</label>
-                                </div>
-                            </div>
-
-                            
+            <div class="forms">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="aparelho" name="aparelho" placeholder="Tipo de aparelho" required>
                         </div>
                     </div>
-                    <div class="text-center">
-                        <button onclick="window.history.back()" class="btn btn-secondary">Cancelar</button>
-                        <input type="submit" value="Cadastrar" class="btn btn-primary">
+        
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Modelo" required>
+                        </div>
                     </div>
-                </form>
+                </div>
+
+                <div class="form-group">
+                    <textarea type="text" class="form-control" id="descricao_problema" name="descricao_problema" rows="5" placeholder="Descreva seu problema..." required></textarea>
+                </div>
+            </div>
+
+            <div class="forms">
+                <div class="form-group text-center">
+                    <label>Garantia:</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="garantia" id="garantia_sim" value="True" required>
+                            <label class="form-check-label" for="garantia_sim">Sim</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="garantia" id="garantia_nao" value="False" required>
+                            <label class="form-check-label" for="garantia_nao">Não</label>
+                        </div>
+                </div>      
             </div>
         </div>
-    </div>
-    <script>
-        const inputFile = document.querySelector("#picture__input");
-        const pictureImage = document.querySelector(".picture__image");
-        const pictureImageTxt = "Escolha uma imagem";
-        pictureImage.innerHTML = pictureImageTxt;
 
-        inputFile.addEventListener("change", function (e) {
-        const inputTarget = e.target;
-        const file = inputTarget.files[0];
+        <div class="text-center">
+            <button onclick="window.history.back()" class="btn btn-secondary">Cancelar</button>
+            <input type="submit" value="Cadastrar" class="btn btn-primary">
+        </div>
+    </form>
+</div>
 
-        if (file) {
-            const reader = new FileReader();
+<script>
+    const inputFile = document.querySelector("#picture__input");
+    const pictureImage = document.querySelector(".picture__image");
+    const pictureImageTxt = "Escolha uma imagem";
+    pictureImage.innerHTML = pictureImageTxt;
 
-            reader.addEventListener("load", function (e) {
-            const readerTarget = e.target;
+    inputFile.addEventListener("change", function (e) {
+    const inputTarget = e.target;
+    const file = inputTarget.files[0];
 
-            const img = document.createElement("img");
-            img.src = readerTarget.result;
-            img.classList.add("picture__img");
+    if (file) {
+        const reader = new FileReader();
 
-            pictureImage.innerHTML = "";
-            pictureImage.appendChild(img);
-            });
+        reader.addEventListener("load", function (e) {
+        const readerTarget = e.target;
 
-            reader.readAsDataURL(file);
-        } else {
-            pictureImage.innerHTML = pictureImageTxt;
-        }
+        const img = document.createElement("img");
+        img.src = readerTarget.result;
+        img.classList.add("picture__img");
+
+        pictureImage.innerHTML = "";
+        pictureImage.appendChild(img);
         });
-    </script>
+
+        reader.readAsDataURL(file);
+    } else {
+        pictureImage.innerHTML = pictureImageTxt;
+    }
+    });
+</script>
 {% endblock %}
