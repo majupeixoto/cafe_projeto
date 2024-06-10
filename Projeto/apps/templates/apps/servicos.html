@@ -2,12 +2,13 @@
 {% load static %}
 
 {% block content %}
-<div class="container marketing">
+<div class="container">
 
     <!-- Bem-vindo -->
     <div class="row">
         <div class="col-lg-8">
             <h2 class="fw-normal">Bem-vindo, {{ user.username }}!</h2>
+        </div>
         </div>
     </div>
 
@@ -16,32 +17,36 @@
     <!-- Exibição das ordens de serviço -->
     <div class="row">
         {% if ordens_servico %}
-            {% for os in ordens_servico %}
-            <div class="col-lg-4">
-                <div class="card glass-card" style="width: 18rem;">
-                    <p class="card-text">Código da OS: {{ os.numero }}</p>
-                    {% if os.cliente.imagem %}
-                    <img src="{% static os.cliente.imagem.url %}" class="card-img-top" alt="{{ os.descricao }}">
-                    {% else %}
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                        role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#55595c"></rect>
-                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ os.descricao }}</text>
-                    </svg>
-                    {% endif %}
-                    <div class="card-body">
-                        <p class="card-text">Nome cliente: {{ os.perfil_os.username }}</p>
-                        <p class="card-text">Aparelho: {{ os.aparelho }}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a href="{% url 'detalhes_os' os.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
+            <div id="container-servicos" class="container">
+                <div class="row">
+                    {% for os in ordens_servico %}
+                    <div class="col-lg-4">
+                        <div class="card glass-card" style="width: 18rem;">
+                            <p class="card-text">Código da OS: {{ os.numero }}</p>
+                            {% if os.cliente.imagem %}
+                            <img src="{% static os.cliente.imagem.url %}" class="card-img-top" alt="{{ os.descricao }}">
+                            {% else %}
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#55595c"></rect>
+                                <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ os.descricao }}</text>
+                            </svg>
+                            {% endif %}
+                            <div class="card-body">
+                                <p class="card-text">Nome cliente: {{ os.perfil_os.username }}</p>
+                                <p class="card-text">Aparelho: {{ os.aparelho }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="{% url 'detalhes_os' os.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-            </div> 
-            {% endfor %}
+            </div>
         {% else %}
             <div class="col-lg-4">
                 <p>Não há ordens de serviço atribuídas a você.</p>

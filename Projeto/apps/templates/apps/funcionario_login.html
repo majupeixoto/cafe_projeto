@@ -1,9 +1,12 @@
 {% extends 'global/base_logins.html' %}
+{% load static %}
 
 {% block body %}
     <div class="container">
+        <div class="div-img">
+            <img src="{% static 'global/img/Vbox principal (3).png' %}" alt="Logo VBox">
+        </div>
         <h2 id="h2_login">LOGIN FUNCIONÁRIO</h2>
-
         <form class="login login-funcionario" method="post">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
@@ -22,6 +25,6 @@
             
             <input type='submit' value='ENTRAR' class='btn btn-light'>
         </form>
-        <p>Não possui uma conta? <a href="{% url 'funcionario_cadastro' %}">Fazer Cadastro</a></p>
+        <p><a href="{% url 'funcionario_cadastro' %}">Funcionário novo? Fazer Cadastro</a></p>
     </div>
 {% endblock %}

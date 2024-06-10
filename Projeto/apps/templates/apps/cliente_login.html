@@ -1,7 +1,11 @@
 {% extends 'global/base_logins.html' %}
+{% load static %}
 
 {% block body %}
     <div class="container">
+        <div class="div-img">
+            <img src="{% static 'global/img/Vbox principal (3).png' %}" alt="Logo VBox">
+        </div>
         <h2 id="h2_login">LOGIN CLIENTE</h2>
 
         <form class="login login-cliente" method="post">
@@ -22,6 +26,6 @@
             <input type='submit' value='ENTRAR' class='btn btn-light'>
 
         </form>
-        <p>Não possui uma conta? <a href="{% url 'cliente_cadastro' %}">Fazer Cadastro</a></p>
+        <p><a href="{% url 'cliente_cadastro' %}">Não possui uma conta? Cadastre-se</a></p>
     </div>
 {% endblock %}

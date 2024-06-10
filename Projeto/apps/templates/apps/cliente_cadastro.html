@@ -2,28 +2,28 @@
 
 {% block body %}
     <div class="cadastrar">
-        <h2>FAÇA SEU CADASTRO<br></h2>
+        <h2 id="h2_cadastro">Cadastre-se</h2>
 
-        <form class="login" action="{% url 'cliente_cadastro' %}" method="post">
+        <form class="cadastro_cliente" action="{% url 'cliente_cadastro' %}" method="post">
             {% csrf_token %}
+
+            <input type="text" placeholder="Nome" id="id_nome" name="nome" required>
+
+            <input type="text" placeholder="Username" id="id_username" name="username" required>
+
+            <input type="text" placeholder="CPF" id="id_cpf" name="cpf" required>
             
-            <input type="text" placeholder="Username" id="id_username" name="username" required><br><br>
+            <label for="id_data_nascimento">Data de Nascimento:</label>
 
-            <input type="text" placeholder="Nome" id="id_nome" name="nome" required><br><br>
+            <input type="date" id="id_data_nascimento" name="data_nascimento" required>
 
-            <input type="text" placeholder="CPF" id="id_cpf" name="cpf" required><br><br>
-            
-            <label for="id_data_nascimento">Data de Nascimento:</label><br>
+            <input type="text" placeholder="Número para contato" id="id_contato" name="contato" required>
 
-            <input type="date" id="id_data_nascimento" name="data_nascimento" required><br><br>
+            <input type="text" placeholder="Email" id="id_email" name="email" required>
 
-            <input type="text" placeholder="Número para contato" id="id_contato" name="contato" required><br><br>
+            <input type="password" placeholder="Senha" id="id_senha" name="senha" required>
 
-            <input type="text" placeholder="Email" id="id_email" name="email" required><br><br>
-
-            <input type="password" placeholder="Senha" id="id_senha" name="senha" required><br><br>
-
-            <input type="password" placeholder="Confirmar Senha" id="id_confirmar_senha" name="confirmar_senha" required><br><br>
+            <input type="password" placeholder="Confirmar Senha" id="id_confirmar_senha" name="confirmar_senha" required>
             
             <input type='submit' value='Cadastrar' class='btn btn-light'>
 
