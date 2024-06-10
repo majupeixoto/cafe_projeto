@@ -25,7 +25,7 @@
 
 body {
     min-height: 100vh;
-    background-image: url('../img/fundo1.png');
+    background-color: var(--color-background);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -332,4 +332,15 @@ textarea[readonly] {
 
 .star-icon.ativo ~ .star-icon::before {
     content: "\2606";
+}
+
+#tabela {
+    border-radius: 15px;
+    overflow: hidden;
+}
+#tabela thead th {
+    background-color: #f8f9fa;
+}
+#tabela tbody tr {
+    border-bottom: 1px solid #dee2e6;
 }
