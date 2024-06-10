@@ -41,7 +41,7 @@ h1 {
     font-weight: 500;
     font-style: normal;
     font-size: 80px;
-    color: var(--color-neutral-40);
+    color: var(--color-azul-virtu);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* offsetX, offsetY, blurRadius, color */
 }
 
