@@ -53,13 +53,16 @@ h2 {
     color: var(--color-neutral-40);
 }
 
+
 .botao-cliente,
 .botao-funcionario {
     width: 60%;
     font-size: x-large;
     transition: background-color 0.3s, color 0.3s;
     border-radius: 50px;
+    position: absolute; /* ou relative, fixed, sticky */
 }
+
 
 .botao {
     text-decoration: none;
@@ -69,7 +72,7 @@ h2 {
 .botao-funcionario {
     background-color: var(--color-azul-esquisito); /* cor inicial */
     border: none; /* para remover o contorno */
-    margin-left: 10px;
+    margin-left: none;
 }
 
 .botao-funcionario:hover {
@@ -83,7 +86,8 @@ h2 {
 .botao-cliente {
     background-color: var(--color-azul-esquisito); /* cor inicial */
     border: none; /* para remover o contorno */
-    margin-right: 10px;
+    margin-right: none;
+    left: 300px;
 }
 
 .botao-cliente:hover {
@@ -249,6 +253,7 @@ p a:hover {
     padding: 20px;
     box-sizing: border-box;
     background-color: transparent; /* Removendo fundo azul claro */
+    position: relative; 
 }
 
 /* Media query para dispositivos móveis */
