@@ -55,7 +55,7 @@
                             <td>{{ os.modelo }}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="{% url 'detalhes_os' os.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
+                                    <a id="ver-mais-lista-os" href="{% url 'detalhes_os' os.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
                                     {% if os.funcionario_responsavel and os.funcionario_responsavel.username == usuario.username %}
                                         <form action="{% url 'excluir_os' os.id %}" method="POST" class="d-inline">
                                             {% csrf_token %}

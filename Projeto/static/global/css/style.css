@@ -337,10 +337,22 @@ textarea[readonly] {
 #tabela {
     border-radius: 15px;
     overflow: hidden;
+    background-color: #f0f0f0; /* Cor de fundo da tabela */
 }
 #tabela thead th {
-    background-color: #f8f9fa;
+    background-color: var(--color-azul-escuro); /* Cor de fundo do cabeçalho */
+    color: white; /* Cor do texto do cabeçalho */
 }
-#tabela tbody tr {
-    border-bottom: 1px solid #dee2e6;
+#tabela tbody tr:nth-child(even) {
+    background-color: #dfefff; /* Cor das linhas pares */
+}
+#tabela tbody tr:nth-child(odd) {
+    background-color: var(--color-background); /* Cor das linhas ímpares */
+}
+#tabela tbody tr:hover {
+    background-color: #d6d8db; /* Cor de fundo ao passar o mouse */
+}
+
+#ver-mais-lista-os{
+    color: #2E54D1;
 }
