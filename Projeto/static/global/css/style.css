@@ -6,8 +6,13 @@
     --color-neutral-30: #a8a29e; /* Cinza claro */
     --color-neutral-40: #f5f5f5; /* Branco */
     --color-background: #edf2f7;
+    --color-azul-virtu: #2E54D1; 
+    --color-azul-escuro: #0F2167;
+    --color-azul-esquisito: #2E88D1;
+    --color-destaque-azul: #2E54D1;
+    --color-destaque-laranja: #F24726;
+    --color-destaque-verde: #86D12E;
 }
-
 /* PERSONALIZAÇÃO GERAL */
 * {
     margin: 0;
