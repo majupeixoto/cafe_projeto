@@ -12,6 +12,7 @@ from notifications.signals import notify
 from notifications.models import Notification
 from django.http import HttpResponseForbidden
 from django.db import IntegrityError
+import re
 
 
 # VIEWS DE LOGIN
