@@ -394,7 +394,6 @@ def editar_os(request, os_id):
         if request.method == 'POST':
             os.status = request.POST.get('status')
             os.mensagem_funcionario = request.POST.get('mensagem_funcionario')
-            os.anotacoes_internas = request.POST.get('anotacoes_internas')
             os.problema_detectado = request.POST.get('problema_detectado')
             os.tipo_atendimento = request.POST.get('tipo_atendimento')
             os.save()
@@ -448,7 +447,6 @@ def detalhes_os(request, os_id):
                 # Salva as alterações na ordem de serviço
                 os.descricao_problema = request.POST.get('descricao_problema')
                 os.mensagem_funcionario = request.POST.get('mensagem_funcionario')
-                os.anotacoes_internas = request.POST.get('anotacoes_internas')
                 os.problema_detectado = request.POST.get('problema_detectado')
                 os.tipo_atendimento = request.POST.get('tipo_atendimento')  # Atualiza o tipo de atendimento
                 os.save()
