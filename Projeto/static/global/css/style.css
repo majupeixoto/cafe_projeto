@@ -119,8 +119,9 @@ ul li.item-menu a .icon>i {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     color: #000;
     /* Texto preto */
-    padding: 20px;
+    padding: 30px;
     overflow: hidden;
+    margin-right: 30px;
 }
 
 .card:hover {
@@ -550,8 +551,9 @@ textarea[readonly] {
 /* Forms de nova OS */
 .elementos {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap; /* Adicionado para que os itens possam quebrar linha, se necessário */
+    font-style: normal;
 }
 
 .forms {
