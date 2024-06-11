@@ -56,10 +56,11 @@ ul {
 
 ul li.item-menu {
     transition: background-color 0.2s;
+    margin-bottom: 20px; /* Adds space between each menu item */
 }
 
 ul li.item-menu:hover {
-    background: rgba(5, 210, 217, 0.947);
+    background: var(--color-azul-escuro);
 }
 
 ul li.item-menu a {
@@ -67,12 +68,16 @@ ul li.item-menu a {
     text-decoration: none;
     font-size: 20px;
     display: flex;
-    margin-bottom: 10px;
+    align-items: center; /* Centers items vertically */
     line-height: 40px;
 }
 
 ul li.item-menu a .txt-link {
     margin-left: 30px;
+}
+
+ul li.item-menu a .icon {
+    margin: 10px 0; /* Adds fixed top and bottom margin to the icon */
 }
 
 ul li.item-menu a .icon > i {
@@ -409,6 +414,7 @@ textarea[readonly] {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 .btn-detalhes {
@@ -420,4 +426,20 @@ textarea[readonly] {
 
 .btn-detalhes a{
     border-radius: 20px;
+}
+
+.dynamic-info {
+    color: #2E88D1; /* Cor desejada para as informações dinâmicas */
+}
+
+.container-detalhes_os {
+    padding-right: 30px;
+}
+
+.lista-ordens {
+    padding-right: 30px;
+}
+
+.lista-ordens tr{
+    margin-bottom: 10px;
 }

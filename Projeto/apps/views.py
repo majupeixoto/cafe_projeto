@@ -294,16 +294,16 @@ def lista_notifications(request):
 @login_required
 def funcionario_perfil(request):
     user = request.user
-    perfil = get_object_or_404(Perfil, username=user.username)
+    usuario = get_object_or_404(Perfil, username=user.username)
 
-    if perfil.funcionario == 0:
+    if usuario.funcionario == 0:
         return redirect('login')
     else:
         context = {
-            'nome_completo': perfil.nome,
+            'nome_completo': usuario.nome,
             'email': user.email,  # Passa o email do objeto User associado
-            'cpf': perfil.cpf,
-            'contato': perfil.contato,
+            'cpf': usuario.cpf,
+            'contato': usuario.contato,
             'funcionario': 1  # Assegura que o menu lateral de funcionário seja exibido
         }
         return render(request, 'apps/funcionario_perfil.html', context)

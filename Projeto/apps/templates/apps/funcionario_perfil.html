@@ -5,8 +5,8 @@
     <h1>Meu Perfil</h1>
     <p><strong>Nome:</strong> {{ nome_completo }}</p>
     <p><strong>Email:</strong> {{ email }}</p>
-    <p><strong>CPF:</strong> {{ cpf }}</p>
-    <p><strong>Contato:</strong> {{ contato }}</p>
+    <p><strong>CPF:</strong> {{ cpf | default:"Complete suas infromações" }}</p>
+    <p><strong>Contato:</strong> {{ contato | default:"Complete suas infromações"  }}</p>
     <a href="{% url 'funcionario_editar_perfil' %}" class="btn btn-primary">Editar Perfil</a>
     <a href="{% url 'excluir_conta' %}" class="btn btn-danger">Excluir Conta</a>
 </div>
