@@ -398,8 +398,11 @@ def editar_os(request, os_id):
             os.tipo_atendimento = request.POST.get('tipo_atendimento')
             os.save()
             return redirect('detalhes_os', os_id=os.id)
-
-    return render(request, 'apps/editar_os.html', {'funcionario': 1, 'os': os})
+    context = {
+            'funcionario': 1, 
+            'os': os, 
+        }
+    return render(request, 'apps/editar_os.html', context)
 
 @login_required
 def excluir_os(request, pk):

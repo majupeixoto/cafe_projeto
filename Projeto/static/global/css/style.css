@@ -504,20 +504,92 @@ textarea[readonly] {
     right: 20%;
 }
 
-.ul-column {
-    justify-content:space-between;
+.card-body.d-flex {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.box-mensagem-funcionario{
-    border-left: 3px solid #fff;
-    border-bottom: 3px solid #fff;
-    display: flex;
-    margin-right: 20px;  /* Ajuste esse valor conforme necessário */
-}  
+.ul-column {
+    flex: 1;
+    min-width: 300px; /* Define uma largura mínima para a lista */
+    max-height: 300px; /* Define uma altura máxima para a lista */
+    overflow: auto; /* Adiciona rolagem vertical e horizontal se o conteúdo exceder as dimensões */
+    margin-right: 10px; /* Espaçamento à direita */
+}
+
+@media (min-width: 768px) {
+    .box-mensagem-funcionario {
+        margin-top: 0;
+    }
+}
+
+.box-mensagem-funcionario {
+    flex: 1;
+    min-width: 300px; /* Define uma largura mínima para a caixa de comentários */
+    max-height: 300px; /* Define uma altura máxima para a caixa de comentários */
+    overflow: auto; /* Adiciona rolagem vertical e horizontal se o conteúdo exceder as dimensões */
+    margin-top: 20px;
+} 
 
 #retornar {
     position: absolute;
     top: 30px; /* Adjust this value as needed */
     right: 30px; /* Adjust this value as needed */
     z-index: 1001; /* Ensure it's above other elements */
+}
+
+
+
+
+/* Estilos para a página de edição de OS */
+.editar-os .container {
+    margin-top: 50px;
+}
+
+.editar-os .form-group {
+    margin-bottom: 20px;
+}
+
+.editar-os label {
+    font-weight: bold;
+}
+
+.editar-os .btn {
+    margin-top: 20px;
+}
+
+.editar-os textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.editar-os select {
+    width: 100%;
+    padding: 10px;
+}
+
+.editar-os form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.os-details .glass-card {
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+}
+
+.os-details .glass-card .card-title {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.os-details .glass-card .card-text {
+    color: #666;
+    margin-bottom: 10px;
 }
