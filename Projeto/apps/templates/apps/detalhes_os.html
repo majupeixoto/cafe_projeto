@@ -52,9 +52,11 @@
                 <button type="submit" class="btn btn-success" name="responsabilizar">Responsabilizar-se</button>
               </form>
             {% else %}
-            <h6>Comentários para o Cliente:</h6>
-            <div class="comment-bubble mt-3">
-              <p>{{ detalhes_da_os.mensagem_funcionario|default:"Nenhum comentário feito" }}</p>
+            <div class="box-mensagem-funcionario">
+              <h6>Comentários para o Cliente:</h6>
+              <div class="comment-bubble mt-3">
+                <p>{{ detalhes_da_os.mensagem_funcionario|default:"Nenhum comentário feito" }}</p>
+              </div>
             </div>
           </div>
         </div>
