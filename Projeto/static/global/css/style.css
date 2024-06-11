@@ -56,6 +56,7 @@ ul {
 
 ul li.item-menu {
     transition: background-color 0.2s;
+    margin-bottom: 20px; /* Adds space between each menu item */
 }
 
 ul li.item-menu:hover {
@@ -67,12 +68,16 @@ ul li.item-menu a {
     text-decoration: none;
     font-size: 20px;
     display: flex;
-    margin-bottom: 10px;
+    align-items: center; /* Centers items vertically */
     line-height: 40px;
 }
 
 ul li.item-menu a .txt-link {
     margin-left: 30px;
+}
+
+ul li.item-menu a .icon {
+    margin: 10px 0; /* Adds fixed top and bottom margin to the icon */
 }
 
 ul li.item-menu a .icon > i {
