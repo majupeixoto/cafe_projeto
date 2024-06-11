@@ -16,5 +16,33 @@ describe('teste cadastro os funcionario', () => {
         cy.get('.btn').click();
         cy.wait(2000);
         cy.get('.btn').click();
+<<<<<<< HEAD
+=======
+        cy.get('#aparelho').type('microondas');
+        cy.get('#descricao_problema').type('aparelho não quer ligar');
+        cy.get('#modelo').type('lg 1234')
+        cy.get('#garantia_sim').click();
+        cy.get('.btn-primary').click();
+        cy.wait(2000)
+        cy.get(':nth-child(5) > a > .img-fluid').click();
+        cy.get('#funcionario > .botao').click();
+        cy.get('a').click();
+        cy.get('#id_nome').type('rob');
+        cy.get('#id_email').type('rob@tech.com')
+        cy.get('#id_username').type('rob');
+        cy.get('#id_senha').type('123')
+        cy.get('#id_confirmar_senha').type('123')
+        cy.get('.btn').click();
+        cy.wait(1500)
+        cy.get(':nth-child(2) > a > .img-fluid').click()
+        cy.wait(1500)
+        cy.get('#ver-mais-lista-os').click()
+        cy.wait(1500)
+        cy.get('.btn').click()
+        cy.wait(1500)
+        cy.get(':nth-child(1) > a > .img-fluid').click()
+        cy.get('.card').should('exist')
+        
+>>>>>>> 304f7fc49a1b115ae85c2cfd55c80c12d745f1e3
     })
 })
