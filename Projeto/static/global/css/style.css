@@ -59,7 +59,7 @@ ul li.item-menu {
 }
 
 ul li.item-menu:hover {
-    background: rgba(5, 210, 217, 0.947);
+    background: var(--color-azul-escuro);
 }
 
 ul li.item-menu a {
