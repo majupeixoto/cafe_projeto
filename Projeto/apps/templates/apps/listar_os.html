@@ -30,17 +30,17 @@
         </div>
     </div>
 
-    <div>
+    <div class="lista-ordens">
         {% if ordens %}
             <table id="tabela" class="table table-hover rounded">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Funcionário responsável</th>
-                        <th scope="col">Contato</th>
+                        <th scope="col">Número da OS</th>
+                        <th scope="col">Data de abertura</th>
+                        <th scope="col">Cliente</th>
                         <th scope="col">Aparelho</th>
                         <th scope="col">Modelo</th>
+                        <th scope="col">Funcionário responsável</th>
                         <th scope="col">Ações</th> <!-- Nova coluna para botões de ação -->
                     </tr>
                 </thead>
@@ -48,11 +48,11 @@
                     {% for os in ordens %}
                         <tr>
                             <th scope="row">{{ os.numero|default:"-" }}</th>
-                            <td>{{ os.perfil_os.username }}</td> <!--primeiro nome-->
-                            <td>{{ os.funcionario_responsavel.username|default:"Sem responsável" }}</td> <!--primeiro nome-->
-                            <td>{{ os.perfil_os.contato }}</td>
+                            <td>{{ os.created_at|date:"d/m/Y" }}</td>
+                            <td>{{ os.perfil_os.username }}</td>
                             <td>{{ os.aparelho }}</td>
                             <td>{{ os.modelo }}</td>
+                            <td>{{ os.funcionario_responsavel.username|default:"Sem responsável" }}</td>
                             <td>
                                 <div class="btn-group">
                                     <a id="ver-mais-lista-os" href="{% url 'detalhes_os' os.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>

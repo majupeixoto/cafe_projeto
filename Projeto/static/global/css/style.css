@@ -356,6 +356,7 @@ textarea[readonly] {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 .btn-detalhes {
@@ -367,4 +368,20 @@ textarea[readonly] {
 
 .btn-detalhes a{
     border-radius: 20px;
+}
+
+.dynamic-info {
+    color: #2E88D1; /* Cor desejada para as informações dinâmicas */
+}
+
+.container-detalhes_os {
+    padding-right: 30px;
+}
+
+.lista-ordens {
+    padding-right: 30px;
+}
+
+.lista-ordens tr{
+    margin-bottom: 10px;
 }

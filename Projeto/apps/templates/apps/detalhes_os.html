@@ -2,11 +2,12 @@
 
 {% block content %}
 
-  <div class="title_detalhes_os">
-    <h5 class="card-title">ORDEM DE SERVIÇO: {{ numero_os }}</h5>
-  </div>
-  <div class="card mb-3" style="max-width: 1350px">
-    <h5>Status: {{ detalhes_da_os.status }}</h5>
+<div class="title_detalhes_os">
+  <h5 class="card-title">ORDEM DE SERVIÇO: {{ numero_os }}</h5>
+</div>
+<div class="container-detalhes_os">
+  <div class="card mb-3 mx-auto" style="max-width: 1350px">
+    <h5>STATUS: <span class="dynamic-info">{{ detalhes_da_os.status }}</span></h5>
     <div class="row g-0">
       <div class="col-md-4">
         {% if os.imagem %}
@@ -27,34 +28,40 @@
           </svg>
         {% endif %}
       </div>
-        <div class="col-md-8">
-          <div class="card-body">
+      <div class="col-md-8">
+        <div class="card-body d-flex">
+          <div class="flex-grow-1">
             <ul class="list-group">
-              <li class="list-group-item">Aparelho: {{ detalhes_da_os.aparelho }}</li>
-              <li class="list-group-item">Data de Entrada: {{ detalhes_da_os.created_at|date:"d/m/Y" }}</li>
-              <li class="list-group-item">Tipo de Produto: {{ detalhes_da_os.modelo }}</li>
-              <li class="list-group-item">Cliente: {{ os.perfil_os.nome }}</li>
-              <li class="list-group-item">Tipo de Atendimento: {{ detalhes_da_os.tipo_atendimento }}</li>
-              <li class="list-group-item">Problema relatado: {{ detalhes_da_os.descricao_problema }}</li>
+              <li class="list-group-item">Aparelho: <span class="dynamic-info">{{ detalhes_da_os.aparelho }}</span></li>
+              <li class="list-group-item">Data de Entrada: <span class="dynamic-info">{{ os.created_at|date:"d/m/Y" }}</span></li>
+              <li class="list-group-item">Tipo de Produto: <span class="dynamic-info">{{ detalhes_da_os.modelo }}</span></li>
+              <li class="list-group-item">Cliente: <span class="dynamic-info">{{ os.perfil_os.nome }}</span></li>
+              <li class="list-group-item">Contato: <span class="dynamic-info">{{ os.perfil_os.contato }}</span></li>
+              <li class="list-group-item">Tipo de Atendimento: <span class="dynamic-info">{{ detalhes_da_os.tipo_atendimento }}</span></li>
+              <li class="list-group-item">Problema relatado: <span class="dynamic-info">{{ detalhes_da_os.descricao_problema }}</span></li>
+              {% if os.status != 'Enviada' %}
+                <li class="list-group-item">Técnico Responsável: <span class="dynamic-info">{{ funcionario_responsavel|default:"OS sem responsável" }}</span></li>
+                <li class="list-group-item">Garantia: <span class="dynamic-info">{{ detalhes_da_os.garantia }}</span></li>
+              {% endif %}
             </ul>
+          </div>
+          <div class="flex-shrink-0 ms-3">
             {% if os.status == 'Enviada' %}
-              <form method="post">
-                  {% csrf_token %}
-                  <button type="submit" class="btn btn-success" name="responsabilizar">Responsabilizar-se</button>
+              <form method="post" class="mt-3">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success" name="responsabilizar">Responsabilizar-se</button>
               </form>
             {% else %}
-            <div>
-              <h6>Técnico Responsável: {{ funcionario_responsavel|default:"OS sem responsável" }}</h6>
-              <h6>Garantia: {{ detalhes_da_os.garantia }}</h6>
-              <h6>Comentários para o Cliente: {{ detalhes_da_os.mensagem_funcionario|default:"Nenhum comentário feito" }}</h6>
-            </div>
+              <h6 class="mt-3">Comentários para o Cliente: {{ detalhes_da_os.mensagem_funcionario|default:"Nenhum comentário feito" }}</h6>
           </div>
         </div>
+      </div>
     </div>
   </div>
-  <div class="btn-detalhes">
-    <a href="{% url 'editar_os' os.id %}" class="btn btn-primary">Atualizar informações</a>
-  </div>
-  {% endif %}
+</div>
+<div class="btn-detalhes">
+  <a href="{% url 'editar_os' os.id %}" class="btn btn-primary">Atualizar informações</a>
+</div>
+{% endif %}
 
 {% endblock %}
