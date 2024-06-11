@@ -21,24 +21,24 @@
                     {% for os in ordens_servico %}
                     <div class="col-lg-4">
                         <a href="{% url 'detalhes_os' os.id %}" style="text-decoration: none;">
-                        <div class="card glass-card" style="width: 18rem;">
-                            <p class="card-text">Código da OS: {{ os.numero }}</p>
-                            {% if os.cliente.imagem %}
-                            <img src="{% static os.cliente.imagem.url %}" class="card-img-top" alt="{{ os.descricao }}">
-                            {% else %}
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#55595c"></rect>
-                                <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ os.descricao }}</text>
-                            </svg>
-                            {% endif %}
-                            <div class="card-body">
-                                <p class="card-text">Nome cliente: {{ os.perfil_os.nome }}</p>
-                                <p class="card-text">Aparelho: {{ os.aparelho }}</p>
+                            <div class="card glass-card" style="width: 18rem;">
+                                <p class="card-text">Código da OS: {{ os.numero }}</p>
+                                {% if os.cliente.imagem %}
+                                <img src="{% static os.cliente.imagem.url %}" class="card-img-top" alt="{{ os.descricao }}">
+                                {% else %}
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                                    role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                    <title>Placeholder</title>
+                                    <rect width="100%" height="100%" fill="#55595c"></rect>
+                                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ os.descricao }}</text>
+                                </svg>
+                                {% endif %}
+                                <div class="card-body">
+                                    <p class="card-text">Nome cliente: {{ os.perfil_os.nome }}</p>
+                                    <p class="card-text">Aparelho: {{ os.aparelho }}</p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
                     </div>
                     {% endfor %}
             </div>

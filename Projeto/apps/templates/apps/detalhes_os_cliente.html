@@ -1,32 +1,34 @@
 {% extends 'global/base.html' %}
+{% load static %}
 
 {% block content %}
 
 <title>Detalhes da Ordem de Serviço</title>
 
-<section class="flex parent">
-    <div class="card" style="width: 18rem;">
+<link rel="stylesheet" type="text/css" href="{% static 'css/details_page.css' %}">
+
+<section class="details-page">
+    <div class="details-page__card">
         {% if os.imagem %}
-        <img src="{{ os.imagem.url }}" class="card-img-top" alt="{{ os.descricao }}">
+        <img src="{{ os.imagem.url }}" class="details-page__card-img" alt="{{ os.descricao }}">
         {% else %}
-        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-            role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <svg class="details-page__card-placeholder" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#55595c"></rect>
             <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ os.descricao }}</text>
         </svg>
         {% endif %}
     </div>
-    <div class="div2">
-        <h2>Aparelho: {{ os.aparelho }}</h2>
-        <ul>
-            <h2>Nº da OS: {{ os.numero|default:"-" }}</h2>
-            <h2>Data de entrada: {{ os.data_entrada|date:"d/m/Y" }}</h2>
-            <h2>Cliente: {{ os.perfil_os.username }}</h2>
-            <h2>Tipo de atendimento: {{ os.tipo_atendimento }}</h2>
-            <h2>Status: {{ os.status }}</h2>
+    <div class="details-page__info">
+        <h2 class="details-page__info-title">Detalhes da Ordem de Serviço</h2>
+        <ul class="details-page__info-list">
+            <li><strong>Número da OS:</strong> {{ os.numero|default:"-" }}</li>
+            <li><strong>Data de Entrada:</strong> {{ os.created_at|date:"d/m/Y" }}</li>
+            <li><strong>Cliente:</strong> {{ os.perfil_os.username }}</li>
+            <li><strong>Tipo de Atendimento:</strong> {{ os.tipo_atendimento }}</li>
+            <li><strong>Status:</strong> {{ os.status }}</li>
             {% if os.status == 'Pronto' %}
-            <div id="avaliar">
+            <div class="details-page__info-actions">
                 {% if os.avaliacao %}
                 <a href="{% url 'avaliar_os' os.id %}" class="btn btn-outline-secondary">Editar Avaliação</a>
                 <p>Sua avaliação:<span class="rating" data-rating="{{ os.avaliacao }}"></span></p>
@@ -38,11 +40,11 @@
         </ul>
     </div>
     {% if os.status == 'Enviada' %}
-    <div class="div3">
-        <h2>Aguardando funcionário se responsabilizar</h2>
+    <div class="details-page__status">
+        <h3 class="details-page__status-title">Aguardando Responsabilidade</h3>
     </div>
     {% else %}
-    <div class="div3">
+    <div class="details-page__status">
         <section class="step-wizard">
             <ul class="step-wizard-list">
                 <li class="step-wizard-item {% if os.status == 'Iniciada' %}current-item{% endif %}">
@@ -71,16 +73,15 @@
                 </li>
             </ul>
         </section>
-
-        <!-- Caixa de texto para comentários do funcionário -->
-        <div class="form-group mt-4">
+        <div class="details-page__comments">
             <label for="comentarios_funcionario">Comentários do Funcionário:</label>
-            <textarea id="comentarios_funcionario" class="form-control" rows="5" readonly>{{ os.mensagem_funcionario}}</textarea>
+            <textarea id="comentarios_funcionario" class="form-control" rows="5" readonly>{{ os.mensagem_funcionario|default:"Ainda sem comentários" }}</textarea>
         </div>
     </div>
+    {% endif %}
 </section>
 
-<script type="text/javascript">
+<script type="text/javascript" src="{% static 'js/details_page.js' %}">
     function renderStars(rating) {
         let stars = '';
         for (let i = 0; i < 5; i++) {
@@ -102,7 +103,5 @@
         }
     }
 </script>
-
-{% endif %}
 
 {% endblock %}
