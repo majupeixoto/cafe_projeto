@@ -11,10 +11,11 @@ from django.http import HttpResponse
 from notifications.signals import notify
 from notifications.models import Notification
 from django.http import HttpResponseForbidden
-import re
+from django.db import IntegrityError
 
 
 #VIEWS DE LOGIN
+# VIEWS DE LOGIN
 def login_view(request):
     if request.method == 'POST':
         tipo_usuario = request.POST.get('tipo_usuario')
@@ -72,8 +73,7 @@ def funcionario_login(request):
 
     return render(request, 'apps/funcionario_login.html')
 
-
-def cliente_cadastro(request): # VIEW CORRETA
+def cliente_cadastro(request): 
     if request.method == 'POST':
         username = request.POST['username']
         nome = request.POST['nome']
@@ -88,27 +88,32 @@ def cliente_cadastro(request): # VIEW CORRETA
             return render(request, 'apps/cliente_cadastro.html')
         
         if User.objects.filter(username=username).exists():
-            return render(request, 'apps/cliente_cadastro.html', {"erro": "Usuário já existe"})
+            messages.error(request, 'Usuário já existe')
+            return render(request, 'apps/cliente_cadastro.html')
         elif User.objects.filter(email=email).exists():
-            return render(request, 'apps/cliente_cadastro.html', {"erro": "Email já está sendo usado"})
+            messages.error(request, 'Email já está sendo usado')
+            return render(request, 'apps/cliente_cadastro.html')
         
-        errors= validate_dados(nome, username, email, cpf, contato)
+        errors = validate_dados(nome, username, email, cpf, contato)
 
         if errors:
             for error in errors:
                 messages.error(request, error)
             return render(request, 'apps/cliente_cadastro.html')
 
-        user = User.objects.create_user(username=username, email=email, password=senha)
-        Perfil.objects.create(username=username, funcionario=0, cpf=cpf, contato=contato, nome=nome)
-
-        login(request, user)
-        request.session["usuario"] = username
-        return redirect(home_cliente)
+        try:
+            user = User.objects.create_user(username=username, email=email, password=senha)
+            Perfil.objects.create(username=username, funcionario=0, cpf=cpf, contato=contato, nome=nome)
+            login(request, user)
+            request.session["usuario"] = username
+            return redirect('home_cliente')
+        except IntegrityError:
+            messages.error(request, 'Erro ao criar usuário. Por favor, tente novamente.')
+            return render(request, 'apps/cliente_cadastro.html')
 
     return render(request, 'apps/cliente_cadastro.html')
 
-def funcionario_cadastro(request): # VIEW CORRETA
+def funcionario_cadastro(request): 
     if request.method == "POST":
         username = request.POST['username']
         nome = request.POST['nome']
@@ -121,28 +126,29 @@ def funcionario_cadastro(request): # VIEW CORRETA
             return render(request, 'apps/funcionario_cadastro.html')
         
         if User.objects.filter(username=username).exists():
-            return render(request, 'apps/funcionario_cadastro.html', {"erro": "Usuário já existe"})
+            messages.error(request, 'Usuário já existe')
+            return render(request, 'apps/funcionario_cadastro.html')
         elif User.objects.filter(email=email).exists():
-            return render(request, 'apps/funcionario_cadastro.html', {"erro": "Email já está sendo usado"})
+            messages.error(request, 'Email já está sendo usado')
+            return render(request, 'apps/funcionario_cadastro.html')
         
-        errors= validate_dados(nome, username, email)
+        errors = validate_dados(nome, username, email)
 
         if errors:
             for error in errors:
                 messages.error(request, error)
             return render(request, 'apps/funcionario_cadastro.html')
         
-        user = User.objects.create_user(username=username, email=email, password=senha)
-        Perfil.objects.create(
-            username=username, 
-            funcionario=1,
-            nome=nome
-        )
+        try:
+            user = User.objects.create_user(username=username, email=email, password=senha)
+            Perfil.objects.create(username=username, funcionario=1, nome=nome)
+            login(request, user)
+            request.session["usuario"] = username
+            return redirect('servicos')
+        except IntegrityError:
+            messages.error(request, 'Erro ao criar usuário. Por favor, tente novamente.')
+            return render(request, 'apps/funcionario_cadastro.html')
 
-        login(request, user)
-        request.session["usuario"] = username
-        return redirect(servicos)
-    
     return render(request, 'apps/funcionario_cadastro.html')
 
 # FINAL DAS VIEWS DE LOGIN
