@@ -35,5 +35,4 @@ describe('teste da visualiazação pelo funcionario da lista das OS’s', () => 
         cy.get('.btn-primary').click();
 
     })
-
 })

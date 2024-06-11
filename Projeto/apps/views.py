@@ -15,7 +15,6 @@ from django.db import IntegrityError
 import re
 
 
-#VIEWS DE LOGIN
 # VIEWS DE LOGIN
 def login_view(request):
     if request.method == 'POST':

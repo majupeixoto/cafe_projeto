@@ -16,8 +16,6 @@ describe('teste cadastro os funcionario', () => {
         cy.get('.btn').click();
         cy.wait(2000);
         cy.get('.btn').click();
-<<<<<<< HEAD
-=======
         cy.get('#aparelho').type('microondas');
         cy.get('#descricao_problema').type('aparelho não quer ligar');
         cy.get('#modelo').type('lg 1234')
@@ -42,7 +40,5 @@ describe('teste cadastro os funcionario', () => {
         cy.wait(1500)
         cy.get(':nth-child(1) > a > .img-fluid').click()
         cy.get('.card').should('exist')
-        
->>>>>>> 304f7fc49a1b115ae85c2cfd55c80c12d745f1e3
     })
 })
