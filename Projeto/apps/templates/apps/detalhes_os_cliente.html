@@ -39,19 +39,12 @@
                         </ul>
                     </div>
                     <div class="flex-shrink-0 ms-3">
-                        {% if os.status == 'Enviada' %}
-                            <form method="post" class="mt-3">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-success" name="responsabilizar">Responsabilizar-se</button>
-                            </form>
-                        {% else %}
-                            <div class="box-mensagem-funcionario">
-                                <h6>Comentários do Funcionário:</h6>
-                                <div class="comment-bubble mt-3">
-                                    <p>{{ detalhes_da_os.mensagem_funcionario|default:"Nenhum comentário feito" }}</p>
-                                </div>
+                        <div class="box-mensagem-funcionario">
+                            <h6>Comentários do Funcionário:</h6>
+                            <div class="comment-bubble mt-3">
+                                <p>{{ detalhes_da_os.mensagem_funcionario|default:"Nenhum comentário feito" }}</p>
                             </div>
-                        {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -67,36 +60,40 @@
             </div>
         {% endif %}
     </div>
-    <div class="details-page__status">
-        <section class="step-wizard">
-            <ul class="step-wizard-list">
-                <li class="step-wizard-item {% if os.status == 'Iniciada' %}current-item{% endif %}">
-                    <span class="progress-count">1</span>
-                    <span class="progress-label">Iniciada</span>
-                </li>
-                <li class="step-wizard-item {% if os.status == 'Em_analise' %}current-item{% endif %}">
-                    <span class="progress-count">2</span>
-                    <span class="progress-label">Em análise</span>
-                </li>
-                <li class="step-wizard-item {% if os.status == 'Aguardando_peca' %}current-item{% endif %}">
-                    <span class="progress-count">3</span>
-                    <span class="progress-label">Aguardando peça</span>
-                </li>
-                <li class="step-wizard-item {% if os.status == 'Aguardando_reparo' %}current-item{% endif %}">
-                    <span class="progress-count">4</span>
-                    <span class="progress-label">Aguardando reparo</span>
-                </li>
-                <li class="step-wizard-item {% if os.status == 'Em_reparo' %}current-item{% endif %}">
-                    <span class="progress-count">5</span>
-                    <span class="progress-label">Em reparo</span>
-                </li>
-                <li class="step-wizard-item {% if os.status == 'Pronto' %}current-item{% endif %}">
-                    <span class="progress-count">6</span>
-                    <span class="progress-label">Pronto</span>
-                </li>
-            </ul>
-        </section>
-    </div>
+    {% if os.status != 'Enviada' %}
+        <div class="details-page__status">
+            <section class="step-wizard">
+                <ul class="step-wizard-list">
+                    <li class="step-wizard-item {% if os.status == 'Iniciada' %}current-item{% endif %}">
+                        <span class="progress-count">1</span>
+                        <span class="progress-label">Iniciada</span>
+                    </li>
+                    <li class="step-wizard-item {% if os.status == 'Em_analise' %}current-item{% endif %}">
+                        <span class="progress-count">2</span>
+                        <span class="progress-label">Em análise</span>
+                    </li>
+                    <li class="step-wizard-item {% if os.status == 'Aguardando_peca' %}current-item{% endif %}">
+                        <span class="progress-count">3</span>
+                        <span class="progress-label">Aguardando peça</span>
+                    </li>
+                    <li class="step-wizard-item {% if os.status == 'Aguardando_reparo' %}current-item{% endif %}">
+                        <span class="progress-count">4</span>
+                        <span class="progress-label">Aguardando reparo</span>
+                    </li>
+                    <li class="step-wizard-item {% if os.status == 'Em_reparo' %}current-item{% endif %}">
+                        <span class="progress-count">5</span>
+                        <span class="progress-label">Em reparo</span>
+                    </li>
+                    <li class="step-wizard-item {% if os.status == 'Pronto' %}current-item{% endif %}">
+                        <span class="progress-count">6</span>
+                        <span class="progress-label">Pronto</span>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    {% else %}
+        <p class="mt-3">Esperando um funcionário se responsabilizar pela sua OS</p>
+    {% endif %}
 </div>
 
 <script type="text/javascript">
@@ -104,14 +101,14 @@
         let stars = '';
         for (let i = 0; i < 5; i++) {
             if (i < rating) {
-                stars += '★'; // Filled star
+                stars += '★'; // Estrela preenchida
             } else {
-                stars += '☆'; // Empty star
+                stars += '☆'; // Estrela vazia
             }
         }
         return stars;
     }
-
+    
     window.onload = function() {
         var ratingElements = document.getElementsByClassName('rating');
         for (var i = 0; i < ratingElements.length; i++) {
@@ -120,6 +117,7 @@
             ratingElement.innerHTML = renderStars(rating);
         }
     }
-</script>
-
+    </script>
+    
 {% endblock %}
+

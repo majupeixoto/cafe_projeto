@@ -14,7 +14,6 @@ from django.http import HttpResponseForbidden
 from django.db import IntegrityError
 
 
-#VIEWS DE LOGIN
 # VIEWS DE LOGIN
 def login_view(request):
     if request.method == 'POST':
