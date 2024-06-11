@@ -18,6 +18,7 @@
     {% if ordens %}
       {% for os in ordens %}
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <a href="{% url 'detalhes_os_cliente' os_id=os.id %}" style="text-decoration: none;">
           <div class="card glass-card h-100">
             {% if os.imagem %}
             <img src="{{ os.imagem.url }}" class="card-img-top" alt="{{ os.descricao }}">
@@ -33,12 +34,10 @@
                 <p class="card-text">Aparelho: {{ os.aparelho }}</p>
                 <p class="card-text">Status: {{ os.status }}</p>
                 <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a href="{% url 'detalhes_os_cliente' os_id=os.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
-                    </div>
                 </div>
             </div>
           </div>
+        </a>
         </div> 
       {% endfor %}
     {% else %}
@@ -47,7 +46,7 @@
       </div>
       <div class="row">
         <div class="col-lg-4">
-          <a class="btn btn-primary" href="{% url 'cadastrar_os_cliente' %}" role="button">Cadastrar Ordem de Serviço</a>
+          <a class="btn btn-primary" href="{% url 'cadastrar_os_cliente' %}" role="button">Cadastrar Novo Serviço</a>
         </div>
       </div>
     {% endif %}

@@ -1,33 +1,32 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-    <div class="container mt-5">
+    <div class="container editar-os mt-5">
         <div class="row align-items-center">
-            <div class="col-md-6">
-                <h2>Número da OS: {{ os.numero }}</h2>
-                <h5>Nome do Cliente: {{ os.perfil_os.nome }}</h5>
-                <h5>Contato: {{ os.perfil_os.contato }}</h5>
-                <h5>Garantia: {{ os.garantia }}</h5>
-                <h5>Aparelho: {{ os.aparelho }}</h5>
-                <h5>Modelo do aparelho: {{ os.modelo }}</h5>
-                <h5>Problema relatado: {{ os.descricao_problema }}</h5>
+            <div class="col-md-6 os-details">
+                <div class="card glass-card">
+                    <div class="card-body">
+                        <h2 class="card-title">Número da OS: {{ os.numero }}</h2>
+                        <p class="card-text"><strong>Nome do Cliente:</strong> {{ os.perfil_os.nome }}</p>
+                        <p class="card-text"><strong>Contato:</strong> {{ os.perfil_os.contato }}</p>
+                        <p class="card-text"><strong>Garantia:</strong> {{ os.garantia }}</p>
+                        <p class="card-text"><strong>Aparelho:</strong> {{ os.aparelho }}</p>
+                        <p class="card-text"><strong>Modelo do aparelho:</strong> {{ os.modelo }}</p>
+                        <p class="card-text"><strong>Problema relatado:</strong> {{ os.descricao_problema }}</p>
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-6">
                 <form method="post">
                     {% csrf_token %}
-
                     <div class="form-group">
                         <label for="mensagem_funcionario">Comentários para o Cliente:</label>
-                        <textarea id="mensagem_funcionario" name="mensagem_funcionario" class="form-control">{{ os.mensagem_funcionario }}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="anotacoes_internas">Anotações Internas:</label>
-                        <textarea id="anotacoes_internas" name="anotacoes_internas" class="form-control">{{ os.anotacoes_internas }}</textarea>
+                        <textarea id="mensagem_funcionario" name="mensagem_funcionario" class="form-control">{{ os.mensagem_funcionario|default:"" }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="problema_detectado">Problema Detectado:</label>
-                        <textarea id="problema_detectado" name="problema_detectado" class="form-control">{{ os.problema_detectado }}</textarea>
+                        <textarea id="problema_detectado" name="problema_detectado" class="form-control">{{ os.problema_detectado|default:"" }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="status">Status:</label>

@@ -5,23 +5,29 @@
     --color-neutral-10: #171717; /* Cinza escuro */
     --color-neutral-30: #a8a29e; /* Cinza claro */
     --color-neutral-40: #f5f5f5; /* Branco */
-    --color-green-1: #595E4A;
-    --color-green-2: #7b7d66;
-    --color-green-3: #2e342a;
+    --color-background: #edf2f7;
+    --color-azul-virtu: #2E54D1; 
+    --color-azul-escuro: #0F2167;
+    --color-azul-esquisito: #2E88D1;
+    --color-destaque-azul: #2E54D1;
+    --color-destaque-laranja: #F24726;
+    --color-destaque-verde: #86D12E;
 }
 
-*{
-    font-family: "PT Mono", monospace;
+* {
+    font-family: "Montserrat";
     font-weight: 400;
     font-style: normal;
 }
 
 body {
-    background-image: url(../img/background-site.png);
+    background-color: var(--color-background);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .logo-placeholder {
@@ -36,8 +42,8 @@ h1 {
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
-    font-size: 80px;
-    color: var(--color-neutral-40);
+    font-size: 60px;
+    color: var(--color-azul-virtu);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* offsetX, offsetY, blurRadius, color */
 }
 
@@ -47,12 +53,16 @@ h2 {
     color: var(--color-neutral-40);
 }
 
+
 .botao-cliente,
 .botao-funcionario {
-    width: 100%;
-    font-size: xx-large;
+    width: 60%;
+    font-size: x-large;
     transition: background-color 0.3s, color 0.3s;
+    border-radius: 50px;
+    position: absolute; /* ou relative, fixed, sticky */
 }
+
 
 .botao {
     text-decoration: none;
@@ -60,12 +70,13 @@ h2 {
 }
 
 .botao-funcionario {
-    background-color: #d9d9d9; /* cor inicial */
+    background-color: var(--color-azul-esquisito); /* cor inicial */
     border: none; /* para remover o contorno */
+    margin-left: none;
 }
 
 .botao-funcionario:hover {
-    background-color: #c3c3c3; /* cor quando o mouse passa por cima */
+    background-color: var(--color-azul-virtu); /* cor quando o mouse passa por cima */
 }
 
 .botao-funcionario:hover .botao {
@@ -73,12 +84,14 @@ h2 {
 }
 
 .botao-cliente {
-    background-color: #d9d9d9; /* cor inicial */
+    background-color: var(--color-azul-esquisito); /* cor inicial */
     border: none; /* para remover o contorno */
+    margin-right: none;
+    left: 300px;
 }
 
 .botao-cliente:hover {
-    background-color: #c3c3c3; /* cor quando o mouse passa por cima */
+    background-color: var(--color-azul-virtu); /* cor quando o mouse passa por cima */
 }
 
 .botao-cliente:hover .botao {
@@ -88,32 +101,75 @@ h2 {
 .container {
     max-width: 400px;
     padding: 20px;
-    border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #f9f9f9;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
+
+.div-img {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100%; /* Define uma altura para a div */
+    padding: 10px;
+}
+
+.div-img img {
+    max-width: 230px; /* Defina a largura máxima desejada */
+}
+
+.cadastrar, .cadastro_cliente {
+    display: flex;
+    flex-direction: column; /* Alinha os itens verticalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+}
+
 .cadastrar {
-    max-width: 400px;
-    padding: 20px;
-    border: 1px solid #ccc;
+    width: 100%;
     border-radius: 5px;
-    background-color: #f9f9f9;
-    position: absolute;
-    top: 75%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    padding: 20px;
+}
+
+.cadastro_cliente {
+    width: 50%;
+    padding: 10px;
+}
+
+.cadastro_cliente input[type="text"],
+.cadastro_cliente input[type="password"] {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 100px;
+}
+
+.cadastro_cliente input[type="submit"] {
+    width: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: 100px;
+    background-color: #2e54d1;
+    color: white;
+    cursor: pointer;
+    display: flex;
+}
+
+.cadastro_cliente input[type="submit"]:hover {
+    background-color: #0056b3;
 }
 
 h2 {
     text-align: center;
+    color: #0F2167;
+    padding: 10px;
 }
 
-#h2_login{
+#h2_login {
     text-align: center;
     margin-top: 10px;
     color: var(--color-neutral-10);
@@ -125,17 +181,18 @@ h2 {
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 100px;
 }
 
 .login input[type="submit"] {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 100px;
     background-color: #2e54d1;
     color: white;
     cursor: pointer;
+    display: flex;
 }
 
 .login input[type="submit"]:hover {
@@ -145,6 +202,7 @@ h2 {
 p {
     text-align: center;
     margin-top: 10px;
+    color: #0056b3;
 }
 
 p a {
@@ -153,4 +211,59 @@ p a {
 
 p a:hover {
     text-decoration: underline;
+}
+
+.parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+/* Flexbox layout for responsiveness */
+.div_1_2 {
+    display: flex;
+    flex-wrap: wrap; /* Permite que as divs se ajustem em novas linhas */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    gap: 20px; /* Espaço entre as divs */
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.div1 {
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.div1 img {
+    max-width: 300px; /* Defina a largura máxima desejada */
+    height: auto; /* Isso garante que a altura seja ajustada automaticamente para manter a proporção da imagem */
+}
+
+
+.div2, .div3 {
+    flex: 1 1 300px; /* Permite que as divs cresçam e encolham, com um tamanho mínimo de 300px */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: transparent; /* Removendo fundo azul claro */
+    position: relative; 
+}
+
+/* Media query para dispositivos móveis */
+@media (max-width: 768px) {
+    .div_1_2 {
+        flex-direction: column; /* Empilha as divs verticalmente */
+    }
+
+    .botao-cliente,
+    .botao-funcionario {
+    width: 100%;
+    }
 }

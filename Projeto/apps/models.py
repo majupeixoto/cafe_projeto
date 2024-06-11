@@ -57,14 +57,13 @@ class OrdemServico(models.Model):
     garantia = models.BooleanField(choices=[(True, 'Sim'), (False, 'Não')])
     descricao_problema = models.CharField(max_length=255)
     perfil_os = models.ForeignKey('Perfil', on_delete=models.CASCADE, default=None)
-    imagem = models.ImageField(upload_to='imagens_os/', blank=True, null=True)
+    imagem = models.ImageField(upload_to='picture/', blank=True, null=True)
     avaliacao = models.IntegerField(blank=True, null=True)
     comentario_avaliacao = models.TextField(blank=True, null=True)
 
     funcionario_responsavel = models.ForeignKey('Perfil', on_delete=models.SET_NULL, null=True, blank=True, related_name='ordens_responsavel')
 
     mensagem_funcionario = models.TextField(blank=True, null=True)
-    anotacoes_internas = models.TextField(blank=True, null=True)
     problema_detectado = models.TextField(blank=True, null=True)
 
     numero = models.CharField(max_length=10, unique=True)
@@ -94,7 +93,6 @@ class OrdemServico(models.Model):
             'cliente_contato': self.perfil_os.contato if self.perfil_os else None,
             'status': self.get_status_display(),
             'mensagem_funcionario': self.mensagem_funcionario,
-            'anotacoes_internas': self.anotacoes_internas,
             'problema_detectado': self.problema_detectado,
             'tipo_atendimento': self.get_tipo_atendimento_display(),
         }

@@ -11,10 +11,11 @@ from django.http import HttpResponse
 from notifications.signals import notify
 from notifications.models import Notification
 from django.http import HttpResponseForbidden
+from django.db import IntegrityError
 import re
 
 
-#VIEWS DE LOGIN
+# VIEWS DE LOGIN
 def login_view(request):
     if request.method == 'POST':
         tipo_usuario = request.POST.get('tipo_usuario')
@@ -72,8 +73,7 @@ def funcionario_login(request):
 
     return render(request, 'apps/funcionario_login.html')
 
-
-def cliente_cadastro(request): # VIEW CORRETA
+def cliente_cadastro(request): 
     if request.method == 'POST':
         username = request.POST['username']
         nome = request.POST['nome']
@@ -88,27 +88,32 @@ def cliente_cadastro(request): # VIEW CORRETA
             return render(request, 'apps/cliente_cadastro.html')
         
         if User.objects.filter(username=username).exists():
-            return render(request, 'apps/cliente_cadastro.html', {"erro": "Usuário já existe"})
+            messages.error(request, 'Usuário já existe')
+            return render(request, 'apps/cliente_cadastro.html')
         elif User.objects.filter(email=email).exists():
-            return render(request, 'apps/cliente_cadastro.html', {"erro": "Email já está sendo usado"})
+            messages.error(request, 'Email já está sendo usado')
+            return render(request, 'apps/cliente_cadastro.html')
         
-        errors= validate_dados(nome, username, email, cpf, contato)
+        errors = validate_dados(nome, username, email, cpf, contato)
 
         if errors:
             for error in errors:
                 messages.error(request, error)
             return render(request, 'apps/cliente_cadastro.html')
 
-        user = User.objects.create_user(username=username, email=email, password=senha)
-        Perfil.objects.create(username=username, funcionario=0, cpf=cpf, contato=contato, nome=nome)
-
-        login(request, user)
-        request.session["usuario"] = username
-        return redirect(home_cliente)
+        try:
+            user = User.objects.create_user(username=username, email=email, password=senha)
+            Perfil.objects.create(username=username, funcionario=0, cpf=cpf, contato=contato, nome=nome)
+            login(request, user)
+            request.session["usuario"] = username
+            return redirect('home_cliente')
+        except IntegrityError:
+            messages.error(request, 'Erro ao criar usuário. Por favor, tente novamente.')
+            return render(request, 'apps/cliente_cadastro.html')
 
     return render(request, 'apps/cliente_cadastro.html')
 
-def funcionario_cadastro(request): # VIEW CORRETA
+def funcionario_cadastro(request): 
     if request.method == "POST":
         username = request.POST['username']
         nome = request.POST['nome']
@@ -121,28 +126,29 @@ def funcionario_cadastro(request): # VIEW CORRETA
             return render(request, 'apps/funcionario_cadastro.html')
         
         if User.objects.filter(username=username).exists():
-            return render(request, 'apps/funcionario_cadastro.html', {"erro": "Usuário já existe"})
+            messages.error(request, 'Usuário já existe')
+            return render(request, 'apps/funcionario_cadastro.html')
         elif User.objects.filter(email=email).exists():
-            return render(request, 'apps/funcionario_cadastro.html', {"erro": "Email já está sendo usado"})
+            messages.error(request, 'Email já está sendo usado')
+            return render(request, 'apps/funcionario_cadastro.html')
         
-        errors= validate_dados(nome, username, email)
+        errors = validate_dados(nome, username, email)
 
         if errors:
             for error in errors:
                 messages.error(request, error)
             return render(request, 'apps/funcionario_cadastro.html')
         
-        user = User.objects.create_user(username=username, email=email, password=senha)
-        Perfil.objects.create(
-            username=username, 
-            funcionario=1,
-            nome=nome
-        )
+        try:
+            user = User.objects.create_user(username=username, email=email, password=senha)
+            Perfil.objects.create(username=username, funcionario=1, nome=nome)
+            login(request, user)
+            request.session["usuario"] = username
+            return redirect('servicos')
+        except IntegrityError:
+            messages.error(request, 'Erro ao criar usuário. Por favor, tente novamente.')
+            return render(request, 'apps/funcionario_cadastro.html')
 
-        login(request, user)
-        request.session["usuario"] = username
-        return redirect(servicos)
-    
     return render(request, 'apps/funcionario_cadastro.html')
 
 # FINAL DAS VIEWS DE LOGIN
@@ -227,7 +233,7 @@ def cadastrar_os_cliente(request):
             garantia = request.POST['garantia'] == 'True'
             modelo = request.POST['modelo']
             descricao_problema = request.POST['descricao_problema']
-            imagem = request.FILES.get('imagem')  # Obtém a imagem do formulário
+            imagem = request.FILES.get('picture__input')  # Obtém a imagem do formulário
 
             # Cria uma nova OrdemServico associada ao perfil do usuário logado
             OrdemServico.objects.create(
@@ -294,16 +300,16 @@ def lista_notifications(request):
 @login_required
 def funcionario_perfil(request):
     user = request.user
-    perfil = get_object_or_404(Perfil, username=user.username)
+    usuario = get_object_or_404(Perfil, username=user.username)
 
-    if perfil.funcionario == 0:
+    if usuario.funcionario == 0:
         return redirect('login')
     else:
         context = {
-            'nome_completo': perfil.nome,
+            'nome_completo': usuario.nome,
             'email': user.email,  # Passa o email do objeto User associado
-            'cpf': perfil.cpf,
-            'contato': perfil.contato,
+            'cpf': usuario.cpf,
+            'contato': usuario.contato,
             'funcionario': 1  # Assegura que o menu lateral de funcionário seja exibido
         }
         return render(request, 'apps/funcionario_perfil.html', context)
@@ -394,13 +400,15 @@ def editar_os(request, os_id):
         if request.method == 'POST':
             os.status = request.POST.get('status')
             os.mensagem_funcionario = request.POST.get('mensagem_funcionario')
-            os.anotacoes_internas = request.POST.get('anotacoes_internas')
             os.problema_detectado = request.POST.get('problema_detectado')
             os.tipo_atendimento = request.POST.get('tipo_atendimento')
             os.save()
             return redirect('detalhes_os', os_id=os.id)
-
-    return render(request, 'apps/editar_os.html', {'funcionario': 1, 'os': os})
+    context = {
+            'funcionario': 1, 
+            'os': os, 
+        }
+    return render(request, 'apps/editar_os.html', context)
 
 @login_required
 def excluir_os(request, pk):
@@ -448,7 +456,6 @@ def detalhes_os(request, os_id):
                 # Salva as alterações na ordem de serviço
                 os.descricao_problema = request.POST.get('descricao_problema')
                 os.mensagem_funcionario = request.POST.get('mensagem_funcionario')
-                os.anotacoes_internas = request.POST.get('anotacoes_internas')
                 os.problema_detectado = request.POST.get('problema_detectado')
                 os.tipo_atendimento = request.POST.get('tipo_atendimento')  # Atualiza o tipo de atendimento
                 os.save()

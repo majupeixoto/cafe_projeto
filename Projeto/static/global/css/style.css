@@ -1,18 +1,34 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=PT+Mono&family=Righteous&family=Silkscreen:wght@400;700&display=swap');
+:root {
+    --color-neutral-0: #0e0c0c;
+    /* Preto */
+    --color-neutral-10: #171717;
+    /* Cinza escuro */
+    --color-neutral-30: #a8a29e;
+    /* Cinza claro */
+    --color-neutral-40: #f5f5f5;
+    /* Branco */
+    --color-background: #edf2f7;
+    --color-azul-virtu: #2E54D1;
+    --color-azul-escuro: #0F2167;
+    --color-azul-esquisito: #2E88D1;
+    --color-destaque-azul: #2E54D1;
+    --color-destaque-laranja: #F24726;
+    --color-destaque-verde: #86D12E;
+}
 
 /* PERSONALIZAÇÃO GERAL */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "PT Mono", monospace;
+    font-family: "Montserrat";
     font-weight: 400;
     font-style: normal;
 }
 
 body {
     min-height: 100vh;
-    background-image: url('../img/fundo1.png');
+    background-color: var(--color-background);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -22,10 +38,10 @@ body {
 /* MENU */
 nav.menu-lateral {
     z-index: 1000;
-    width: 80px;
+    width: 82px;
     height: 100%;
     background-color: #202020;
-    padding: 40px 0px 40px 1%;
+    padding: 40px 0px 2px 1%;
     position: fixed;
     top: 0;
     left: 0;
@@ -37,17 +53,6 @@ nav.menu-lateral:hover {
     width: 300px;
 }
 
-.btn-expandir {
-    width: 100%;
-    padding-left: 10px;
-}
-
-.btn-expandir > i {
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-}
-
 ul {
     list-style-type: none;
     padding-left: 0;
@@ -55,27 +60,34 @@ ul {
 
 ul li.item-menu {
     transition: background-color 0.2s;
+    margin-bottom: 20px;
+    /* Adds space between each menu item */
 }
 
 ul li.item-menu:hover {
-    background: rgba(5, 210, 217, 0.947);
+    background: var(--color-azul-escuro);
 }
 
 ul li.item-menu a {
     color: white;
     text-decoration: none;
     font-size: 20px;
-    padding: 20px 4%;
     display: flex;
-    margin-bottom: 20px;
+    align-items: center;
+    /* Centers items vertically */
     line-height: 40px;
 }
 
 ul li.item-menu a .txt-link {
-    margin-left: 40px;
+    margin-left: 30px;
 }
 
-ul li.item-menu a .icon > i {
+ul li.item-menu a .icon {
+    margin: 10px 0;
+    /* Adds fixed top and bottom margin to the icon */
+}
+
+ul li.item-menu a .icon>i {
     font-size: 30px;
     margin-left: 9px;
 }
@@ -86,55 +98,68 @@ ul li.item-menu a .icon > i {
     padding-top: 40px;
 }
 
-/* Glass Effect for Cards */
-.glass-card {
-    background: rgba(255, 255, 255, 0.2);
+/* Styling for #container-servicos */
+#container-servicos {
+    background-color: var(--color-neutral-40);
+    /* Fundo branco */
     border-radius: 15px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Bordas arredondadas */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Drop shadow */
+    padding: 20px;
 }
 
-.glass-card:hover {
-    transform: translateY(-10px);
+/* Card Styles */
+.card {
+    background: #ffffff;
+    /* Fundo branco */
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Drop shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #000;
+    /* Texto preto */
+    padding: 20px;
+    overflow: hidden;
+}
+
+.card:hover {
+    /*transform: translateY(-10px);*/
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Additional Styling for Card Content */
 .card-body {
-    color: #fff;
+    color: #000;
+    /* Texto preto */
 }
 
 .card-text {
-    color: #fff;
+    color: #000;
+    /* Texto preto */
 }
 
 .btn-outline-secondary {
-    color: #fff;
-    border-color: #fff;
+    color: #000;
+    /* Texto preto */
+    border-color: #000;
+    /* Borda preta */
 }
 
 .btn-outline-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border-color: #fff;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #000;
+    /* Texto preto */
+    border-color: #000;
+    /* Borda preta */
 }
 
-/* Card Styles */
-.card {
-    width: 18rem;
-    padding: 20px;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
+/* Placeholder Image Styling */
 .bd-placeholder-img {
     width: 100%;
     height: auto;
     margin-bottom: 6px;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .btn-lg,
@@ -145,6 +170,125 @@ ul li.item-menu a .icon > i {
 h2.text-center,
 .form-group {
     font-size: larger;
+}
+
+/* Estilos globais para a página de detalhes da Ordem de Serviço */
+
+/* Estilo para o container principal */
+.details-page {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Estilo para o cartão */
+.details-page__card {
+    grid-area: 1 / 1 / 4 / 3;
+}
+
+.details-page__card-img {
+    width: 100%;
+    height: auto;
+}
+
+.details-page__card-placeholder {
+    width: 100%;
+    height: 225px;
+}
+
+/* Estilo para a informação */
+.details-page__info {
+    grid-area: 1 / 3 / 4 / 6;
+    display: flex;
+    flex-direction: column;
+}
+
+.details-page__info-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.details-page__info-list {
+    list-style: none;
+    padding: 0;
+}
+
+.details-page__info-list li {
+    margin-bottom: 5px;
+}
+
+/* Estilo para os botões de ação */
+.details-page__info-actions {
+    margin-top: 10px;
+}
+
+/* Estilo para o status */
+.details-page__status {
+    grid-column: span 6;
+}
+
+/* Estilo para a barra de progresso */
+.step-wizard {
+    margin-top: 20px;
+}
+
+.step-wizard-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.step-wizard-item {
+    flex: 1;
+    text-align: center;
+}
+
+.progress-count {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.progress-label {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.current-item .progress-label {
+    color: #000;
+    font-weight: bold;
+}
+
+/* Estilo para os comentários */
+.details-page__comments {
+    margin-top: 20px;
+}
+
+textarea.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+/* Estilo para os botões */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
 }
 
 /* Detalhes da OS para o Cliente */
@@ -166,9 +310,6 @@ h2.text-center,
 
 .div3 {
     grid-area: 2 / 1 / 3 / 6;
-}
-
-.div3 {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -205,7 +346,7 @@ body {
     position: relative;
 }
 
-.step-wizard-item + .step-wizard-item:after {
+.step-wizard-item+.step-wizard-item:after {
     content: "";
     position: absolute;
     left: 0;
@@ -264,16 +405,16 @@ body {
 }
 
 .current-item .progress-count:before,
-.current-item ~ .step-wizard-item .progress-count:before {
+.current-item~.step-wizard-item .progress-count:before {
     display: none;
 }
 
-.current-item ~ .step-wizard-item .progress-count:after {
+.current-item~.step-wizard-item .progress-count:after {
     height: 10px;
     width: 10px;
 }
 
-.current-item ~ .step-wizard-item .progress-label {
+.current-item~.step-wizard-item .progress-label {
     opacity: 0.5;
 }
 
@@ -304,7 +445,8 @@ textarea[readonly] {
     list-style-type: none;
     cursor: pointer;
     color: #ffe500;
-    font-size: 40px; /* alterar o tamanho das estrelas */
+    font-size: 40px;
+    /* alterar o tamanho das estrelas */
 }
 
 .star-icon::before {
@@ -313,10 +455,262 @@ textarea[readonly] {
 
 .star-icon.ativo::before,
 .star-icon:hover::before,
-.star-icon:hover ~ .star-icon::before {
+.star-icon:hover~.star-icon::before {
     content: "\2605";
 }
 
-.star-icon.ativo ~ .star-icon::before {
+.star-icon.ativo~.star-icon::before {
     content: "\2606";
+
+}
+
+#tabela {
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    /* Cor de fundo da tabela */
+}
+
+#tabela thead th {
+    background-color: var(--color-azul-escuro);
+    /* Cor de fundo do cabeçalho */
+    color: white;
+    /* Cor do texto do cabeçalho */
+}
+
+#tabela tbody tr:nth-child(even) {
+    background-color: #dfefff;
+    /* Cor das linhas pares */
+}
+
+#tabela tbody tr:nth-child(odd) {
+    background-color: var(--color-background);
+    /* Cor das linhas ímpares */
+}
+
+#tabela tbody tr:hover {
+    background-color: #d6d8db;
+    /* Cor de fundo ao passar o mouse */
+}
+
+#ver-mais-lista-os {
+    color: #2E54D1;
+}
+
+#container-servicos {
+    background-color: var(--color-neutral-40);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Drop shadow */
+    padding: 20px;
+}
+
+/* Upload de foto */
+#picture__input {
+    display: none;
+}
+
+.picture {
+    width: 200px;
+    height: 200px;
+    aspect-ratio: 16/9;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    border: 2px dashed currentcolor;
+    cursor: pointer;
+    transition: color 300ms ease-in-out, background 300ms ease-in-out;
+    outline: none;
+    overflow: hidden;
+}
+
+.picture:hover {
+    color: #777;
+    background: #ccc;
+}
+
+.picture:active {
+    border-color: turquoise;
+    color: turquoise;
+    background: #eee;
+}
+
+.picture:focus {
+    color: #777;
+    background: #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.picture__img {
+    max-width: 100%;
+}
+
+/* Forms de nova OS */
+.elementos {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Adicionado para que os itens possam quebrar linha, se necessário */
+}
+
+.forms {
+    margin: 10px; /* Espaço ao redor de cada form */
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.title_detalhes_os {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.btn-detalhes {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    margin-right: 30px;
+}
+
+.btn-detalhes a {
+    border-radius: 20px;
+}
+
+.dynamic-info {
+    color: #2E88D1;
+    /* Cor desejada para as informações dinâmicas */
+}
+
+.container-detalhes_os {
+    padding-right: 30px;
+}
+
+.lista-ordens {
+    padding-right: 30px;
+}
+
+.lista-ordens tr {
+    margin-bottom: 10px;
+}
+
+.comment-bubble {
+    position: relative;
+    background: #f1f1f1;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    max-width: 60%;
+}
+
+.comment-bubble:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #f1f1f1;
+    bottom: -20px;
+    right: 20%;
+}
+
+.card-body.d-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ul-column {
+    flex: 1;
+    min-width: 300px; /* Define uma largura mínima para a lista */
+    max-height: 300px; /* Define uma altura máxima para a lista */
+    overflow: auto; /* Adiciona rolagem vertical e horizontal se o conteúdo exceder as dimensões */
+    margin-right: 10px; /* Espaçamento à direita */
+}
+
+@media (min-width: 768px) {
+    .box-mensagem-funcionario {
+        margin-top: 0;
+    }
+}
+
+.box-mensagem-funcionario {
+    flex: 1;
+    min-width: 300px; /* Define uma largura mínima para a caixa de comentários */
+    max-height: 300px; /* Define uma altura máxima para a caixa de comentários */
+    overflow: auto; /* Adiciona rolagem vertical e horizontal se o conteúdo exceder as dimensões */
+    margin-top: 20px;
+} 
+
+#retornar {
+    position: absolute;
+    top: 30px; /* Adjust this value as needed */
+    right: 30px; /* Adjust this value as needed */
+    z-index: 1001; /* Ensure it's above other elements */
+}
+
+
+
+
+/* Estilos para a página de edição de OS */
+.editar-os .container {
+    margin-top: 50px;
+}
+
+.editar-os .form-group {
+    margin-bottom: 20px;
+}
+
+.editar-os label {
+    font-weight: bold;
+}
+
+.editar-os .btn {
+    margin-top: 20px;
+}
+
+.editar-os textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.editar-os select {
+    width: 100%;
+    padding: 10px;
+}
+
+.editar-os form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.os-details .glass-card {
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+}
+
+.os-details .glass-card .card-title {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.os-details .glass-card .card-text {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+#avalicao_detalhes{
+    font-size: 100px;
 }
