@@ -1,7 +1,12 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-<div class="card mb-3" style="max-width: 1350px">
+
+  <div class="title_detalhes_os">
+    <h5 class="card-title">ORDEM DE SERVIÇO: {{ numero_os }}</h5>
+  </div>
+  <div class="card mb-3" style="max-width: 1350px">
+    <h5>Status: {{ detalhes_da_os.status }}</h5>
     <div class="row g-0">
       <div class="col-md-4">
         {% if os.imagem %}
@@ -22,31 +27,34 @@
           </svg>
         {% endif %}
       </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">ORDEM DE SERVIÇO:</h5>
-          <ul class="list-group">
-            <li class="list-group-item">Aparelho: {{ detalhes_da_os.aparelho }}</li>
-            <li class="list-group-item">Modelo do aparelho: {{ detalhes_da_os.modelo }}</li>
-            <li class="list-group-item">Problema relatado: {{ detalhes_da_os.descricao_problema }}</li>
-            <li class="list-group-item">Status: {{ detalhes_da_os.status }}</li>
-          </ul>
-          {% if os.status == 'Enviada' %}
-            <form method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-success" name="responsabilizar">Responsabilizar-se</button>
-            </form>
-          {% else %}
+        <div class="col-md-8">
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item">Aparelho: {{ detalhes_da_os.aparelho }}</li>
+              <li class="list-group-item">Data de Entrada: {{ detalhes_da_os.created_at|date:"d/m/Y" }}</li>
+              <li class="list-group-item">Tipo de Produto: {{ detalhes_da_os.modelo }}</li>
+              <li class="list-group-item">Cliente: {{ os.perfil_os.nome }}</li>
+              <li class="list-group-item">Tipo de Atendimento: {{ detalhes_da_os.tipo_atendimento }}</li>
+              <li class="list-group-item">Problema relatado: {{ detalhes_da_os.descricao_problema }}</li>
+            </ul>
+            {% if os.status == 'Enviada' %}
+              <form method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-success" name="responsabilizar">Responsabilizar-se</button>
+              </form>
+            {% else %}
             <div>
-                <h6>Responsável: {{ funcionario_responsavel|default:"OS sem responsável" }}</h6>
-                <h6>Comentários para o Cliente: {{ detalhes_da_os.mensagem_funcionario|default:"Nenhum comentário feito" }}</h6>
-                <div class="btn-group">
-                    <a href="{% url 'editar_os' os.id %}" class="btn btn-success">Atualizar</a>
-                </div>
+              <h6>Técnico Responsável: {{ funcionario_responsavel|default:"OS sem responsável" }}</h6>
+              <h6>Garantia: {{ detalhes_da_os.garantia }}</h6>
+              <h6>Comentários para o Cliente: {{ detalhes_da_os.mensagem_funcionario|default:"Nenhum comentário feito" }}</h6>
             </div>
-          {% endif %}
+          </div>
         </div>
-      </div>
     </div>
   </div>
+  <div class="btn-detalhes">
+    <a href="{% url 'editar_os' os.id %}" class="btn btn-primary">Atualizar informações</a>
+  </div>
+  {% endif %}
+
 {% endblock %}

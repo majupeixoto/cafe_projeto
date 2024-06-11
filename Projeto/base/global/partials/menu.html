@@ -1,11 +1,12 @@
 
         <!-----------MENU LATERAL-------------->
+        {% load static %}
 
         <nav class = "menu-lateral">
 
-            <div class="btn-expandir">
-                <i class="bi bi-list"></i> <!--link do ícone-->
-            </div> <!-- btn-expandir -->
+            <p> 
+                <img src="{% static 'global/img/iconografia/dropdown.png' %}" alt="toggle - botão sanduíche" class="img-fluid icon" style="height: 60px; width: 60px;">
+            </p><!-- btn-expandir -->
 
             <ul>
                 {% if funcionario == 1 %} <!-- MENU FUNCIONÁRIO-->
@@ -24,11 +25,10 @@
 
                 <li class="item-menu">
                     <a href="{% url 'funcionario_perfil' %}">
-                        <span class="icon"><i class="bi bi-person-circle"></i></span><!--link do ícone-->
+                        <img src="{% static 'global/img/iconografia/perfil.png' %}" alt="logout" class="img-fluid icon" style="height: 60px; width: 60px;">
                         <span class="txt-link">Conta</span>
                     </a>
                 </li>
-
                 {% else %} <!--MENU CLIENTE-->
                 <li class="item-menu">
                     <a href="{% url 'home_cliente' %}">
@@ -44,13 +44,13 @@
                 </li>
                 <li class="item-menu">
                     <a href="{% url 'cliente_perfil' %}">
-                        <span class="icon"><i class="bi bi-person-circle"></i></span><!--link do ícone-->
+                        <img src="{% static 'global/img/iconografia/perfil.png' %}" alt="logout" class="img-fluid icon" style="height: 60px; width: 60px;">
                         <span class="txt-link">Conta</span>
                     </a>
                 </li>
                 <li class="item-menu">
                     <a href="{% url 'lista_notifications' %}">
-                        <span class="icon"><i class="bi bi-bell"></i></span><!--link do ícone-->
+                        <img src="{% static 'global/img/iconografia/notif.png' %}" alt="logout" class="img-fluid icon" style="height: 60px; width: 60px;">
                         <span class="txt-link">Notificações</span>
                     </a>
                 </li>
@@ -58,7 +58,7 @@
                 {% endif %} <!-- LOGIN/LOGOUT DOS DOIS-->
                 <li class="item-menu">
                     <a href="{% url 'logout' %}">
-                        <span class="icon"><i class="bi bi-box-arrow-left"></i></span><!--link do ícone-->
+                        <img src="{% static 'global/img/iconografia/logout.png' %}" alt="logout" class="img-fluid icon" style="height: 60px; width: 60px;">
                         <span class="txt-link">Logout</span>
                     </a>
                 </li>
