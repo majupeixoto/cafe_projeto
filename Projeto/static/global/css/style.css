@@ -49,17 +49,6 @@ nav.menu-lateral:hover {
     width: 300px;
 }
 
-.btn-expandir {
-    width: 100%;
-    padding-left: 10px;
-}
-
-.btn-expandir > i {
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-}
-
 ul {
     list-style-type: none;
     padding-left: 0;
@@ -118,7 +107,7 @@ ul li.item-menu a .icon > i {
 }
 
 .card:hover {
-    transform: translateY(-10px);
+    /*transform: translateY(-10px);*/
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -364,3 +353,8 @@ textarea[readonly] {
     padding: 20px;
 }
 
+.title_detalhes_os {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
