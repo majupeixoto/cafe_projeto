@@ -1,58 +1,60 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-<div class="title_detalhes_os">
-  <h5 class="card-title">ORDEM DE SERVIÇO: {{ numero_os }}</h5>
-</div>
-<div class="card mb-3" style="max-width: 1350px">
-  <h5>Status: {{ detalhes_da_os.status }}</h5>
-  <div class="row g-0">
-    <div class="col-md-4">
-      {% if os.imagem %}
-        <img src="{{ os.imagem.url }}" class="card-img-top img-fluid rounded-start" alt="{{ os.descricao }}">
-      {% else %}
-        <svg
-          class="bd-placeholder-img img-fluid rounded-start"
-          width="100%"
-          height="315"
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          aria-label="Placeholder: Image"
-          preserveAspectRatio="xMidYMid slice"
-          focusable="false">
-          <title>Placeholder</title>
-          <rect width="100%" height="100%" fill="#868e96"></rect>
-          <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text>
-        </svg>
-      {% endif %}
-    </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <ul class="list-group">
-            <li class="list-group-item">Aparelho: {{ detalhes_da_os.aparelho }}</li>
-            <li class="list-group-item">Data de Entrada: {{ detalhes_da_os.created_at|date:"d/m/Y" }}</li>
-            <li class="list-group-item">Tipo de Produto: {{ detalhes_da_os.modelo }}</li>
-            <li class="list-group-item">Cliente: {{ os.perfil_os.nome }}</li>
-            <li class="list-group-item">Tipo de Atendimento: {{ detalhes_da_os.tipo_atendimento }}</li>
-            <li class="list-group-item">Problema relatado: {{ detalhes_da_os.descricao_problema }}</li>
-          </ul>
-          {% if os.status == 'Enviada' %}
-            <form method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-success" name="responsabilizar">Responsabilizar-se</button>
-            </form>
-          {% else %}
-          <div>
-            <h6>Técnico Responsável: {{ funcionario_responsavel|default:"OS sem responsável" }}</h6>
-            <h6>Garantia: {{ detalhes_da_os.garantia }}</h6>
-            <h6>Comentários para o Cliente: {{ detalhes_da_os.mensagem_funcionario|default:"Nenhum comentário feito" }}</h6>
-            <div class="btn-group">
-              <a href="{% url 'editar_os' os.id %}" class="btn btn-success">Atualizar</a>
+
+  <div class="title_detalhes_os">
+    <h5 class="card-title">ORDEM DE SERVIÇO: {{ numero_os }}</h5>
+  </div>
+  <div class="card mb-3" style="max-width: 1350px">
+    <h5>Status: {{ detalhes_da_os.status }}</h5>
+    <div class="row g-0">
+      <div class="col-md-4">
+        {% if os.imagem %}
+          <img src="{{ os.imagem.url }}" class="card-img-top img-fluid rounded-start" alt="{{ os.descricao }}">
+        {% else %}
+          <svg
+            class="bd-placeholder-img img-fluid rounded-start"
+            width="100%"
+            height="315"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Placeholder: Image"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#868e96"></rect>
+            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text>
+          </svg>
+        {% endif %}
+      </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item">Aparelho: {{ detalhes_da_os.aparelho }}</li>
+              <li class="list-group-item">Data de Entrada: {{ detalhes_da_os.created_at|date:"d/m/Y" }}</li>
+              <li class="list-group-item">Tipo de Produto: {{ detalhes_da_os.modelo }}</li>
+              <li class="list-group-item">Cliente: {{ os.perfil_os.nome }}</li>
+              <li class="list-group-item">Tipo de Atendimento: {{ detalhes_da_os.tipo_atendimento }}</li>
+              <li class="list-group-item">Problema relatado: {{ detalhes_da_os.descricao_problema }}</li>
+            </ul>
+            {% if os.status == 'Enviada' %}
+              <form method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-success" name="responsabilizar">Responsabilizar-se</button>
+              </form>
+            {% else %}
+            <div>
+              <h6>Técnico Responsável: {{ funcionario_responsavel|default:"OS sem responsável" }}</h6>
+              <h6>Garantia: {{ detalhes_da_os.garantia }}</h6>
+              <h6>Comentários para o Cliente: {{ detalhes_da_os.mensagem_funcionario|default:"Nenhum comentário feito" }}</h6>
             </div>
           </div>
-          {% endif %}
         </div>
-      </div>
+    </div>
   </div>
-</div>
+  <div class="btn-detalhes">
+    <a href="{% url 'editar_os' os.id %}" class="btn btn-primary">Atualizar informações</a>
+  </div>
+  {% endif %}
+
 {% endblock %}

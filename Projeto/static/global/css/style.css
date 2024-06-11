@@ -17,7 +17,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Montserrat", monospace;
+    font-family: "Montserrat";
     font-weight: 400;
     font-style: normal;
 }
@@ -357,4 +357,15 @@ textarea[readonly] {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.btn-detalhes {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    margin-right: 30px;
+}
+
+.btn-detalhes a{
+    border-radius: 20px;
 }
