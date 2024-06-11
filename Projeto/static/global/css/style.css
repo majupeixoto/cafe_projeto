@@ -512,4 +512,12 @@ textarea[readonly] {
     border-left: 3px solid #fff;
     border-bottom: 3px solid #fff;
     display: flex;
+    margin-right: 20px;  /* Ajuste esse valor conforme necessário */
+}  
+
+#retornar {
+    position: absolute;
+    top: 30px; /* Adjust this value as needed */
+    right: 30px; /* Adjust this value as needed */
+    z-index: 1001; /* Ensure it's above other elements */
 }
