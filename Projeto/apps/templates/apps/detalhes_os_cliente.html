@@ -4,27 +4,67 @@
 {% block content %}
 
 <title>Detalhes da Ordem de Serviço</title>
-<section class="details-page">
-    <div class="details-page__card">
-        {% if os.imagem %}
-        <img src="{{ os.imagem.url }}" class="details-page__card-img" alt="{{ os.descricao }}">
-        {% else %}
-        <svg class="details-page__card-placeholder" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#55595c"></rect>
-            <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ os.descricao }}</text>
-        </svg>
-        {% endif %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/details_page.css' %}">
+
+<div class="container-detalhes_os">
+    <div class="card mb-3 mx-auto" style="max-width: 1350px">
+      <h5>STATUS: <span class="dynamic-info">{{ detalhes_da_os.status }}</span></h5>
+      <div class="row g-0">
+        <div class="col-md-4">
+          {% if os.imagem %}
+            <img src="{{ os.imagem.url }}" class="card-img-top img-fluid rounded-start" alt="{{ os.descricao }}">
+          {% else %}
+            <svg
+              class="bd-placeholder-img img-fluid rounded-start"
+              width="100%"
+              height="315"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Placeholder: Image"
+              preserveAspectRatio="xMidYMid slice"
+              focusable="false">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#868e96"></rect>
+              <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text>
+            </svg>
+          {% endif %}
+        </div>
+        <div class="col-md-8">
+          <div class="card-body d-flex">
+            <div class="ul-column flex-grow-1">
+              <ul class="list-group">
+                <li class="list-group-item">Data de Entrada: <span class="dynamic-info">{{ os.numero|default:"-" }}</span></li>
+                <li class="list-group-item">Data de Entrada: <span class="dynamic-info">{{ os.created_at|date:"d/m/Y" }}</span></li>
+                <li class="list-group-item">Tipo de Atendimento: <span class="dynamic-info">{{ os.tipo_atendimento }}</span></li>
+                <li class="list-group-item">Status: <span class="dynamic-info">{{ os.status }}</span></li>
+                <li class="list-group-item">Contato: <span class="dynamic-info">{{ os.perfil_os.contato }}</span></li>
+                <li class="list-group-item">Tipo de Atendimento: <span class="dynamic-info">{{ detalhes_da_os.tipo_atendimento }}</span></li>
+                <li class="list-group-item">Problema relatado: <span class="dynamic-info">{{ detalhes_da_os.descricao_problema }}</span></li>
+                {% if os.status != 'Enviada' %}
+                  <li class="list-group-item">Técnico Responsável: <span class="dynamic-info">{{ funcionario_responsavel|default:"OS sem responsável" }}</span></li>
+                {% endif %}
+              </ul>
+            </div>
+            <div class="flex-shrink-0 ms-3">
+              {% if os.status == 'Enviada' %}
+                <form method="post" class="mt-3">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-success" name="responsabilizar">Responsabilizar-se</button>
+                </form>
+              {% else %}
+              <div class="box-mensagem-funcionario">
+                <h6>Comentários do Funcionário:</h6>
+                <div class="comment-bubble mt-3">
+                  <p>{{ detalhes_da_os.mensagem_funcionario|default:"Nenhum comentário feito" }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="details-page__info">
-        <h2 class="details-page__info-title">Detalhes da Ordem de Serviço</h2>
-        <ul class="details-page__info-list">
-            <li><strong>Número da OS:</strong> {{ os.numero|default:"-" }}</li>
-            <li><strong>Data de Entrada:</strong> {{ os.created_at|date:"d/m/Y" }}</li>
-            <li><strong>Cliente:</strong> {{ os.perfil_os.username }}</li>
-            <li><strong>Tipo de Atendimento:</strong> {{ os.tipo_atendimento }}</li>
-            <li><strong>Status:</strong> {{ os.status }}</li>
-            {% if os.status == 'Pronto' %}
+    {% if os.status == 'Pronto' %}
             <div class="details-page__info-actions">
                 {% if os.avaliacao %}
                 <a href="{% url 'avaliar_os' os.id %}" class="btn btn-outline-secondary">Editar Avaliação</a>
@@ -34,13 +74,7 @@
                 {% endif %}
             </div>
             {% endif %}
-        </ul>
-    </div>
-    {% if os.status == 'Enviada' %}
-    <div class="details-page__status">
-        <h3 class="details-page__status-title">Aguardando Responsabilidade</h3>
-    </div>
-    {% else %}
+  </div>
     <div class="details-page__status">
         <section class="step-wizard">
             <ul class="step-wizard-list">
@@ -70,10 +104,6 @@
                 </li>
             </ul>
         </section>
-        <div class="details-page__comments">
-            <label for="comentarios_funcionario">Comentários do Funcionário:</label>
-            <textarea id="comentarios_funcionario" class="form-control" rows="5" readonly>{{ os.mensagem_funcionario|default:"Ainda sem comentários" }}</textarea>
-        </div>
     </div>
     {% endif %}
 </section>
