@@ -12,34 +12,34 @@
                 {% if funcionario == 1 %} <!-- MENU FUNCIONÁRIO-->
                 <li class="item-menu">
                     <a href="{% url 'servicos' %}">
-                        <span class="icon"><i class="bi bi-house"></i></span><!--link do ícone-->
+                        <img src="{% static 'global/img/iconografia/servicos.png' %}" alt="logout" class="img-fluid icon" style="height: 60px; width: 60px;">
                         <span class="txt-link">Servicos</span>
                     </a>
                 </li>
                 <li class="item-menu">
                     <a href="{% url 'listar_os' %}">
-                        <span class="icon"><i class="bi bi-ui-radios"></i></span><!--link do ícone-->
-                        <span class="txt-link">OS</span>
+                        <img src="{% static 'global/img/iconografia/OS.png' %}" alt="logout" class="img-fluid icon" style="height: 60px; width: 60px;">
+                        <span class="txt-link">Lista OS</span>
                     </a>
                 </li>
 
                 <li class="item-menu">
                     <a href="{% url 'funcionario_perfil' %}">
-                        <span class="icon"><i class="bi bi-person-circle"></i></span><!--link do ícone-->
+                        <img src="{% static 'global/img/iconografia/perfil.png' %}" alt="logout" class="img-fluid icon" style="height: 60px; width: 60px;">
                         <span class="txt-link">Conta</span>
                     </a>
                 </li>
                 {% else %} <!--MENU CLIENTE-->
                 <li class="item-menu">
                     <a href="{% url 'home_cliente' %}">
-                        <span class="icon"><i class="bi bi-box"></i></span><!--link do ícone-->
+                        <img src="{% static 'global/img/iconografia/home.png' %}" alt="logout" class="img-fluid icon" style="height: 60px; width: 60px;">
                         <span class="txt-link">Início</span>
                     </a>
                 </li>
                 <li class="item-menu">
                     <a href="{% url 'cadastrar_os_cliente' %}">
-                        <span class="icon"><i class="bi bi-postcard-heart"></i></span><!--link do ícone-->
-                        <span class="txt-link">Cadastrar OS</span>
+                        <img src="{% static 'global/img/iconografia/OS.png' %}" alt="cadastrar novo serviço" class="img-fluid icon" style="height: 60px; width: 60px;">
+                        <span class="txt-link">Cadastrar Serviço</span>
                     </a>
                 </li>
                 <li class="item-menu">

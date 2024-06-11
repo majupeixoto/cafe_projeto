@@ -56,10 +56,11 @@ ul {
 
 ul li.item-menu {
     transition: background-color 0.2s;
+    margin-bottom: 20px; /* Adds space between each menu item */
 }
 
 ul li.item-menu:hover {
-    background: rgba(5, 210, 217, 0.947);
+    background: var(--color-azul-escuro);
 }
 
 ul li.item-menu a {
@@ -67,12 +68,16 @@ ul li.item-menu a {
     text-decoration: none;
     font-size: 20px;
     display: flex;
-    margin-bottom: 10px;
+    align-items: center; /* Centers items vertically */
     line-height: 40px;
 }
 
 ul li.item-menu a .txt-link {
     margin-left: 30px;
+}
+
+ul li.item-menu a .icon {
+    margin: 10px 0; /* Adds fixed top and bottom margin to the icon */
 }
 
 ul li.item-menu a .icon > i {
@@ -352,7 +357,60 @@ textarea[readonly] {
     padding: 20px;
 }
 
-.title_detalhes_os {
+/*uploud de foto*/
+#picture__input {
+    display: none;
+  }
+
+  .picture {
+    width: 200px;
+    height: 200px;
+    aspect-ratio: 16/9;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    border: 2px dashed currentcolor;
+    cursor: pointer;
+    transition: color 300ms ease-in-out, background 300ms ease-in-out;
+    outline: none;
+    overflow: hidden;
+  }
+
+  .picture:hover {
+    color: #777;
+    background: #ccc;
+  }
+
+  .picture:active {
+    border-color: turquoise;
+    color: turquoise;
+    background: #eee;
+  }
+
+  .picture:focus {
+    color: #777;
+    background: #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .picture__img {
+    max-width: 100%;
+  }
+
+  /* forms de nova os*/
+  .elementos{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }.title_detalhes_os {
     display: flex;
     align-items: center;
     justify-content: center;
