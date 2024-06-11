@@ -352,7 +352,60 @@ textarea[readonly] {
     padding: 20px;
 }
 
-.title_detalhes_os {
+/*uploud de foto*/
+#picture__input {
+    display: none;
+  }
+
+  .picture {
+    width: 200px;
+    height: 200px;
+    aspect-ratio: 16/9;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    border: 2px dashed currentcolor;
+    cursor: pointer;
+    transition: color 300ms ease-in-out, background 300ms ease-in-out;
+    outline: none;
+    overflow: hidden;
+  }
+
+  .picture:hover {
+    color: #777;
+    background: #ccc;
+  }
+
+  .picture:active {
+    border-color: turquoise;
+    color: turquoise;
+    background: #eee;
+  }
+
+  .picture:focus {
+    color: #777;
+    background: #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .picture__img {
+    max-width: 100%;
+  }
+
+  /* forms de nova os*/
+  .elementos{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }.title_detalhes_os {
     display: flex;
     align-items: center;
     justify-content: center;
