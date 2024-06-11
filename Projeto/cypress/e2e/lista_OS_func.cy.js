@@ -18,5 +18,4 @@ describe('teste da visualiazação pelo funcionario da lista das OS’s', () => 
         cy.get('.btn').click()
         cy.url().should('include', 'servicos')
     })
-
 })
