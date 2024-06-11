@@ -34,10 +34,10 @@ body {
 /* MENU */
 nav.menu-lateral {
     z-index: 1000;
-    width: 80px;
+    width: 82px;
     height: 100%;
     background-color: #202020;
-    padding: 40px 0px 40px 1%;
+    padding: 40px 0px 2px 1%;
     position: fixed;
     top: 0;
     left: 0;
@@ -66,14 +66,13 @@ ul li.item-menu a {
     color: white;
     text-decoration: none;
     font-size: 20px;
-    padding: 20px 4%;
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     line-height: 40px;
 }
 
 ul li.item-menu a .txt-link {
-    margin-left: 40px;
+    margin-left: 30px;
 }
 
 ul li.item-menu a .icon > i {
