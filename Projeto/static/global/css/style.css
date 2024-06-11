@@ -710,3 +710,7 @@ textarea[readonly] {
     color: #666;
     margin-bottom: 10px;
 }
+
+#avalicao_detalhes{
+    font-size: 100px;
+}

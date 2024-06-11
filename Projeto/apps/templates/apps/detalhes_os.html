@@ -62,11 +62,42 @@
         </div>
       </div>
     </div>
+    {% if os.status == 'Pronto' %}
+            <div class="details-page__info-actions">
+                {% if os.avaliacao %}
+                    <p id="avaliacao_detalhes">Avaliação do cliente: <span class="rating" data-rating="{{ os.avaliacao }}"></span></p>
+                {% endif %}
+            </div>
+        {% endif %}
   </div>
 </div>
 <div class="btn-detalhes">
   <a href="{% url 'editar_os' os.id %}" class="btn btn-primary">Atualizar informações</a>
 </div>
 {% endif %}
+
+<script type="text/javascript">
+  function renderStars(rating) {
+      let stars = '';
+      for (let i = 0; i < 5; i++) {
+          if (i < rating) {
+              stars += '★'; // Filled star
+          } else {
+              stars += '☆'; // Empty star
+          }
+      }
+      return stars;
+  }
+
+  window.onload = function() {
+      var ratingElements = document.getElementsByClassName('rating');
+      for (var i = 0; i < ratingElements.length; i++) {
+          var ratingElement = ratingElements[i];
+          var rating = ratingElement.getAttribute('data-rating');
+          ratingElement.innerHTML = renderStars(rating);
+      }
+  }
+</script>
+
 
 {% endblock %}
