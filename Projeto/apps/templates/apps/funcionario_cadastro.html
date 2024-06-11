@@ -6,7 +6,7 @@
 
         <form class="login cadastro-form" action="{% if form_type == 'cliente' %}{% url 'cliente_cadastro' %}{% elif form_type == 'funcionario' %}{% url 'funcionario_cadastro' %}{% endif %}" method="post">
             {% csrf_token %}
-
+            
             {% if messages %}
                 <ul class="messages">
                     {% for message in messages %}
