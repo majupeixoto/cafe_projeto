@@ -1,3 +1,5 @@
+
+https://github.com/lua-mf/vitu_projeto/assets/149490954/8829a735-52cc-4252-bef1-f6bc62480635
 # Virtù #
 
 ## Descrição
@@ -51,3 +53,4 @@
 
 ## SR2
 - [Screencast CI/CD](https://drive.google.com/file/d/1Iv68W1G6tXZrKeObWgXfCl0jyTahNd7k/view?usp=sharing)
+- [Screencast Testes e2e](https://drive.google.com/file/d/1xAtLwCp2C3lCi9SpzNvpPqvYSoXN3ZWH/view?usp=sharing)
