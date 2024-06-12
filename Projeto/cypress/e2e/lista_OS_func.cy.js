@@ -8,10 +8,10 @@ describe('teste da visualiazação pelo funcionario da lista das OS’s', () => 
         cy.get('#id_username').type('larissa');
         cy.get('#id_senha').type('123');
         cy.get('#id_confirmar_senha').type('123');
-        cy.wait(1000);
+        cy.wait(2000);
         cy.get('.btn').click();
         cy.get(':nth-child(2) > a > .img-fluid').click();
-        cy.wait(1000);
+        cy.wait(2000);
         cy.get('thead > tr > :nth-child(1)').should('not.exist');
     })
     it('Com OS cadastrada no sistema', () => {
@@ -26,7 +26,7 @@ describe('teste da visualiazação pelo funcionario da lista das OS’s', () => 
         cy.get('#id_email').type('gabi@gmail.com');
         cy.get('#id_senha').type('123');
         cy.get('#id_confirmar_senha').type('123');
-        cy.wait(1000);
+        cy.wait(2000);
         cy.get('.btn').click();
         cy.get('.btn').click();
         cy.get('#aparelho').type('Maquina de Lavar');
