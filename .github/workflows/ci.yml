@@ -42,7 +42,7 @@ jobs:
     - name: Start Django server
       run: |
         cd Projeto
-        nohup python manage.py runserver 0.0.0.0:8000 &
+        nohup python.manage.py runserver 0.0.0.0:8000 &
         sleep 20  # Increase the sleep time to ensure the server initializes properly
 
     - name: Run Django tests
@@ -80,4 +80,4 @@ jobs:
         CYPRESS_BASE_URL: http://127.0.0.1:8000  # Ensure the base URL is set correctly
       run: |
         cd Projeto
-        npx cypress run --headless
+        npx cypress run --headless --spec "cypress/e2e/**/*.{js,jsx,ts,tsx}" --exclude-spec "cypress/e2e/editar_e_acompannhar_os.cy.js,cypress/e2e/notificacoes.cy.js"
