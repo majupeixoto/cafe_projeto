@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Python version
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
           python-version: '3.11'
 
@@ -28,31 +28,35 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: pip install -r Projeto/requirements.txt
+        run: |
+          source venv/bin/activate
+          pip install -r Projeto/requirements.txt
 
       - name: Cleaning testing files
         run: |
           cd Projeto/
-          rm db.sqlite3
-          rm .env
+          rm -f db.sqlite3
+          rm -f .env
           cd ..
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+      - name: Run tests
+        run: |
+          source venv/bin/activate
+          cd Projeto/
+          python manage.py test
 
       - name: Zip artifact for deployment
         run: |
           cd Projeto/
-          zip release.zip ./* -r
+          zip -r ../release.zip .
           cd ..
-          mv Projeto/release.zip .
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
         with:
           name: python-app
-          path: |
-            release.zip
-            !venv/
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -61,7 +65,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write # This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
@@ -72,7 +76,6 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -80,10 +83,9 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_CF1DF04B84134EDB938847ACCF5537C1 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D9860830DAF84B90B1C6B83646F9176A }}
 
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
           app-name: 'Virtu'
-          slot-name: 'Production'
-          
+          slot-name: 'production'
