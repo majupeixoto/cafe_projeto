@@ -69,4 +69,14 @@
   
   ![image](https://github.com/lua-mf/vitu_projeto/assets/142419595/7f220027-986c-425b-b275-a9f223ba432e)
 
+  ### Quadro - Jira
+  ![image](https://github.com/lua-mf/vitu_projeto/assets/142419595/f73a7cdb-71af-4d60-bfb5-1109f1bdbdca)
+
+  ### Backlog - Jira
+  ![image](https://github.com/lua-mf/vitu_projeto/assets/142419595/7da2076d-a997-44b5-9a42-99d1d6b66cf8)
+
+
+  
+
+
   
