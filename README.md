@@ -53,3 +53,4 @@
 ## SR2
 - [Screencast CI/CD](https://drive.google.com/file/d/1Iv68W1G6tXZrKeObWgXfCl0jyTahNd7k/view?usp=sharing)
 - [Screencast Testes e2e](https://drive.google.com/file/d/1xAtLwCp2C3lCi9SpzNvpPqvYSoXN3ZWH/view?usp=sharing)
+- [Screencast Aplicação na Azure](https://drive.google.com/file/d/11BH4_6Ge_pd2R-G9TS_k3OcPk_0Dix_d/view?usp=sharing)
