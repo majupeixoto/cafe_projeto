@@ -1,5 +1,5 @@
-describe('acompanhamento status da os pelo cliente', () => {
-    it('teste 1', () => {
+describe('avaliar', () => {
+    it('avaliando', () => {
         cy.visit('/');
         cy.wait(1000);
         cy.get('#cliente').click();
