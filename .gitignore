@@ -27,4 +27,5 @@ staticfiles
 .history
 
 # Testes Cypres que nao rodam no ambiente virtual da CI
-Projeto/cypress/e2e/editar_e_acompannhar_os.cy.js
+editar_e_acompannhar_os.cy.js
+noticacoes.cy.js
