@@ -1,8 +1,8 @@
 describe('acompanhamento status da os pelo cliente', () => {
-    it('teste 1', () =>{
+    it('teste 1', () => {
         cy.visit('/');
         cy.wait(1000);
-        cy.get('#cliente > .botao').click();
+        cy.get('#cliente').click();
         cy.wait(2000);
         cy.get('a').click();
         cy.get('#id_nome').type('Jonatas Joel');
@@ -17,7 +17,7 @@ describe('acompanhamento status da os pelo cliente', () => {
         //home cliente
         cy.get('.btn').click();
         //cadastra os cliente
-        cy.get('.picture').click().attachFile('imgs/maquina_de_lavar.jpg');
+        cy.get('.picture').attachFile('imgs/maquina_de_lavar.jpg');
         cy.get('#aparelho').type('Maquina de Lavar');
         cy.get('#modelo').type('Electrolux');
         cy.get('#descricao_problema').type('Maquina de Lavar não está funcionando');
@@ -26,7 +26,7 @@ describe('acompanhamento status da os pelo cliente', () => {
         cy.get(':nth-child(5) > a > .img-fluid').click();
 
         //login funcionario
-        cy.get('[href="/funcionario_login/"]').click();
+        cy.get('#funcionario').click();
         cy.get('a').click();
         cy.get('#id_nome').type('Joana Bueno');
         cy.get('#id_email').type('jb@gmail.com');
@@ -39,12 +39,18 @@ describe('acompanhamento status da os pelo cliente', () => {
         cy.wait(1000);
 
         // home funcionario
-
         cy.get('#lista_os').click();
         cy.get('#ver-mais-lista-os').click();
         cy.get('.btn').click();
         cy.get('.btn').click();
-        
+        cy.get('#mensagem_funcionario').type('Olá, Jonatas! Estamos aguardando peças para realizar seu serviço, daqui algum tempo iremos lhe atualizar da situação!');
+        cy.get('#problema_detectado').type('Por enquanto nada...');
+        cy.get('#status').select('Aguardando peça');
+        cy.get('#tipo_atendimento').select('Garantia on site');
+        cy.get(':nth-child(4) > a > .img-fluid').click();
 
-        })
-    })
+        cy.get('#username').type('jonatas');
+        cy.get('#senha').type('123');
+        cy.get('.btn').click();
+    });
+});
