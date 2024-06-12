@@ -43,7 +43,7 @@ jobs:
       run: |
         cd Projeto
         nohup python manage.py runserver 0.0.0.0:8000 &
-        sleep 10  # Aumente o tempo de espera se necessário para garantir que o servidor inicialize
+        sleep 20  # Increase the sleep time to ensure the server initializes properly
 
     - name: Run Django tests
       run: |
@@ -76,6 +76,8 @@ jobs:
         npx cypress verify
 
     - name: Run Cypress tests
+      env:
+        CYPRESS_BASE_URL: http://127.0.0.1:8000  # Ensure the base URL is set correctly
       run: |
         cd Projeto
-        npx cypress run
+        npx cypress run --headless
