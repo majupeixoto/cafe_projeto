@@ -29,7 +29,7 @@
                             <li class="list-group-item">Número da OS: <span class="dynamic-info">{{ os.numero|default:"-" }}</span></li>
                             <li class="list-group-item">Data de Entrada: <span class="dynamic-info">{{ os.created_at|date:"d/m/Y" }}</span></li>
                             <li class="list-group-item">Tipo de Atendimento: <span class="dynamic-info">{{ os.tipo_atendimento }}</span></li>
-                            <li class="list-group-item">Status: <span class="dynamic-info">{{ os.status }}</span></li>
+                            <li id="status_os_detalhes_cliente" class="list-group-item">Status: <span class="dynamic-info">{{ os.status }}</span></li>
                             <li class="list-group-item">Contato: <span class="dynamic-info">{{ os.perfil_os.contato }}</span></li>
                             <li class="list-group-item">Tipo de Atendimento: <span class="dynamic-info">{{ detalhes_da_os.tipo_atendimento }}</span></li>
                             <li class="list-group-item">Problema relatado: <span class="dynamic-info">{{ detalhes_da_os.descricao_problema }}</span></li>
@@ -52,10 +52,10 @@
         {% if os.status == 'Pronto' %}
             <div class="details-page__info-actions">
                 {% if os.avaliacao %}
-                    <a href="{% url 'avaliar_os' os.id %}" class="btn btn-outline-secondary">Editar Avaliação</a>
+                    <a href="{% url 'avaliar_os' os.id %}" id="avalie" class="btn btn-outline-secondary">Editar Avaliação</a>
                     <p>Sua avaliação: <span class="rating" data-rating="{{ os.avaliacao }}"></span></p>
                 {% else %}
-                    <a href="{% url 'avaliar_os' os.id %}" class="btn btn-outline-secondary">Avaliar Ordem de Serviço</a>
+                    <a href="{% url 'avaliar_os' os.id %}" id="avalie" class="btn btn-outline-secondary">Avaliar Ordem de Serviço</a>
                 {% endif %}
             </div>
         {% endif %}
@@ -72,7 +72,7 @@
                         <span class="progress-count">2</span>
                         <span class="progress-label">Em análise</span>
                     </li>
-                    <li class="step-wizard-item {% if os.status == 'Aguardando_peca' %}current-item{% endif %}">
+                    <li id="status_aguardando_peca" class="step-wizard-item {% if os.status == 'Aguardando_peca' %}current-item{% endif %}">
                         <span class="progress-count">3</span>
                         <span class="progress-label">Aguardando peça</span>
                     </li>

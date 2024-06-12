@@ -33,7 +33,7 @@
                         <select id="status" name="status" class="form-control">
                             <option value="Iniciada" {% if os.status == 'Iniciada' %}selected{% endif %}>Iniciada</option>
                             <option value="Em_analise" {% if os.status == 'Em_analise' %}selected{% endif %}>Em análise</option>
-                            <option value="Aguardando_peca" {% if os.status == 'Aguardando_peca' %}selected{% endif %}>Aguardando peça</option>
+                            <option id="aguardando-peca" value="Aguardando_peca" {% if os.status == 'Aguardando_peca' %}selected{% endif %}>Aguardando peça</option>
                             <option value="Aguardando_reparo" {% if os.status == 'Aguardando_reparo' %}selected{% endif %}>Aguardando reparo</option>
                             <option value="Em_reparo" {% if os.status == 'Em_reparo' %}selected{% endif %}>Em reparo</option>
                             <option value="Pronto" {% if os.status == 'Pronto' %}selected{% endif %}>Pronto</option>
@@ -47,7 +47,7 @@
                             <option value="FB" {% if os.tipo_atendimento == 'FB' %}selected{% endif %}>Fora Balcão</option>
                             <option value="GS" {% if os.tipo_atendimento == 'GS' %}selected{% endif %}>Garantia serviço</option>
                             <option value="GB" {% if os.tipo_atendimento == 'GB' %}selected{% endif %}>Garantia balcão</option>
-                            <option value="GON" {% if os.tipo_atendimento == 'GON' %}selected{% endif %}>Garantia on site</option>
+                            <option id="GON" value="GON" {% if os.tipo_atendimento == 'GON' %}selected{% endif %}>Garantia on site</option>
                             <option value="GIN" {% if os.tipo_atendimento == 'GIN' %}selected{% endif %}>Garantia instalação</option>
                             <option value="GRIN" {% if os.tipo_atendimento == 'GRIN' %}selected{% endif %}>Garantia reincidência</option>
                         </select>

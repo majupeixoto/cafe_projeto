@@ -25,3 +25,7 @@ staticfiles
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+# Testes Cypres que nao rodam no ambiente virtual da CI
+cypress/e2e/editar_e_acompannhar_os.cy.js
+cypress/e2e/noticacoes.cy.js
