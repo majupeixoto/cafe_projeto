@@ -14,9 +14,9 @@ describe('acompanhamento status da os pelo cliente', () => {
         cy.get('#id_senha').type('123');
         cy.get('#id_confirmar_senha').type('123');
         cy.get('.btn').click();
-        //home cliente
+        // home cliente
         cy.get('.btn').click();
-        //cadastra os cliente
+        // cadastra os cliente
         cy.get('.picture').attachFile('imgs/maquina_de_lavar.jpg');
         cy.get('#aparelho').type('Maquina de Lavar');
         cy.get('#modelo').type('Electrolux');
@@ -25,7 +25,7 @@ describe('acompanhamento status da os pelo cliente', () => {
         cy.get('.btn-primary').click();
         cy.get(':nth-child(5) > a > .img-fluid').click();
 
-        //login funcionario
+        // login funcionario
         cy.get('#funcionario').click();
         cy.get('a').click();
         cy.get('#id_nome').type('Joana Bueno');
@@ -47,10 +47,15 @@ describe('acompanhamento status da os pelo cliente', () => {
         cy.get('#problema_detectado').type('Por enquanto nada...');
         cy.get('#status').select('Aguardando peça');
         cy.get('#tipo_atendimento').select('Garantia on site');
+        cy.get('.btn');
         cy.get(':nth-child(4) > a > .img-fluid').click();
 
+        // verifica status
+        cy.get('#cliente').click();
         cy.get('#username').type('jonatas');
         cy.get('#senha').type('123');
         cy.get('.btn').click();
+        cy.get('.col-lg-3.col-md-4.col-sm-6.mb-4').click();
+        cy.get('#status_os_detalhes_cliente').should('have.text', 'Aguardando peça');
     });
 });
