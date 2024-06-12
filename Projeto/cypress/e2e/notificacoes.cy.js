@@ -1,6 +1,7 @@
 describe('teste cadastro os usuário', () => {
     it('teste 1', () => {
         cy.visit('/');
+        // Realizar o cadastro do cliente
         cy.wait(1000);
         cy.get('#cliente > .botao').click();
         cy.wait(2000);
@@ -15,13 +16,15 @@ describe('teste cadastro os usuário', () => {
         cy.get('#id_confirmar_senha').type('123');
         cy.wait(2000);
         cy.get('.btn').click();
+        // Cadastrar uma nova ordem de serviço
         cy.get(':nth-child(2) > a > .img-fluid').click();
         cy.get('#aparelho').type('Geladeira');
         cy.get('#descricao_problema').type('Geladeira não gela');
         cy.get('#modelo').type('Eletrolux')
         cy.get('#garantia_sim').click();
-        cy.get('.btn-primary').click();
+        cy.get('.card > :nth-child(2) > .btn-primary').click();
         cy.wait(2000);
+        // Simular a atribuição de um funcionário à ordem de serviço
         cy.get(':nth-child(4) > a > .img-fluid').click();
         cy.wait(1000);
         cy.get(':nth-child(5) > a > .img-fluid').click();
