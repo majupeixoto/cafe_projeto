@@ -1,5 +1,4 @@
 
-https://github.com/lua-mf/vitu_projeto/assets/149490954/8829a735-52cc-4252-bef1-f6bc62480635
 # Virtù #
 
 ## Descrição
