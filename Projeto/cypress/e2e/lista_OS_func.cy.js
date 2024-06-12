@@ -29,7 +29,6 @@ describe('teste da visualiazação pelo funcionario da lista das OS’s', () => 
         cy.wait(1000);
         cy.get('.btn').click();
         cy.get('.btn').click();
-        cy.get('.picture').attachFile('imgs/maquina_de_lavar.jpg');
         cy.get('#aparelho').type('Maquina de Lavar');
         cy.get('#modelo').type('Electrolux');
         cy.get('#descricao_problema').type('Maquina de Lavar não está funcionando');
