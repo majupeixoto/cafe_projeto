@@ -54,3 +54,8 @@
 - [Screencast CI/CD](https://drive.google.com/file/d/1Iv68W1G6tXZrKeObWgXfCl0jyTahNd7k/view?usp=sharing)
 - [Screencast Testes e2e](https://drive.google.com/file/d/1xAtLwCp2C3lCi9SpzNvpPqvYSoXN3ZWH/view?usp=sharing)
 - [Screencast Aplicação na Azure](https://drive.google.com/file/d/11BH4_6Ge_pd2R-G9TS_k3OcPk_0Dix_d/view?usp=sharing)
+
+### Diagrama de Atividades
+  ![Diagrama de atividades - Cliente - SR2 (1)](https://drive.google.com/file/d/1r5uhL5nP472WcOnqI7yoSHmrjslu_MVK/view?usp=drive_link)  
+  ![Diagrama de atividades - Funcionário - SR2 (1)](https://drive.google.com/file/d/1-mKLLOzhyYLTBWsHZX-DLUCzSEgNkt5M/view?usp=drive_link)
+  
