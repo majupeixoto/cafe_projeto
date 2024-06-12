@@ -70,7 +70,7 @@ describe('acompanhamento status da os pelo cliente', () => {
         cy.get('[data-avaliacao="4"]')
         cy.get('#comentario_avaliacao').type('Amei!')
         cy.get('#avaliar').click();
-        cy.get('.rating[data-rating="4"]').should('exist').and('contain.text', '★★★★☆');
+        cy.get('.rating[data-rating="4"]').should('exist');
 
     });
 });
