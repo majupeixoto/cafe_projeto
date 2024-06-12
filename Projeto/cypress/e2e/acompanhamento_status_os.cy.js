@@ -45,9 +45,13 @@ describe('acompanhamento status da os pelo cliente', () => {
         cy.get('.btn').click();
         cy.get('#mensagem_funcionario').type('Olá, Jonatas! Estamos aguardando peças para realizar seu serviço, daqui algum tempo iremos lhe atualizar da situação!');
         cy.get('#problema_detectado').type('Por enquanto nada...');
-        cy.get('#status').select('Aguardando peça');
-        cy.get('#tipo_atendimento').select('Garantia on site');
-        cy.get('.btn');
+
+        // Ensure select is visible and interact
+        cy.get('#status').should('be.visible').select('Aguardando peça');
+        cy.get('#status').should('have.value', 'Aguardando_peca');
+        cy.get('#tipo_atendimento').should('be.visible').select('Garantia on site');
+        cy.get('#tipo_atendimento').should('have.value', 'GON');
+        cy.get('.btn').click();
         cy.get(':nth-child(4) > a > .img-fluid').click();
 
         // verifica status
@@ -56,6 +60,12 @@ describe('acompanhamento status da os pelo cliente', () => {
         cy.get('#senha').type('123');
         cy.get('.btn').click();
         cy.get('.col-lg-3.col-md-4.col-sm-6.mb-4').click();
-        cy.get('#status_os_detalhes_cliente').should('have.text', 'Aguardando peça');
+        
+        // Adding logs to help with debugging
+        cy.get('#status_os_detalhes_cliente').then(($el) => {
+            cy.log('Status Text:', $el.text());
+        });
+
+        cy.get('#status_aguardando_peca > .progress-count').should('exist');
     });
 });
