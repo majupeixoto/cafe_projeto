@@ -3,12 +3,12 @@
 
 {% block content %}
     <h2>Notificações</h2>
-        <a id="retornar" href="{% url 'home_cliente' %}">
-            <img src="{% static 'global/img/iconografia/retornar.png' %}" alt="home" class="img-fluid icon" style="height: 60px; width: 60px;">
-        </a>
+    <a id="retornar" href="{% url 'home_cliente' %}">
+        <img src="{% static 'global/img/iconografia/retornar.png' %}" alt="home" class="img-fluid icon" style="height: 60px; width: 60px;">
+    </a>
     <ul>
         {% for notification in notifications %}
-        <div class="card" style="width: 60rem;">
+        <div class="card-notificacoes">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     {{ notification.timestamp }} - {{ notification.actor }}: {{ notification.verb }} {{ notification.description }}
@@ -16,6 +16,8 @@
                         <a href="{% url 'detalhes_os_cliente' os_id=notification.target.id %}">Ver mais</a>
                     {% endif %}
                 </li>
+            </ul>
+        </div>
         {% empty %}
         <li>Você não tem notificações.</li>
         {% endfor %}
