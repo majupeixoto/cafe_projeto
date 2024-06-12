@@ -56,8 +56,10 @@
 - [Screencast Aplicação na Azure](https://drive.google.com/file/d/11BH4_6Ge_pd2R-G9TS_k3OcPk_0Dix_d/view?usp=sharing)
 
 ### Diagrama de Atividades
-  ![Diagrama de atividades - Cliente - SR2 (1)](https://drive.google.com/file/d/1r5uhL5nP472WcOnqI7yoSHmrjslu_MVK/view?usp=drive_link)  
-  [Diagrama de atividades - Funcionário - SR2 (1)]
+  [Diagrama de atividades - Cliente - SR2]
+  ![image](https://github.com/lua-mf/vitu_projeto/assets/142419595/879363cc-e8f1-42c1-92b3-4aa3f94602d5)
+
+  [Diagrama de atividades - Funcionário - SR2]
   ![image](https://github.com/lua-mf/vitu_projeto/assets/142419595/7f220027-986c-425b-b275-a9f223ba432e)
 
   
