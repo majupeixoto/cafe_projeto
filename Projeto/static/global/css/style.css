@@ -716,3 +716,19 @@ textarea[readonly] {
 #avalicao_detalhes{
     font-size: 100px;
 }
+
+.card-notificacoes {
+    padding: 10px;
+    border-radius: 10px; /* Arredonda as bordas */
+    border: 1px solid #ddd; /* Adiciona uma borda para melhor visualização */
+    margin-right: 80px; /* Afasta da tela à direita */
+    margin-bottom: 10px; /* Adiciona espaçamento entre os cards */
+    background-color: #fff; /* Fundo branco para o card */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil */
+    overflow: hidden; /* Garante que os elementos internos não transbordem */
+}
+
+.card-notificacoes .list-group-item {
+    border: none; /* Remove a borda das list items */
+    padding: 10px; /* Adiciona padding para melhor espaçamento */
+}
