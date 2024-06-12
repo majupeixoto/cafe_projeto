@@ -57,5 +57,6 @@
 
 ### Diagrama de Atividades
   ![Diagrama de atividades - Cliente - SR2 (1)](https://drive.google.com/file/d/1r5uhL5nP472WcOnqI7yoSHmrjslu_MVK/view?usp=drive_link)  
-  ![Diagrama de atividades - Funcionário - SR2 (1)](https://drive.google.com/file/d/1-mKLLOzhyYLTBWsHZX-DLUCzSEgNkt5M/view?usp=drive_link)
+  [Diagrama de atividades - Funcionário - SR2 (1)](![image](https://github.com/lua-mf/vitu_projeto/assets/142419595/7f220027-986c-425b-b275-a9f223ba432e))
+
   
