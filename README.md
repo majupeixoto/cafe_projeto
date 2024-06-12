@@ -55,6 +55,10 @@
 - [Screencast Testes e2e](https://drive.google.com/file/d/1xAtLwCp2C3lCi9SpzNvpPqvYSoXN3ZWH/view?usp=sharing)
 - [Screencast Aplicação na Azure](https://drive.google.com/file/d/11BH4_6Ge_pd2R-G9TS_k3OcPk_0Dix_d/view?usp=sharing)
 
+## ISSUES
+- [Issues Abertas](https://github.com/lua-mf/vitu_projeto/issues).
+- [Issues Fechadas](https://github.com/lua-mf/vitu_projeto/issues?q=is%3Aissue+is%3Aclosed)
+
 ### Diagrama de Atividades
 
   Diagrama de atividades - Cliente
