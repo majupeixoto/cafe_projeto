@@ -5,12 +5,12 @@ describe('acompanhamento status da os pelo cliente', () => {
         cy.get('#cliente').click();
         cy.wait(2000);
         cy.get('a').click();
-        cy.get('#id_nome').type('Jonatas Joel');
-        cy.get('#id_username').type('jonatas');
+        cy.get('#id_nome').type('Charli XCX');
+        cy.get('#id_username').type('BRAT');
         cy.get('#id_cpf').type('45490900089');
         cy.get('#id_data_nascimento').type('2003-05-05');
         cy.get('#id_contato').type('81990909090');
-        cy.get('#id_email').type('jj@gmail.com');
+        cy.get('#id_email').type('brat@gmail.com');
         cy.get('#id_senha').type('123');
         cy.get('#id_confirmar_senha').type('123');
         cy.get('.btn').click();
@@ -28,9 +28,9 @@ describe('acompanhamento status da os pelo cliente', () => {
         // login funcionario
         cy.get('#funcionario').click();
         cy.get('a').click();
-        cy.get('#id_nome').type('Joana Bueno');
-        cy.get('#id_email').type('jb@gmail.com');
-        cy.get('#id_username').type('joana');
+        cy.get('#id_nome').type('Taylor Swift');
+        cy.get('#id_email').type('ts@gmail.com');
+        cy.get('#id_username').type('taylor');
         cy.get('#id_senha').type('123');
         cy.get('#id_confirmar_senha').type('123');
         cy.wait(1000);
@@ -43,12 +43,12 @@ describe('acompanhamento status da os pelo cliente', () => {
         cy.get('#ver-mais-lista-os').click();
         cy.get('.btn').click();
         cy.get('.btn').click();
-        cy.get('#mensagem_funcionario').type('Olá, Jonatas! Estamos aguardando peças para realizar seu serviço, daqui algum tempo iremos lhe atualizar da situação!');
+        cy.get('#mensagem_funcionario').type('Olá, CHARLI XCX! Estamos aguardando peças para realizar seu serviço, daqui algum tempo iremos lhe atualizar da situação!');
         cy.get('#problema_detectado').type('Por enquanto nada...');
 
         // Ensure select is visible and interact
-        cy.get('#status').should('be.visible').select('Aguardando peça');
-        cy.get('#status').should('have.value', 'Aguardando_peca');
+        cy.get('#status').should('be.visible').select('Pronto');
+        cy.get('#status').should('have.value', 'Pronto');
         cy.get('#tipo_atendimento').should('be.visible').select('Garantia on site');
         cy.get('#tipo_atendimento').should('have.value', 'GON');
         cy.get('.btn').click();
@@ -56,7 +56,7 @@ describe('acompanhamento status da os pelo cliente', () => {
 
         // verifica status
         cy.get('#cliente').click();
-        cy.get('#username').type('jonatas');
+        cy.get('#username').type('BRAT');
         cy.get('#senha').type('123');
         cy.get('.btn').click();
         cy.get('.col-lg-3.col-md-4.col-sm-6.mb-4').click();
@@ -66,6 +66,11 @@ describe('acompanhamento status da os pelo cliente', () => {
             cy.log('Status Text:', $el.text());
         });
 
-        cy.get('#status_aguardando_peca > .progress-count').should('exist');
+        cy.get('#avalie').click();
+        cy.get('[data-avaliacao="4"]')
+        cy.get('#comentario_avaliacao').type('Amei!')
+        cy.get('#avaliar').click();
+        cy.get('.rating[data-rating="4"]').should('exist').and('contain.text', '★★★★☆');
+
     });
 });
