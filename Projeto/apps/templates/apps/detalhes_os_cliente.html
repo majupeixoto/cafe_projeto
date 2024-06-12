@@ -52,10 +52,10 @@
         {% if os.status == 'Pronto' %}
             <div class="details-page__info-actions">
                 {% if os.avaliacao %}
-                    <a href="{% url 'avaliar_os' os.id %}" class="btn btn-outline-secondary">Editar Avaliação</a>
+                    <a href="{% url 'avaliar_os' os.id %}" id="avalie" class="btn btn-outline-secondary">Editar Avaliação</a>
                     <p>Sua avaliação: <span class="rating" data-rating="{{ os.avaliacao }}"></span></p>
                 {% else %}
-                    <a href="{% url 'avaliar_os' os.id %}" class="btn btn-outline-secondary">Avaliar Ordem de Serviço</a>
+                    <a href="{% url 'avaliar_os' os.id %}" id="avalie" class="btn btn-outline-secondary">Avaliar Ordem de Serviço</a>
                 {% endif %}
             </div>
         {% endif %}
