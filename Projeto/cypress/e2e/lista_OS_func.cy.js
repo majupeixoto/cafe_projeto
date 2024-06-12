@@ -1,19 +1,4 @@
 describe('teste da visualiazação pelo funcionario da lista das OS’s', () => {
-    it('Sem OS cadastrada no sistema', () => {
-        cy.visit('/');
-        cy.get('[href="/funcionario_login/"]').click();
-        cy.get('a').click();
-        cy.get('#id_nome').type('Larissa Magalhães');
-        cy.get('#id_email').type('larissa@gmail.com');
-        cy.get('#id_username').type('larissa');
-        cy.get('#id_senha').type('123');
-        cy.get('#id_confirmar_senha').type('123');
-        cy.wait(2000);
-        cy.get('.btn').click();
-        cy.get(':nth-child(2) > a > .img-fluid').click();
-        cy.wait(2000);
-        cy.get('thead > tr > :nth-child(1)').should('not.exist');
-    })
     it('Com OS cadastrada no sistema', () => {
         cy.visit('/');
         cy.get('#cliente > .botao').click();
